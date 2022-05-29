@@ -1,0 +1,15 @@
+.nav {
+  grid-area: nav;
+  background-color: #181A1B;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar_link {
+  color: white;
+}
+
+.navSettings {}
