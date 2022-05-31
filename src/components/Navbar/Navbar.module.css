@@ -2,6 +2,7 @@
   grid-area: nav;
   background-color: #181A1B;
   padding: 20px;
+  height: 100vh;
 }
 
 .navbar {

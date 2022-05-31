@@ -1,0 +1,17 @@
+.profileImage {
+  background-image: url(../img/profileBackground.jpg);
+  background-size: contain;
+  min-height: 207px;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 10px;
+  background-position: center;
+}
+
+.profileInfo {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  margin-bottom: 20px;
+}

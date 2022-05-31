@@ -3,3 +3,20 @@
   grid-template-columns: 1fr 1fr;
   padding: 5px;
 }
+
+.dialogs a {
+  color: black;
+}
+
+.dialogs a.active {
+  color: gold;
+}
+
+.dialogsList {
+  list-style-type: circle;
+  color: #1890FF;
+}
+
+.heading {
+  margin: 0;
+}

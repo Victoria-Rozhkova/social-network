@@ -1,0 +1,18 @@
+.heading {
+  text-align: center;
+  color: #1890FF;
+}
+
+.homePage {
+  background-image: url(./img/background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.text {
+  font-size: 28px;
+  text-align: center;
+}
