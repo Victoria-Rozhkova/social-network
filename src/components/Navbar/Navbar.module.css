@@ -1,15 +1,25 @@
 .nav {
   grid-area: nav;
   background-color: #181A1B;
+  padding: 20px;
 }
 
 .navbar {
   display: flex;
   flex-direction: column;
+
 }
 
-.navbar_link {
+
+.navbar a {
   color: white;
 }
 
-.navSettings {}
+.navbar a.active,
+.navSettings a.active {
+  color: #1890FF;
+}
+
+.navSettings a {
+  color: white;
+}

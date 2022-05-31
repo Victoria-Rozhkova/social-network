@@ -1,0 +1,10 @@
+.profileImage {
+  background-image: url(./img/profileBackground.jpg);
+  background-size: contain;
+  min-height: 207px;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 10px;
+}
