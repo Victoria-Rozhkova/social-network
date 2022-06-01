@@ -2,16 +2,11 @@ import React from 'react';
 import module from './MyPosts.module.css';
 import { Post } from './Post/Post';
 
-const posts = [
-  { id: 1, post: 'Hey from props' },
-  { id: 2, post: 'Hello from map' },
-];
 
-const postElements = posts.map((post) => {
-  return <Post post={post.post} />;
-});
-
-export const MyPosts = () => {
+export const MyPosts = (props) => {
+  const postElements = props.posts.map((post) => {
+    return <Post post={post.post} />;
+  });
   return (
     <div>
       <div>
