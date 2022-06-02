@@ -12,11 +12,59 @@
   color: gold;
 }
 
+.dialog {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dialog img {
+  width: 40px;
+}
+
 .dialogsList {
   list-style-type: circle;
   color: #1890FF;
 }
 
+.dialogItem ul {
+  gap: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: center;
+}
+
 .heading {
   margin: 0;
+}
+
+.message {
+  gap: 10px;
+  display: flex;
+}
+
+.message img {
+  width: 55px;
+  padding-bottom: 5px;
+}
+
+.newMessage {
+  grid-column: 2;
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.submitMessage {
+  background: url(https://olympus.crumina.net/wp-content/plugins/youzify/includes/public/assets/images/dotted-bg.png),
+    -webkit-linear-gradient(right, #f35c44, #5c42c4);
+  border: none;
+  padding: 10px;
+  color: white;
+  box-shadow: 0.872px 9.962px 20px 0px rgb(12 78 165 / 30%);
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
 }

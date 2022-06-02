@@ -1,0 +1,17 @@
+.button {
+  background-image: linear-gradient(166deg, #f22876 0%, #942dd9 100%);
+  -webkit-box-shadow: 0.872px 9.962px 20px 0px rgb(12 78 165 / 30%);
+  box-shadow: 0.872px 9.962px 20px 0px rgb(12 78 165 / 30%);
+  font-weight: 600;
+  color: #ffffff;
+  border-radius: 50px;
+  border: 0px;
+  cursor: pointer;
+  padding: 16px 45px;
+}
+
+.newPost {
+  display: flex;
+  gap: 15px;
+  align-items: flex-end;
+}

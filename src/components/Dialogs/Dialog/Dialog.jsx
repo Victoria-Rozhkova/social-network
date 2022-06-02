@@ -5,6 +5,7 @@ import module from '../../Dialogs/Dialogs.module.css';
 export const Dialog = (props) => {
   return (
     <div className={module.dialog}>
+      <img src={props.img} alt="img" />
       <NavLink className={({ isActive }) => isActive ? module.active : ''}
         to={`/dialogs/${props.id}`}>{props.name}</NavLink>
     </div >

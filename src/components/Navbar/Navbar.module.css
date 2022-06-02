@@ -5,12 +5,27 @@
   height: 100vh;
 }
 
+.friendsBlock {
+  color: white
+}
+
+.friends {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.friend img {
+  width: 40px;
+}
+
 .navbar {
   display: flex;
   flex-direction: column;
 
 }
-
 
 .navbar a {
   color: white;
