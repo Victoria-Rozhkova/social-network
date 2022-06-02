@@ -7,7 +7,9 @@ export const Profile = (props) => {
   return (
     <div className={module.content}>
       <ProfileInfo />
-      <MyPosts addPost={props.addPost} posts={props.state.posts} />
+      <MyPosts addPost={props.addPost}
+        posts={props.state.posts}
+        likesCount={props.state.likesCount} />
     </div>
   );
 };

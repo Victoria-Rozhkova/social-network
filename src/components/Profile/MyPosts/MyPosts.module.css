@@ -5,9 +5,15 @@
   font-weight: 600;
   color: #ffffff;
   border-radius: 50px;
-  border: 0px;
+  border: none;
   cursor: pointer;
   padding: 16px 45px;
+  transition: all 0.3s;
+}
+
+.button:hover {
+  opacity: 0.855;
+
 }
 
 .newPost {

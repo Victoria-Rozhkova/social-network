@@ -1,14 +1,19 @@
 import img from '../img/img.png'
+import {
+  renderUI
+} from './render';
 
 const state = {
   profilePage: {
     posts: [{
         id: 1,
-        post: 'Hey from props'
+        post: 'Hey from props',
+        likesCount: 5,
       },
       {
         id: 2,
-        post: 'Hello from map'
+        post: 'Hello from map',
+        likesCount: 3,
       },
     ],
   },
@@ -43,11 +48,14 @@ const state = {
   }
 }
 
-export const addPost =(text)=>{
+export const addPost = (text) => {
   const newPost = {
-    id:5, post: text, likesCount:0,
+    id: 3,
+    post: text,
+    likesCount: 0,
   }
   state.profilePage.posts.push(newPost)
+  renderUI(state)
 }
 
 export default state;

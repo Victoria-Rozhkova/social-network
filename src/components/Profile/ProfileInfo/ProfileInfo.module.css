@@ -15,3 +15,14 @@
   grid-template-columns: 1fr 5fr;
   margin-bottom: 20px;
 }
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 5px
+}
+
+.heading,
+.text {
+  margin: 2px 0;
+}

@@ -11,7 +11,9 @@ export const ProfileInfo = () => {
       </div>
       <div className={module.profileInfo}>
         <img src={avatar} alt="avatar" />
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem beatae quam incidunt voluptate ullam laudantium, voluptatum quaerat ex non asperiores tempore maiores ab suscipit dicta, minus quibusdam soluta reiciendis dolorum?</p>
+        <div className={module.description}>
+          <h2 className={module.heading}>Me</h2>
+          <p className={module.text}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem beatae quam incidunt voluptate ullam laudantium, voluptatum quaerat ex non asperiores tempore maiores ab suscipit dicta, minus quibusdam soluta reiciendis dolorum?</p></div>
       </div>
     </div>
   );
