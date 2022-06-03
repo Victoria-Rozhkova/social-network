@@ -1,7 +1,4 @@
 import img from '../img/img.png'
-import {
-  renderUI
-} from './render';
 
 const state = {
   profilePage: {
@@ -50,6 +47,10 @@ const state = {
   }
 }
 
+let renderUI = () => {
+  console.log('state changed')
+}
+
 export const addPost = () => {
   const newPost = {
     id: 3,
@@ -81,6 +82,10 @@ export const updateTextMessage = (message) => {
   state.dialogsPage.newMessage = message;
   debugger
   renderUI(state)
+}
+
+export const subscribe = (observer) => {
+  renderUI = observer;
 }
 
 export default state;

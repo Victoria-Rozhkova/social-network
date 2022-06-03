@@ -18,6 +18,7 @@ export const MyPosts = (props) => {
     props.updateTextPost(text);
   };
 
+  //Фокус в конец textarea
   const moveCaretAtEnd = (e) => {
     const temp_value = e.target.value;
     e.target.value = '';

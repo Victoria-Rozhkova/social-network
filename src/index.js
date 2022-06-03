@@ -4,11 +4,22 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import state from './redux/state';
+import state, { subscribe, updateTextMessage, updateTextPost, writeNewMessage } from './redux/state';
 import { addPost } from './redux/state';
-import { renderUI } from './redux/render';
+
+const renderUI = (state) => {
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <App state={state} addPost={addPost} updateTextPost={updateTextPost} updateTextMessage={updateTextMessage} writeNewMessage={writeNewMessage} />
+      </BrowserRouter>
+    </React.StrictMode>
+  );
+};
 
 renderUI(state);
+subscribe(renderUI);
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));
 // root.render(
