@@ -1,91 +1,89 @@
 import img from '../img/img.png'
 
-const state = {
-  profilePage: {
-    posts: [{
-        id: 1,
-        post: 'Hey from props',
-        likesCount: 5,
-      },
-      {
-        id: 2,
-        post: 'Hello from map',
-        likesCount: 3,
-      },
-    ],
-    newPostText: 'test',
+let store = {
+  _state: {
+    profilePage: {
+      posts: [{
+          id: 1,
+          post: 'Hey from props',
+          likesCount: 5,
+        },
+        {
+          id: 2,
+          post: 'Hello from map',
+          likesCount: 3,
+        },
+      ],
+      newPostText: 'test',
+    },
+    dialogsPage: {
+      dialogs: [{
+          id: 1,
+          img: img,
+          name: 'Ann',
+        },
+        {
+          id: 2,
+          img: img,
+          name: 'Sam',
+        },
+        {
+          id: 3,
+          img: img,
+          name: 'John',
+        },
+      ],
+      messages: [{
+          id: 1,
+          img: img,
+          message: 'Hi'
+        },
+        {
+          id: 2,
+          img: img,
+          message: 'How are you?'
+        },
+      ],
+      newMessage: 'test message',
+    }
   },
-  dialogsPage: {
-    dialogs: [{
-        id: 1,
-        img: img,
-        name: 'Ann',
-      },
-      {
-        id: 2,
-        img: img,
-        name: 'Sam',
-      },
-      {
-        id: 3,
-        img: img,
-        name: 'John',
-      },
-    ],
-    messages: [{
-        id: 1,
-        img: img,
-        message: 'Hi'
-      },
-      {
-        id: 2,
-        img: img,
-        message: 'How are you?'
-      },
-    ],
-    newMessage: 'test message',
+  getState() {
+    return this._state;
+  },
+  renderUI() {
+    console.log('state changed')
+  },
+  addPost() {
+    const newPost = {
+      id: 3,
+      post: this._state.profilePage.newPostText,
+      likesCount: 0,
+    };
+    this._state.profilePage.posts.push(newPost);
+    this.renderUI(this._state);
+    this._state.profilePage.newPostText = '';
+  },
+  writeNewMessage() {
+    const newMessage = {
+      id: 6,
+      img: img,
+      message: this._state.dialogsPage.newMessage,
+    }
+    this._state.dialogsPage.messages.push(newMessage);
+    this.renderUI(this._state);
+    this._state.dialogsPage.newMessage = '';
+  },
+  updateTextPost(text) {
+    this._state.profilePage.newPostText = text;
+    this.renderUI(this._state);
+  },
+  updateTextMessage(message) {
+    this._state.dialogsPage.newMessage = message;
+    this.renderUI(this.state)
+  },
+  subscribe(observer) {
+    this.renderUI = observer;
   }
 }
 
-let renderUI = () => {
-  console.log('state changed')
-}
-
-export const addPost = () => {
-  const newPost = {
-    id: 3,
-    post: state.profilePage.newPostText,
-    likesCount: 0,
-  };
-  state.profilePage.posts.push(newPost);
-  renderUI(state);
-  state.profilePage.newPostText = '';
-}
-
-export const writeNewMessage = () => {
-  const newMessage = {
-    id: 6,
-    img: img,
-    message: state.dialogsPage.newMessage,
-  }
-  state.dialogsPage.messages.push(newMessage);
-  renderUI(state);
-  state.dialogsPage.newMessage = '';
-}
-
-export const updateTextPost = (text) => {
-  state.profilePage.newPostText = text;
-  renderUI(state);
-}
-
-export const updateTextMessage = (message) => {
-  state.dialogsPage.newMessage = message;
-  debugger
-  renderUI(state)
-}
-
-export const subscribe = (observer) => {
-  renderUI = observer;
-}
-
-export default state;
+export default store;
