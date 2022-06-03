@@ -17,9 +17,13 @@ function App(props) {
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/profile' element={<Profile
-            state={props.state.profilePage}
-            addPost={props.addPost} />} />
-          <Route path='/dialogs/*' element={<Dialogs state={props.state.dialogsPage} />} />
+            profilePage={props.state.profilePage}
+            addPost={props.addPost}
+            updateTextPost={props.updateTextPost} />} />
+          <Route path='/dialogs/*' element={<Dialogs dialogsPage={props.state.dialogsPage}
+            writeNewMessage={props.writeNewMessage}
+            updateTextMessage={props.updateTextMessage}
+          />} />
           {/* <Route path="/news" element={<News />} />
             <Route path="/music" element={<Music />} />
             <Route path="/settings" element={<Settings />} /> */}

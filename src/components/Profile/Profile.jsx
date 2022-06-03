@@ -8,8 +8,10 @@ export const Profile = (props) => {
     <div className={module.content}>
       <ProfileInfo />
       <MyPosts addPost={props.addPost}
-        posts={props.state.posts}
-        likesCount={props.state.likesCount} />
+        updateTextPost={props.updateTextPost}
+        newPostText={props.profilePage.newPostText}
+        posts={props.profilePage.posts}
+        likesCount={props.profilePage.likesCount} />
     </div>
   );
 };

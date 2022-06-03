@@ -9,18 +9,27 @@ export const MyPosts = (props) => {
   });
 
   const ref = useRef();
-  const addPost = () => {
+  // const addPost = () => {
+  //   props.addPost();
+  // };
+
+  const onChangePost = () => {
     const text = ref.current.value;
-    props.addPost(text);
-    ref.current.value = '';
+    props.updateTextPost(text);
+  };
+
+  const moveCaretAtEnd = (e) => {
+    const temp_value = e.target.value;
+    e.target.value = '';
+    e.target.value = temp_value;
   };
 
   return (
     <div>
       <h3>My posts</h3>
       <div className={module.newPost}>
-        <textarea ref={ref} />
-        <button onClick={addPost} className={module.button}>New post</button>
+        <textarea onFocus={moveCaretAtEnd} autoFocus ref={ref} value={props.newPostText} onChange={onChangePost} />
+        <button onClick={props.addPost} className={module.button}>New post</button>
       </div>
       <div>{postElements}</div>
     </div>

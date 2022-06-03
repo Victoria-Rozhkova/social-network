@@ -5,17 +5,23 @@ export const NewMessage = (props) => {
 
   const ref = useRef();
 
-  const writeMessage = () => {
-    const text = ref.current.value;
-    console.log(text);
-    alert(text);
+  const onChangeTextMessage = () => {
+    debugger;
+    const message = ref.current.value;
+    debugger;
+    props.updateTextMessage(message);
+  };
+
+  const moveCaretAtEnd = (e) => {
+    const temp_value = e.target.value;
+    e.target.value = '';
+    e.target.value = temp_value;
   };
 
   return (
     <div className={module.newMessage}>
-      <textarea ref={ref} cols="30" rows="4">
-      </textarea>
-      <button onClick={writeMessage} className={module.submitMessage}>Отправить</button>
+      <textarea autoFocus onFocus={moveCaretAtEnd} ref={ref} onChange={onChangeTextMessage} cols="30" rows="4" value={props.newMessage} />
+      <button onClick={props.writeNewMessage} className={module.submitMessage}>Отправить</button>
     </div>
   );
 };

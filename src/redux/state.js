@@ -16,6 +16,7 @@ const state = {
         likesCount: 3,
       },
     ],
+    newPostText: 'test',
   },
   dialogsPage: {
     dialogs: [{
@@ -44,17 +45,41 @@ const state = {
         img: img,
         message: 'How are you?'
       },
-    ]
+    ],
+    newMessage: 'test message',
   }
 }
 
-export const addPost = (text) => {
+export const addPost = () => {
   const newPost = {
     id: 3,
-    post: text,
+    post: state.profilePage.newPostText,
     likesCount: 0,
+  };
+  state.profilePage.posts.push(newPost);
+  renderUI(state);
+  state.profilePage.newPostText = '';
+}
+
+export const writeNewMessage = () => {
+  const newMessage = {
+    id: 6,
+    img: img,
+    message: state.dialogsPage.newMessage,
   }
-  state.profilePage.posts.push(newPost)
+  state.dialogsPage.messages.push(newMessage);
+  renderUI(state);
+  state.dialogsPage.newMessage = '';
+}
+
+export const updateTextPost = (text) => {
+  state.profilePage.newPostText = text;
+  renderUI(state);
+}
+
+export const updateTextMessage = (message) => {
+  state.dialogsPage.newMessage = message;
+  debugger
   renderUI(state)
 }
 

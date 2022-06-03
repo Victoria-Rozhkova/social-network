@@ -35,9 +35,11 @@ const Messages = (props) => {
 export const Dialogs = (props) => {
   return (
     <div className={module.dialogs}>
-      <DialogItem dialogs={props.state.dialogs} />
-      <Messages messages={props.state.messages} />
-      <NewMessage />
+      <DialogItem dialogs={props.dialogsPage.dialogs} />
+      <Messages messages={props.dialogsPage.messages} />
+      <NewMessage updateTextMessage={props.updateTextMessage}
+        newMessage={props.dialogsPage.newMessage}
+        writeNewMessage={props.writeNewMessage} />
     </div>
   );
 };

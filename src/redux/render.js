@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from "react-router-dom";
 import App from "../App";
-import { addPost } from "./state";
+import { addPost, updateTextMessage, updateTextPost, writeNewMessage } from "./state";
 
 
 export const renderUI = (state) => {
@@ -10,7 +10,7 @@ export const renderUI = (state) => {
   root.render(
     <React.StrictMode>
       <BrowserRouter>
-        <App state={state} addPost={addPost} />
+        <App state={state} addPost={addPost} updateTextPost={updateTextPost} updateTextMessage={updateTextMessage} writeNewMessage={writeNewMessage} />
       </BrowserRouter>
     </React.StrictMode>
   );
