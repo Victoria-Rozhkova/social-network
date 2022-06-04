@@ -1,5 +1,10 @@
 import img from "../img/img.png";
 
+const ADD_POST = "ADD_POST";
+const UPDATE_TEXT_POST = "UPDATE_TEXT_POST";
+const UPDATE_TEXT_MESSAGE = "UPDATE_TEXT_MESSAGE";
+const WRITE_NEW_MESSAGE = "WRITE_NEW_MESSAGE";
+
 let store = {
   _state: {
     profilePage: {
@@ -60,7 +65,7 @@ let store = {
     this._renderUI = observer;
   },
   dispatch(action) {
-    if (action.type === "ADD_POST") {
+    if (action.type === ADD_POST) {
       const newPost = {
         id: 3,
         post: this._state.profilePage.newPostText,
@@ -69,13 +74,13 @@ let store = {
       this._state.profilePage.posts.push(newPost);
       this._renderUI(this._state);
       this._state.profilePage.newPostText = "";
-    } else if (action.type === "UPDATE_TEXT_POST") {
+    } else if (action.type === UPDATE_TEXT_POST) {
       this._state.profilePage.newPostText = action.newText;
       this._renderUI(this._state);
-    } else if (action.type === "UPDATE_TEXT_MESSAGE") {
+    } else if (action.type === UPDATE_TEXT_MESSAGE) {
       this._state.dialogsPage.newMessage = action.message;
       this._renderUI(this.state);
-    } else if (action.type === "WRITE_NEW_MESSAGE") {
+    } else if (action.type === WRITE_NEW_MESSAGE) {
       const newMessage = {
         id: 6,
         img: img,
@@ -88,4 +93,17 @@ let store = {
   },
 };
 
+export const addPostActionCreator = () => {
+  return { type: ADD_POST };
+};
+export const updateTextPostActionCreator = (text) => {
+  return { type: UPDATE_TEXT_POST, newText: text };
+};
+
+export const writeNewMessageActionCreator = () => {
+  return { type: WRITE_NEW_MESSAGE };
+};
+export const updateTextMessageActionCreator = (message) => {
+  return { type: UPDATE_TEXT_MESSAGE, message: message };
+};
 export default store;

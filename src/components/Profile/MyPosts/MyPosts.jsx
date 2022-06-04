@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import module from './MyPosts.module.css';
 import { Post } from './Post/Post';
+import { addPostActionCreator, updateTextPostActionCreator } from '../../../redux/state';
 
 
 export const MyPosts = (props) => {
@@ -11,15 +12,12 @@ export const MyPosts = (props) => {
   const ref = useRef();
 
   const addPost = () => {
-    props.dispatch({ type: 'ADD_POST' });
+    props.dispatch(addPostActionCreator());
   };
 
   const onChangePost = () => {
     const text = ref.current.value;
-    props.dispatch({
-      type: 'UPDATE_TEXT_POST',
-      newText: text
-    });
+    props.dispatch(updateTextPostActionCreator(text));
   };
 
   //Фокус в конец textarea
