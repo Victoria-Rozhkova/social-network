@@ -5,14 +5,16 @@ export const NewMessage = (props) => {
 
   const ref = useRef();
 
-  const onChangeTextMessage = () => {
-    debugger;
-    const message = ref.current.value;
-    debugger;
-    props.updateTextMessage(message);
+  const writeNewMessage = () => {
+    props.dispatch({ type: 'WRITE_NEW_MESSAGE' });
   };
 
-//Фокус в конец textarea
+  const onChangeTextMessage = () => {
+    const message = ref.current.value;
+    props.dispatch({ type: 'UPDATE_TEXT_MESSAGE', message: message });
+  };
+
+  //Фокус в конец textarea
   const moveCaretAtEnd = (e) => {
     const temp_value = e.target.value;
     e.target.value = '';
@@ -22,7 +24,7 @@ export const NewMessage = (props) => {
   return (
     <div className={module.newMessage}>
       <textarea autoFocus onFocus={moveCaretAtEnd} ref={ref} onChange={onChangeTextMessage} cols="30" rows="4" value={props.newMessage} />
-      <button onClick={props.writeNewMessage} className={module.submitMessage}>Отправить</button>
+      <button onClick={writeNewMessage} className={module.submitMessage}>Отправить</button>
     </div>
   );
 };

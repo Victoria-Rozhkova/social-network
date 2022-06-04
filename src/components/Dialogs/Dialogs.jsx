@@ -28,7 +28,6 @@ const Messages = (props) => {
     <div className={module.messages}>
       {messageElements}
     </div>
-
   );
 };
 
@@ -37,9 +36,8 @@ export const Dialogs = (props) => {
     <div className={module.dialogs}>
       <DialogItem dialogs={props.dialogsPage.dialogs} />
       <Messages messages={props.dialogsPage.messages} />
-      <NewMessage updateTextMessage={props.updateTextMessage}
-        newMessage={props.dialogsPage.newMessage}
-        writeNewMessage={props.writeNewMessage} />
+      <NewMessage newMessage={props.dialogsPage.newMessage}
+        dispatch={props.dispatch} />
     </div>
   );
 };

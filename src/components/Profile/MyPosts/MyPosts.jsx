@@ -9,13 +9,17 @@ export const MyPosts = (props) => {
   });
 
   const ref = useRef();
-  // const addPost = () => {
-  //   props.addPost();
-  // };
+
+  const addPost = () => {
+    props.dispatch({ type: 'ADD_POST' });
+  };
 
   const onChangePost = () => {
     const text = ref.current.value;
-    props.updateTextPost(text);
+    props.dispatch({
+      type: 'UPDATE_TEXT_POST',
+      newText: text
+    });
   };
 
   //Фокус в конец textarea
@@ -30,7 +34,7 @@ export const MyPosts = (props) => {
       <h3>My posts</h3>
       <div className={module.newPost}>
         <textarea onFocus={moveCaretAtEnd} autoFocus ref={ref} value={props.newPostText} onChange={onChangePost} />
-        <button onClick={props.addPost} className={module.button}>New post</button>
+        <button onClick={addPost} className={module.button}>New post</button>
       </div>
       <div>{postElements}</div>
     </div>
