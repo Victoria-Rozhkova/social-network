@@ -6,7 +6,7 @@ import { addPostActionCreator, updateTextPostActionCreator } from '../../../redu
 
 export const MyPosts = (props) => {
   const postElements = props.posts.map((post) => {
-    return <Post likesCount={post.likesCount} post={post.post} />;
+    return <Post key={post.id} likesCount={post.likesCount} post={post.post} />;
   });
 
   const ref = useRef();

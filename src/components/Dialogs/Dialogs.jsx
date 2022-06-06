@@ -9,7 +9,7 @@ import { NewMessage } from './NewMessage/NewMessage';
 const DialogItem = (props) => {
 
   const dialogElements = props.dialogs.map((dialog) => {
-    return <li className={module.dialogsList}><Dialog name={dialog.name} id={dialog.id} img={dialog.img} /></li>;
+    return <li key={dialog.id} className={module.dialogsList}><Dialog name={dialog.name} id={dialog.id} img={dialog.img} /></li>;
   });
 
   return (
@@ -22,7 +22,7 @@ const DialogItem = (props) => {
 
 const Messages = (props) => {
   const messageElements = props.messages.map((message) => {
-    return <Message img={message.img} message={message.message} id={message.id} />;
+    return <Message key={message.id} img={message.img} message={message.message} id={message.id} />;
   });
   return (
     <div className={module.messages}>

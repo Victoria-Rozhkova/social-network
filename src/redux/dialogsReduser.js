@@ -1,7 +1,40 @@
+import img from "../img/img.png";
 const UPDATE_TEXT_MESSAGE = "UPDATE_TEXT_MESSAGE";
 const SEND_NEW_MESSAGE = "SEND_NEW_MESSAGE";
 
-const dialogsReduser = (state, action) => {
+let initialState = {
+  dialogs: [
+    {
+      id: 1,
+      img: img,
+      name: "Ann",
+    },
+    {
+      id: 2,
+      img: img,
+      name: "Sam",
+    },
+    {
+      id: 3,
+      img: img,
+      name: "John",
+    },
+  ],
+  messages: [
+    {
+      id: 1,
+      img: img,
+      message: "Hi",
+    },
+    {
+      id: 2,
+      img: img,
+      message: "How are you?",
+    },
+  ],
+  newMessage: "test message",
+};
+const dialogsReduser = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_TEXT_MESSAGE:
       state.newMessage = action.message;

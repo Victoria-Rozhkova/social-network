@@ -21,7 +21,7 @@ export const Navbar = (props) => {
         <div className={module.friends}>
           {props.state.dialogs.map((el) => {
             return (
-              <div className={module.friend}>
+              <div key={el.id} className={module.friend}>
                 <img src={el.img} alt="img" />
                 {el.name}
               </div>);
