@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import module from './MyPosts.module.css';
 import { Post } from './Post/Post';
-import { addPostActionCreator, updateTextPostActionCreator } from '../../../redux/state';
+import { addPostActionCreator, updateTextPostActionCreator } from '../../../redux/profileReduser';
 
 
 export const MyPosts = (props) => {

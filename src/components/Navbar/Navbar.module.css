@@ -29,13 +29,16 @@
 
 .navbar a {
   color: white;
+  font-weight: 500;
 }
 
 .navbar a.active,
 .navSettings a.active {
   color: #1890FF;
+  font-size: larger;
 }
 
 .navSettings a {
   color: white;
+  font-weight: 800;
 }

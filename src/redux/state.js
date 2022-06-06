@@ -1,9 +1,6 @@
 import img from "../img/img.png";
-
-const ADD_POST = "ADD_POST";
-const UPDATE_TEXT_POST = "UPDATE_TEXT_POST";
-const UPDATE_TEXT_MESSAGE = "UPDATE_TEXT_MESSAGE";
-const WRITE_NEW_MESSAGE = "WRITE_NEW_MESSAGE";
+import dialogsReduser from "./dialogsReduser";
+import profileReduser from "./profileReduser";
 
 let store = {
   _state: {
@@ -65,45 +62,9 @@ let store = {
     this._renderUI = observer;
   },
   dispatch(action) {
-    if (action.type === ADD_POST) {
-      const newPost = {
-        id: 3,
-        post: this._state.profilePage.newPostText,
-        likesCount: 0,
-      };
-      this._state.profilePage.posts.push(newPost);
-      this._renderUI(this._state);
-      this._state.profilePage.newPostText = "";
-    } else if (action.type === UPDATE_TEXT_POST) {
-      this._state.profilePage.newPostText = action.newText;
-      this._renderUI(this._state);
-    } else if (action.type === UPDATE_TEXT_MESSAGE) {
-      this._state.dialogsPage.newMessage = action.message;
-      this._renderUI(this.state);
-    } else if (action.type === WRITE_NEW_MESSAGE) {
-      const newMessage = {
-        id: 6,
-        img: img,
-        message: this._state.dialogsPage.newMessage,
-      };
-      this._state.dialogsPage.messages.push(newMessage);
-      this._renderUI(this._state);
-      this._state.dialogsPage.newMessage = "";
-    }
+    this._state.profilePage = profileReduser(this._state.profilePage, action);
+    this._state.dialogsPage = dialogsReduser(this._state.dialogsPage, action);
+    this._renderUI(this._state);
   },
-};
-
-export const addPostActionCreator = () => {
-  return { type: ADD_POST };
-};
-export const updateTextPostActionCreator = (text) => {
-  return { type: UPDATE_TEXT_POST, newText: text };
-};
-
-export const writeNewMessageActionCreator = () => {
-  return { type: WRITE_NEW_MESSAGE };
-};
-export const updateTextMessageActionCreator = (message) => {
-  return { type: UPDATE_TEXT_MESSAGE, message: message };
 };
 export default store;

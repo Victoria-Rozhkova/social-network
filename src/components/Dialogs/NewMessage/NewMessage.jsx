@@ -1,13 +1,13 @@
 import React, { useRef } from 'react';
-import { updateTextMessageActionCreator, writeNewMessageActionCreator } from '../../../redux/state';
+import { updateTextMessageActionCreator, sendNewMessageActionCreator } from '../../../redux/dialogsReduser';
 import module from '../Dialogs.module.css';
 
 export const NewMessage = (props) => {
 
   const ref = useRef();
 
-  const writeNewMessage = () => {
-    props.dispatch(writeNewMessageActionCreator());
+  const sendNewMessage = () => {
+    props.dispatch(sendNewMessageActionCreator());
   };
 
   const onChangeTextMessage = () => {
@@ -24,8 +24,8 @@ export const NewMessage = (props) => {
 
   return (
     <div className={module.newMessage}>
-      <textarea autoFocus onFocus={moveCaretAtEnd} ref={ref} onChange={onChangeTextMessage} cols="30" rows="4" value={props.newMessage} />
-      <button onClick={writeNewMessage} className={module.submitMessage}>Отправить</button>
+      <textarea placeholder='Enter your message' autoFocus onFocus={moveCaretAtEnd} ref={ref} onChange={onChangeTextMessage} cols="30" rows="4" value={props.newMessage} />
+      <button onClick={sendNewMessage} className={module.submitMessage}>Send</button>
     </div>
   );
 };
