@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import { updateTextMessageActionCreator, sendNewMessageActionCreator } from '../../../redux/dialogsReduser';
 import module from '../Dialogs.module.css';
 
 export const NewMessage = (props) => {
@@ -7,12 +6,12 @@ export const NewMessage = (props) => {
   const ref = useRef();
 
   const sendNewMessage = () => {
-    props.dispatch(sendNewMessageActionCreator());
+    props.sendNewMessage();
   };
 
   const onChangeTextMessage = () => {
     const message = ref.current.value;
-    props.dispatch(updateTextMessageActionCreator(message));
+    props.updateTextMessage(message);
   };
 
   //Фокус в конец textarea

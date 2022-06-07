@@ -1,43 +1,16 @@
 import React from 'react';
-import { Dialog } from './Dialog/Dialog';
+import { DialogList } from './DialogList/DialogList';
 import module from './Dialogs.module.css';
-import { Message } from './Message/Message';
-import { NewMessage } from './NewMessage/NewMessage';
-
-
-
-const DialogItem = (props) => {
-
-  const dialogElements = props.dialogs.map((dialog) => {
-    return <li key={dialog.id} className={module.dialogsList}><Dialog name={dialog.name} id={dialog.id} img={dialog.img} /></li>;
-  });
-
-  return (
-    <div className={module.dialogItem}>
-      <h2 className={module.heading}>Dialogs</h2>
-      <ul>{dialogElements}</ul>
-    </div>
-  );
-};
-
-const Messages = (props) => {
-  const messageElements = props.messages.map((message) => {
-    return <Message key={message.id} img={message.img} message={message.message} id={message.id} />;
-  });
-  return (
-    <div className={module.messages}>
-      {messageElements}
-    </div>
-  );
-};
+import { NewMessageContainer } from './NewMessage/NewMessageContainer';
+import { Messages } from './Messages/Messages';
 
 export const Dialogs = (props) => {
+  const state = props.store.getState();
   return (
     <div className={module.dialogs}>
-      <DialogItem dialogs={props.dialogsPage.dialogs} />
-      <Messages messages={props.dialogsPage.messages} />
-      <NewMessage newMessage={props.dialogsPage.newMessage}
-        dispatch={props.dispatch} />
+      <DialogList dialogs={state.dialogsPage.dialogs} />
+      <Messages messages={state.dialogsPage.messages} />
+      <NewMessageContainer store={props.store} />
     </div>
   );
 };
