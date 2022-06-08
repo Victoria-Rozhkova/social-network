@@ -34,20 +34,26 @@ let initialState = {
   ],
   newMessage: "test message",
 };
+
 const dialogsReduser = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_TEXT_MESSAGE:
-      state.newMessage = action.message;
-      return state;
-    case SEND_NEW_MESSAGE:
+    case UPDATE_TEXT_MESSAGE: {
+      let stateCopy = { ...state };
+      stateCopy.newMessage = action.message;
+      return stateCopy;
+    }
+    case SEND_NEW_MESSAGE: {
       const newMessage = {
         id: 6,
         img: state.dialogs[0].img,
         message: state.newMessage,
       };
-      state.messages.push(newMessage);
-      state.newMessage = "";
-      return state;
+      let stateCopy = { ...state };
+      stateCopy.messages = [...state.messages];
+      stateCopy.messages.push(newMessage);
+      stateCopy.newMessage = "";
+      return stateCopy;
+    }
     default:
       return state;
   }
