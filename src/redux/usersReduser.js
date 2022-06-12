@@ -4,30 +4,30 @@ const SET_USERS = "SET_USERS";
 
 let initialState = {
   users: [
-    {
-      id: 1,
-      photoUrl: "https://yosoyqueen.com/wp-content/uploads/2021/06/11.png",
-      followed: true,
-      status: "I`m a boss",
-      fullName: "Dmitry K.",
-      location: { country: "Belarus", city: "Minsk" },
-    },
-    {
-      id: 2,
-      photoUrl: "https://yosoyqueen.com/wp-content/uploads/2021/06/11.png",
-      followed: true,
-      status: "I`m a boss",
-      fullName: "Inna D.",
-      location: { country: "Belarus", city: "Minsk" },
-    },
-    {
-      id: 3,
-      photoUrl: "https://yosoyqueen.com/wp-content/uploads/2021/06/11.png",
-      followed: true,
-      status: "I`m a boss",
-      fullName: "Sara A.",
-      location: { country: "Belarus", city: "Minsk" },
-    },
+    // {
+    //   id: 1,
+    //   photoUrl: "https://yosoyqueen.com/wp-content/uploads/2021/06/11.png",
+    //   followed: true,
+    //   status: "I`m a boss",
+    //   fullName: "Dmitry K.",
+    //   location: { country: "Belarus", city: "Minsk" },
+    // },
+    // {
+    //   id: 2,
+    //   photoUrl: "https://yosoyqueen.com/wp-content/uploads/2021/06/11.png",
+    //   followed: true,
+    //   status: "I`m a boss",
+    //   fullName: "Inna D.",
+    //   location: { country: "Belarus", city: "Minsk" },
+    // },
+    // {
+    //   id: 3,
+    //   photoUrl: "https://yosoyqueen.com/wp-content/uploads/2021/06/11.png",
+    //   followed: true,
+    //   status: "I`m a boss",
+    //   fullName: "Sara A.",
+    //   location: { country: "Belarus", city: "Minsk" },
+    // },
   ],
 };
 

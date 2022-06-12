@@ -22,6 +22,9 @@
 .userStatus {
   min-width: 400px;
 }
+.userName a{
+  color: black;
+}
 .userRight {
   display: flex;
   flex-direction: column;
