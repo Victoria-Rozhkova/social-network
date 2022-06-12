@@ -8,6 +8,8 @@ export const Navigate = (props) => {
       <div className={module.navbar}>
         <NavLink className={({ isActive }) => isActive ? module.active : ''} to="/profile">Profile</NavLink></div>
       <div className={module.navbar}>
+        <NavLink className={({ isActive }) => isActive ? module.active : ''} to="/users">Users</NavLink></div>
+      <div className={module.navbar}>
         <NavLink className={({ isActive }) => isActive ? module.active : ''} to="/dialogs">Messages</NavLink></div>
       <div className={module.navbar}>
         <NavLink className={({ isActive }) => isActive ? module.active : ''} to="/news">News</NavLink></div>

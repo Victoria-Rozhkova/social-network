@@ -4,10 +4,10 @@ import { Message } from './Message/Message';
 
 export const Messages = (props) => {
   const messageElements = props.messages.map((message) => {
-    return <Message img={message.img} message={message.message} id={message.id} />;
+    return <Message key={message.id} img={message.img} message={message.message} id={message.id} />;
   });
   return (
-    <div key={props.messages.id} className={module.messages}>
+    <div className={module.messages}>
       {messageElements}
     </div>
   );

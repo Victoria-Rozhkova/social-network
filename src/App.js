@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import { HomePage } from './components/HomePage/HomePage';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NavbarContainer from './components/Navbar/NavbarContainer';
+import UsersContainer from './components/Users/UsersContainer';
 
 function App(props) {
   return (
@@ -17,6 +18,7 @@ function App(props) {
           <Route path='/' element={<HomePage />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/dialogs/*' element={<DialogsContainer />} />
+          <Route path='/users' element={<UsersContainer />} />
           {/* <Route path="/news" element={<News />} />
             <Route path="/music" element={<Music />} />
             <Route path="/settings" element={<Settings />} /> */}

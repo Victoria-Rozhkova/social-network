@@ -1,0 +1,37 @@
+.user {
+  display: flex;
+  gap: 20px;
+  margin: 15px;
+}
+.user img {
+  width: 100px;
+  height: 100px;
+}
+.userInfo {
+  display: flex;
+  border: solid 1px gray;
+  border-radius: 10px;
+  padding: 12px;
+}
+.userLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.userName,
+.userStatus {
+  min-width: 400px;
+}
+.userRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  text-align: end;
+}
+.userCountry {
+  min-width: 400px;
+}
+.userCity {
+  min-width: 400px;
+}
