@@ -1,34 +1,14 @@
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
+const SET_TOTAL_USERS_PAGE = "SET_TOTAL_USERS_PAGE";
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
 let initialState = {
-  users: [
-    // {
-    //   id: 1,
-    //   photoUrl: "https://yosoyqueen.com/wp-content/uploads/2021/06/11.png",
-    //   followed: true,
-    //   status: "I`m a boss",
-    //   fullName: "Dmitry K.",
-    //   location: { country: "Belarus", city: "Minsk" },
-    // },
-    // {
-    //   id: 2,
-    //   photoUrl: "https://yosoyqueen.com/wp-content/uploads/2021/06/11.png",
-    //   followed: true,
-    //   status: "I`m a boss",
-    //   fullName: "Inna D.",
-    //   location: { country: "Belarus", city: "Minsk" },
-    // },
-    // {
-    //   id: 3,
-    //   photoUrl: "https://yosoyqueen.com/wp-content/uploads/2021/06/11.png",
-    //   followed: true,
-    //   status: "I`m a boss",
-    //   fullName: "Sara A.",
-    //   location: { country: "Belarus", city: "Minsk" },
-    // },
-  ],
+  users: [],
+  pages: 5,
+  totalPageCount: 0,
+  currentPage: 1,
 };
 
 const usersReduser = (state = initialState, action) => {
@@ -55,6 +35,10 @@ const usersReduser = (state = initialState, action) => {
       };
     case SET_USERS:
       return { ...state, users: action.users };
+    case SET_TOTAL_USERS_PAGE:
+      return { ...state, totalPageCount: action.pagesCount };
+    case SET_CURRENT_PAGE:
+      return { ...state, currentPage: action.currentPage };
     default:
       return state;
   }
@@ -68,6 +52,12 @@ export const unfollowActionCreator = (userId) => {
 };
 export const setUsersActionCreator = (users) => {
   return { type: SET_USERS, users };
+};
+export const setTotalUsersCountActionCreator = (pagesCount) => {
+  return { type: SET_TOTAL_USERS_PAGE, pagesCount };
+};
+export const setCurrentPageActionCreator = (currentPage) => {
+  return { type: SET_CURRENT_PAGE, currentPage };
 };
 
 export default usersReduser;

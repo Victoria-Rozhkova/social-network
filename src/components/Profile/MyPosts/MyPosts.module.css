@@ -8,16 +8,18 @@
   border: none;
   cursor: pointer;
   padding: 16px 45px;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .button:hover {
   opacity: 0.855;
-
+  background-image: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+  transition: all 0.3s;
 }
+
 .button:active {
-  box-shadow: 0 5px #942dd9;
-  transform: translateY(4px)
+  box-shadow: 0 1px #9d249ffa;
+  transform: translateY(2px);
 }
 
 .newPost {

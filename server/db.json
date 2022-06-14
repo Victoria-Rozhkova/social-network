@@ -1,0 +1,170 @@
+{
+  "users": [
+    {
+      "name": "Andrey",
+      "id": 1,
+      "uniqueUrlName": null,
+      "photos": {
+        "small": null,
+        "large": null
+      },
+      "status": null,
+      "followed": true
+    },
+    {
+      "name": "Bella",
+      "id": 2,
+      "uniqueUrlName": null,
+      "photos": {
+        "small": null,
+        "large": null
+      },
+      "status": null,
+      "followed": false
+    },
+    {
+      "name": "Anna",
+      "id": 3,
+      "uniqueUrlName": null,
+      "photos": {
+        "small": null,
+        "large": null
+      },
+      "status": null,
+      "followed": true
+    },
+    {
+      "name": "Oleg",
+      "id": 4,
+      "uniqueUrlName": null,
+      "photos": {
+        "small": null,
+        "large": null
+      },
+      "status": null,
+      "followed": false
+    },
+    {
+      "name": "Dexter",
+      "id": 5,
+      "uniqueUrlName": null,
+      "photos": {
+        "small": null,
+        "large": null
+      },
+      "status": null,
+      "followed": true
+    },
+    {
+      "name": "BadBoy",
+      "id": 6,
+      "uniqueUrlName": null,
+      "photos": {
+        "small": null,
+        "large": null
+      },
+      "status": null,
+      "followed": false
+    },
+    {
+      "name": "Bob",
+      "id": 7,
+      "uniqueUrlName": null,
+      "photos": {
+        "small": null,
+        "large": null
+      },
+      "status": null,
+      "followed": true
+    },
+    {
+      "name": "Max",
+      "id": 8,
+      "uniqueUrlName": null,
+      "photos": {
+        "small": null,
+        "large": null
+      },
+      "status": null,
+      "followed": false
+    },
+    {
+      "name": "Fred",
+      "id": 9,
+      "uniqueUrlName": null,
+      "photos": {
+        "small": null,
+        "large": null
+      },
+      "status": null,
+      "followed": true
+    },
+    {
+      "name": "Paul",
+      "id": 10,
+      "uniqueUrlName": null,
+      "photos": {
+        "small": null,
+        "large": null
+      },
+      "status": null,
+      "followed": false
+    },
+    {
+      "name": "Leo",
+      "id": 11,
+      "uniqueUrlName": null,
+      "photos": {
+        "small": null,
+        "large": null
+      },
+      "status": null,
+      "followed": false
+    },
+    {
+      "name": "Mary",
+      "id": 12,
+      "uniqueUrlName": null,
+      "photos": {
+        "small": null,
+        "large": null
+      },
+      "status": null,
+      "followed": true
+    },
+    {
+      "name": "Anna",
+      "id": 13,
+      "uniqueUrlName": null,
+      "photos": {
+        "small": null,
+        "large": null
+      },
+      "status": null,
+      "followed": false
+    },
+    {
+      "name": "Richard",
+      "id": 14,
+      "uniqueUrlName": null,
+      "photos": {
+        "small": null,
+        "large": null
+      },
+      "status": null,
+      "followed": true
+    },
+    {
+      "name": "Dean",
+      "id": 15,
+      "uniqueUrlName": null,
+      "photos": {
+        "small": null,
+        "large": null
+      },
+      "status": null,
+      "followed": false
+    }
+  ],
+  "totalCount": [15]
+}
