@@ -3,12 +3,14 @@ const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
 const SET_TOTAL_USERS_PAGE = "SET_TOTAL_USERS_PAGE";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+const TOGGLE_LOADING = "TOGGLE_LOADING";
 
 let initialState = {
   users: [],
   pages: 5,
   totalPageCount: 0,
   currentPage: 1,
+  isLoading: false,
 };
 
 const usersReduser = (state = initialState, action) => {
@@ -39,6 +41,8 @@ const usersReduser = (state = initialState, action) => {
       return { ...state, totalPageCount: action.pagesCount };
     case SET_CURRENT_PAGE:
       return { ...state, currentPage: action.currentPage };
+    case TOGGLE_LOADING:
+      return { ...state, isLoading: action.isLoading };
     default:
       return state;
   }
@@ -58,6 +62,9 @@ export const setTotalUsersCountActionCreator = (pagesCount) => {
 };
 export const setCurrentPageActionCreator = (currentPage) => {
   return { type: SET_CURRENT_PAGE, currentPage };
+};
+export const toggleIsLoadingActionCreator = (isLoading) => {
+  return { type: TOGGLE_LOADING, isLoading };
 };
 
 export default usersReduser;

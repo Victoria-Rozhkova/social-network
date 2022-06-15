@@ -107,3 +107,10 @@
   background: rgba(128, 128, 128, 0.493);
   border: 1px solid rgba(128, 128, 128, 0.493);
 }
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
