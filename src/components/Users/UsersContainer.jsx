@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { followActionCreator, setCurrentPageActionCreator, setTotalUsersCountActionCreator, setUsersActionCreator, toggleIsLoadingActionCreator, unfollowActionCreator } from '../../redux/usersReduser';
+import { follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsLoading, unfollow } from '../../redux/usersReduser';
 import { Users } from './Users';
 import { Preloader } from '../common/Preloader/Preloader';
 
@@ -53,16 +53,23 @@ const MapStateToProps = (state) => {
   };
 };
 
-const MapDispatchToProps = (dispatch) => {
-  return {
-    follow: (userId) => { dispatch(followActionCreator(userId)); },
-    unfollow: (userId) => { dispatch(unfollowActionCreator(userId)); },
-    setUsers: (users) => { dispatch(setUsersActionCreator(users)); },
-    setCurrentPage: (currentPage) => { dispatch(setCurrentPageActionCreator(currentPage)); },
-    setTotalUsersCount: (pagesCount) => { dispatch(setTotalUsersCountActionCreator(pagesCount)); },
-    toggleIsLoading: (isLoading) => { dispatch(toggleIsLoadingActionCreator(isLoading)); }
-  };
-};
+// const MapDispatchToProps = (dispatch) => {
+//   return {
+//     follow: (userId) => { dispatch(followActionCreator(userId)); },
+//     unfollow: (userId) => { dispatch(unfollowActionCreator(userId)); },
+//     setUsers: (users) => { dispatch(setUsersActionCreator(users)); },
+//     setCurrentPage: (currentPage) => { dispatch(setCurrentPageActionCreator(currentPage)); },
+//     setTotalUsersCount: (pagesCount) => { dispatch(setTotalUsersCountActionCreator(pagesCount)); },
+//     toggleIsLoading: (isLoading) => { dispatch(toggleIsLoadingActionCreator(isLoading)); }
+//   };
+// };
 
-const UsersContainer = connect(MapStateToProps, MapDispatchToProps)(UsersAPI);
+const UsersContainer = connect(MapStateToProps, {
+  follow,
+  unfollow,
+  setUsers,
+  setCurrentPage,
+  setTotalUsersCount,
+  toggleIsLoading,
+})(UsersAPI);
 export default UsersContainer;

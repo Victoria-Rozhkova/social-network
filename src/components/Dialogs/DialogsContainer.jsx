@@ -9,9 +9,5 @@ const MapStateToProps = (state) => {
   };
 };
 
-const MapDispatchToProps = (dispatch) => {
-  return {};
-};
-
-const DialogsContainer = connect(MapStateToProps, MapDispatchToProps)(Dialogs);
+const DialogsContainer = connect(MapStateToProps, {})(Dialogs);
 export default DialogsContainer;

@@ -43,26 +43,29 @@ const dialogsReduser = (state = initialState, action) => {
       return stateCopy;
     }
     case SEND_NEW_MESSAGE: {
-      const newMessage = {
-        id: 6,
-        img: state.dialogs[0].img,
-        message: state.newMessage,
-      };
-      let stateCopy = { ...state };
-      stateCopy.messages = [...state.messages];
-      stateCopy.messages.push(newMessage);
-      stateCopy.newMessage = "";
-      return stateCopy;
+      if (state.newMessage) {
+        const newMessage = {
+          id: 6,
+          img: state.dialogs[0].img,
+          message: state.newMessage,
+        };
+        let stateCopy = { ...state };
+        stateCopy.messages = [...state.messages];
+        stateCopy.messages.push(newMessage);
+        stateCopy.newMessage = "";
+        return stateCopy;
+      }
+      return state;
     }
     default:
       return state;
   }
 };
 
-export const sendNewMessageActionCreator = () => {
+export const sendNewMessage = () => {
   return { type: SEND_NEW_MESSAGE };
 };
-export const updateTextMessageActionCreator = (message) => {
+export const updateTextMessage = (message) => {
   return { type: UPDATE_TEXT_MESSAGE, message: message };
 };
 

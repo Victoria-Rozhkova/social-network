@@ -20,16 +20,19 @@ let initialState = {
 const profileReduser = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST: {
-      const newPost = {
-        id: 3,
-        post: state.newPostText,
-        likesCount: 0,
-      };
-      let stateCopy = { ...state };
-      stateCopy.posts = [...state.posts];
-      stateCopy.posts.push(newPost);
-      stateCopy.newPostText = "";
-      return stateCopy;
+      if (state.newPostText) {
+        const newPost = {
+          id: 3,
+          post: state.newPostText,
+          likesCount: 0,
+        };
+        let stateCopy = { ...state };
+        stateCopy.posts = [...state.posts];
+        stateCopy.posts.push(newPost);
+        stateCopy.newPostText = "";
+        return stateCopy;
+      }
+      return state;
     }
     case UPDATE_TEXT_POST: {
       let stateCopy = { ...state };
@@ -41,10 +44,10 @@ const profileReduser = (state = initialState, action) => {
   }
 };
 
-export const addPostActionCreator = () => {
+export const addPost = () => {
   return { type: ADD_POST };
 };
-export const updateTextPostActionCreator = (text) => {
+export const updateTextPost = (text) => {
   return { type: UPDATE_TEXT_POST, newText: text };
 };
 
