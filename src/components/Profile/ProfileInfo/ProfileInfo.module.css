@@ -16,6 +16,11 @@
   margin-bottom: 20px;
 }
 
+.profileInfo img {
+  width: 200px;
+  height: 200px;
+}
+
 .description {
   display: flex;
   flex-direction: column;

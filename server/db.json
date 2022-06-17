@@ -166,5 +166,43 @@
       "followed": false
     }
   ],
-  "totalCount": [15]
+  "totalCount": [15],
+  "profile": [
+    {
+      "aboutMe": "I am cool 1001%",
+      "contacts": {
+        "vk": "vk.com/",
+        "twitter": "https://twitter.com/@sdf",
+        "youtube": null,
+        "github": "github.com",
+        "mainLink": null
+      },
+      "lookingForAJob": true,
+      "lookingForAJobDescription": "Не ищу, а дурачусь",
+      "fullName": "Andrey",
+      "userId": 1,
+      "photos": {
+        "small": null,
+        "large": "https://image.shutterstock.com/image-vector/young-smiling-man-adam-avatar-260nw-2107967969.jpg"
+      }
+    },
+    {
+      "aboutMe": "Me",
+      "contacts": {
+        "vk": "vk.com/",
+        "twitter": "https://twitter.com/@sdf",
+        "youtube": null,
+        "github": "github.com",
+        "mainLink": null
+      },
+      "lookingForAJob": true,
+      "lookingForAJobDescription": "R",
+      "fullName": "Bella",
+      "userId": 2,
+      "photos": {
+        "small": null,
+        "large": "https://img.freepik.com/free-vector/woman-avatars-with-different-emotions-girl-with-spring-or-summer-flowers-and-a-wreath-in-black-hair_427567-1481.jpg"
+      }
+    }
+  ]
 }

@@ -7,6 +7,7 @@ import { HomePage } from "./components/HomePage/HomePage";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 function App(props) {
   return (
@@ -16,7 +17,8 @@ function App(props) {
       <div className="app-wrapper-content">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<ProfileContainer />} />
+          <Route path={`users/profile/2`} element={<ProfileContainer />} />
           <Route path="/dialogs/*" element={<DialogsContainer />} />
           <Route path="/users" element={<UsersContainer />} />
           {/* <Route path="/news" element={<News />} />
@@ -27,5 +29,4 @@ function App(props) {
     </div>
   );
 }
-
 export default App;
