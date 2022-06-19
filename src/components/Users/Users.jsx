@@ -22,7 +22,8 @@ export const Users = (props) => {
           </div>
           <div className={module.userInfo}>
             <div className={module.userLeft}>
-              <div className={module.userName}> <a href="#2">{user.name}</a></div>
+              <div className={module.userName}>
+                <NavLink to={`profile/${user.id}`}>{user.name}</NavLink></div>
               <div className={module.userStatus}>{user.status}</div>
             </div>
             <div className={module.userRight}>

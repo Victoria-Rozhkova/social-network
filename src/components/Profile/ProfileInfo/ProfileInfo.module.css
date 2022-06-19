@@ -14,11 +14,13 @@
   display: grid;
   grid-template-columns: 1fr 5fr;
   margin-bottom: 20px;
+  gap: 10px;
 }
 
 .profileInfo img {
   width: 200px;
   height: 200px;
+  border-radius: 50%;
 }
 
 .description {

@@ -17,7 +17,7 @@ export const ProfileInfo = (props) => {
         <img src={props.profile.photos.large} alt="avatar" />
         <div className={module.description}>
           <h2 className={module.heading}>{props.profile.fullName}</h2>
-          <p className={module.text}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem beatae quam incidunt voluptate ullam laudantium, voluptatum quaerat ex non asperiores tempore maiores ab suscipit dicta, minus quibusdam soluta reiciendis dolorum?</p></div>
+          <p className={module.text}>{props.profile.aboutMe}</p></div>
       </div>
     </div>
   );

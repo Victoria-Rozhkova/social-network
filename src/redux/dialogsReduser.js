@@ -32,7 +32,7 @@ let initialState = {
       message: "How are you?",
     },
   ],
-  newMessage: "test message",
+  newMessage: "",
 };
 
 const dialogsReduser = (state = initialState, action) => {
