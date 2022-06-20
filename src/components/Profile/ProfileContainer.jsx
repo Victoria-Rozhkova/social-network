@@ -9,13 +9,10 @@ import { useParams } from "react-router-dom";
 const ProfileAPI = (props) => {
   const { id } = useParams();
   useEffect(() => {
-    axios.get(`http://localhost:3004/profile/${id}`)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
       .then(response => {
-        console.log(response.data);
-        debugger;
         props.setUserProfile(response.data);
       });
-
   }, []);
   return <Profile profile={props.profile} />;
 };

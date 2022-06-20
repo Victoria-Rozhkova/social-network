@@ -1,10 +1,26 @@
 .header {
   grid-area: header;
   background-color: #181A1B;
-  padding-left: 20px;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
+  padding: 0 20px;
+}
+
+.header a {
+  color: #1890FF;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.header a:hover {
+  color: white;
+}
+
+.header p {
+  color: #1890FF;
+  font-size: 20px;
+  font-weight: 900;
 }
 
 .logo {

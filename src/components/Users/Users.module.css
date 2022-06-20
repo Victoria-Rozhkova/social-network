@@ -83,6 +83,8 @@
   gap: 5px;
   justify-content: center;
   margin: 10px 0;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .pageBtn {
