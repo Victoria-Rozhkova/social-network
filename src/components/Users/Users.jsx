@@ -18,18 +18,22 @@ export const Users = (props) => {
           <div className={module.userFollow}>
             <NavLink to={`profile/${user.id}`}><img src={user.photos.small != null ? user.photos.small : userPhoto} alt="img" /></NavLink>
             {user.followed === true
-              ? <button onClick={() => {
+              ? <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
+                props.toggleFollowing(true, user.id);
                 UsersAxios.unfollowUser(user.id).then(data => {
                   if (data.resultCode === 0) {
                     props.unfollow(user.id);
                   }
+                  props.toggleFollowing(false, user.id);
                 });
               }}>Unfollow</button>
-              : <button onClick={() => {
+              : <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
+                props.toggleFollowing(true, user.id);
                 UsersAxios.followUser(user.id).then(data => {
                   if (data.resultCode === 0) {
                     props.follow(user.id);
                   }
+                  props.toggleFollowing(false, user.id);
                 });
               }}>Follow</button>}
           </div>
