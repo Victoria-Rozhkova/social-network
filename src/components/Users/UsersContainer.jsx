@@ -1,18 +1,16 @@
 import React from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsLoading, unfollow } from '../../redux/usersReduser';
 import { Users } from './Users';
 import { Preloader } from '../common/Preloader/Preloader';
+import { UsersAxios } from '../../api/api';
 
 class UsersAPI extends React.Component {
   componentDidMount() {
     this.props.toggleIsLoading(true);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pages}`, {
-      withCredentials: true
-    })
-      .then(response => {
-        this.props.setUsers(response.data.items);
+    UsersAxios.getUsers(this.props.currentPage, this.props.pages)
+      .then(data => {
+        this.props.setUsers(data.items);
         this.props.setTotalUsersCount(50);
         this.props.toggleIsLoading(false);
       });
@@ -20,11 +18,9 @@ class UsersAPI extends React.Component {
   onPageChange = (page) => {
     this.props.setCurrentPage(page);
     this.props.toggleIsLoading(true);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pages}`, {
-      withCredentials: true
-    })
-      .then(response => {
-        this.props.setUsers(response.data.items);
+    UsersAxios.getUsers(page, this.props.pages)
+      .then(data => {
+        this.props.setUsers(data.items);
         this.props.toggleIsLoading(false);
       });
   };
