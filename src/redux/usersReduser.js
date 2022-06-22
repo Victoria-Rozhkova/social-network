@@ -1,3 +1,5 @@
+import { UsersAxios } from "../api/api";
+
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
@@ -65,10 +67,10 @@ const usersReduser = (state = initialState, action) => {
   }
 };
 
-export const follow = (userId) => {
+export const followSuccses = (userId) => {
   return { type: FOLLOW, userId };
 };
-export const unfollow = (userId) => {
+export const unfollowSuccses = (userId) => {
   return { type: UNFOLLOW, userId };
 };
 export const setUsers = (users) => {
@@ -85,6 +87,29 @@ export const toggleIsLoading = (isLoading) => {
 };
 export const toggleFollowing = (isProgress, userId) => {
   return { type: TOGGLE_FOLLOWING, isProgress, userId };
+};
+
+export const follow = (id) => {
+  return (dispatch) => {
+    dispatch(toggleFollowing(true, id));
+    UsersAxios.followUser(id).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(followSuccses(id));
+      }
+    });
+    dispatch(toggleFollowing(false, id));
+  };
+};
+export const unfollow = (id) => {
+  return (dispatch) => {
+    dispatch(toggleFollowing(true, id));
+    UsersAxios.unfollowUser(id).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(unfollowSuccses(id));
+      }
+    });
+    dispatch(toggleFollowing(false, id));
+  };
 };
 
 export default usersReduser;

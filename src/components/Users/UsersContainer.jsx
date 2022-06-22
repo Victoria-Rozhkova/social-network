@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { follow, setCurrentPage, setTotalUsersCount, setUsers, toggleFollowing, toggleIsLoading, unfollow } from '../../redux/usersReduser';
+import { follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsLoading, unfollow } from '../../redux/usersReduser';
 import { Users } from './Users';
 import { Preloader } from '../common/Preloader/Preloader';
 import { UsersAxios } from '../../api/api';
@@ -36,7 +36,6 @@ class UsersAPI extends React.Component {
           unfollow={this.props.unfollow}
           currentPage={this.props.currentPage}
           onPageChange={this.onPageChange}
-          toggleFollowing={this.props.toggleFollowing}
           followingInProgress={this.props.followingInProgress}
         />}
     </>;
@@ -62,6 +61,5 @@ const UsersContainer = connect(MapStateToProps, {
   setCurrentPage,
   setTotalUsersCount,
   toggleIsLoading,
-  toggleFollowing
 })(UsersAPI);
 export default UsersContainer;
