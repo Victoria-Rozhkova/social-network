@@ -112,4 +112,26 @@ export const unfollow = (id) => {
   };
 };
 
+export const getUsers = (currentPage, pages) => {
+  return (dispatch) => {
+    dispatch(toggleIsLoading(true));
+    UsersAxios.getUsers(currentPage, pages).then((data) => {
+      dispatch(setUsers(data.items));
+      dispatch(setTotalUsersCount(50));
+      dispatch(toggleIsLoading(false));
+    });
+  };
+};
+
+export const getCurrentPage = (page, pages) => {
+  return (dispatch) => {
+    dispatch(setCurrentPage(page));
+    dispatch(toggleIsLoading(true));
+    UsersAxios.getUsers(page, pages).then((data) => {
+      dispatch(setUsers(data.items));
+      dispatch(toggleIsLoading(false));
+    });
+  };
+};
+
 export default usersReduser;

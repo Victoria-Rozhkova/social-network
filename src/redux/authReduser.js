@@ -1,3 +1,6 @@
+import { UsersAxios } from "../api/api";
+import { toggleIsLoading } from "./usersReduser";
+
 const SET_AUTH_USER = "SET_AUTH_USER";
 
 let initialState = {
@@ -23,5 +26,16 @@ const authReduser = (state = initialState, action) => {
 
 export const setAuthUser = (userId, login, email) => {
   return { type: SET_AUTH_USER, data: { userId, login, email } };
+};
+
+export const getAuthUser = () => {
+  return (dispatch) => {
+    dispatch(toggleIsLoading(true));
+    UsersAxios.getAuthUser().then((data) => {
+      const { id, login, email } = data.data;
+      dispatch(setAuthUser(id, login, email));
+      dispatch(toggleIsLoading(false));
+    });
+  };
 };
 export default authReduser;

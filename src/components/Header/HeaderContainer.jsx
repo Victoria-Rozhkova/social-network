@@ -1,19 +1,12 @@
 import React from 'react';
 import { Header } from './Header';
 import { connect } from 'react-redux';
-import { setAuthUser } from '../../redux/authReduser';
-import { toggleIsLoading } from '../../redux/usersReduser';
-import { UsersAxios } from '../../api/api';
+import { getAuthUser } from '../../redux/authReduser';
 
 class HeaderContainer extends React.Component {
   componentDidMount() {
-    this.props.toggleIsLoading(true);
-    UsersAxios.getAuthUser().then(data => {
-      const { id, login, email } = data.data;
-      this.props.setAuthUser(id, login, email);
-      this.props.toggleIsLoading(false);
-    });
-  }
+    this.props.getAuthUser();
+  };
   render() {
     return <Header {...this.props} />;
   }
@@ -25,4 +18,4 @@ const MapStateToProps = (state) => {
     login: state.auth.login,
   };
 };
-export default connect(MapStateToProps, { setAuthUser, toggleIsLoading })(HeaderContainer);;
+export default connect(MapStateToProps, { getAuthUser })(HeaderContainer);;

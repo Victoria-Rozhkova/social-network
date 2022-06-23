@@ -1,3 +1,6 @@
+import { ProfileAxios } from "../api/api";
+import { toggleIsLoading } from "./usersReduser";
+
 const ADD_POST = "ADD_POST";
 const UPDATE_TEXT_POST = "UPDATE_TEXT_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
@@ -57,6 +60,16 @@ export const updateTextPost = (text) => {
 };
 export const setUserProfile = (profile) => {
   return { type: SET_USER_PROFILE, profile };
+};
+
+export const getProfile = (id) => {
+  return (dispatch) => {
+    dispatch(toggleIsLoading(true));
+    ProfileAxios.getProfiles(id).then((data) => {
+      dispatch(setUserProfile(data));
+      dispatch(toggleIsLoading(false));
+    });
+  };
 };
 
 export default profileReduser;
