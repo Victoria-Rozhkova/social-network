@@ -33,7 +33,10 @@ export const getAuthUser = () => {
     dispatch(toggleIsLoading(true));
     UsersAxios.getAuthUser().then((data) => {
       const { id, login, email } = data.data;
-      dispatch(setAuthUser(id, login, email));
+      console.log(data);
+      if (data.resultCode === 0) {
+        dispatch(setAuthUser(id, login, email));
+      }
       dispatch(toggleIsLoading(false));
     });
   };
