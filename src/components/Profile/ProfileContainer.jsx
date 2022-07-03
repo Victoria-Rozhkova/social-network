@@ -10,11 +10,12 @@ import { compose } from "redux";
 const ProfileAPI = (props) => {
   const { id } = useParams();
   useEffect(() => {
-    if (!id === undefined) {
+    if (Number(id)) {
       props.getProfile(id);
     }
-    else {
+    if (id === undefined || id === null) {
       props.getProfile(props.userId);
+      return;
     }
   }, [id]);
   return <Profile profile={props.profile} />;

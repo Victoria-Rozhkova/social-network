@@ -3,6 +3,7 @@ import module from './ProfileInfo.module.css';
 import img from '../img/profileImg.png';
 import userPhoto from '../../../assets/images/user.png';
 import { Preloader } from '../../common/Preloader/Preloader';
+import { ProfileStatus } from './ProfileStatus/ProfileStatus';
 
 export const ProfileInfo = (props) => {
   if (props.profile === null) {
@@ -19,6 +20,7 @@ export const ProfileInfo = (props) => {
           : props.profile.photos.large} alt="avatar" />
         <div className={module.description}>
           <h2 className={module.heading}>{props.profile.fullName}</h2>
+          <ProfileStatus status={'status from props ProfileStatus'} />
           <p className={module.text}>{props.profile.aboutMe}</p></div>
       </div>
     </div>
