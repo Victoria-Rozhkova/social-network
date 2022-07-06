@@ -22,7 +22,7 @@
   transform: translateY(2px);
 }
 
-.newPost {
+.newPost form {
   display: flex;
   gap: 15px;
   align-items: flex-end;

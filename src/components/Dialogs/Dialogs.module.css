@@ -52,9 +52,16 @@
 
 .newMessage {
   grid-column: 2;
+}
+
+.newMessage form {
   display: flex;
   gap: 10px;
   align-items: flex-end;
+}
+
+.messageTextarea {
+  outline: none;
 }
 
 .submitMessage {

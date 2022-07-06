@@ -1,5 +1,4 @@
 import img from "../img/img.png";
-const UPDATE_TEXT_MESSAGE = "UPDATE_TEXT_MESSAGE";
 const SEND_NEW_MESSAGE = "SEND_NEW_MESSAGE";
 
 let initialState = {
@@ -32,27 +31,20 @@ let initialState = {
       message: "How are you?",
     },
   ],
-  newMessage: "",
 };
 
 const dialogsReduser = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_TEXT_MESSAGE: {
-      let stateCopy = { ...state };
-      stateCopy.newMessage = action.message;
-      return stateCopy;
-    }
     case SEND_NEW_MESSAGE: {
-      if (state.newMessage) {
+      if (action.message) {
         const newMessage = {
           id: 6,
           img: state.dialogs[0].img,
-          message: state.newMessage,
+          message: action.message,
         };
         let stateCopy = { ...state };
         stateCopy.messages = [...state.messages];
         stateCopy.messages.push(newMessage);
-        stateCopy.newMessage = "";
         return stateCopy;
       }
       return state;
@@ -62,11 +54,8 @@ const dialogsReduser = (state = initialState, action) => {
   }
 };
 
-export const sendNewMessage = () => {
-  return { type: SEND_NEW_MESSAGE };
-};
-export const updateTextMessage = (message) => {
-  return { type: UPDATE_TEXT_MESSAGE, message: message };
+export const sendNewMessage = (message) => {
+  return { type: SEND_NEW_MESSAGE, message };
 };
 
 export default dialogsReduser;
