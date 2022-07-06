@@ -10,7 +10,7 @@ const TOGGLE_FOLLOWING = "TOGGLE_FOLLOWING";
 
 let initialState = {
   users: [],
-  pages: 5,
+  pages: 10,
   totalPageCount: 0,
   currentPage: 1,
   isLoading: false,
@@ -117,7 +117,7 @@ export const getUsers = (currentPage, pages) => {
     dispatch(toggleIsLoading(true));
     UsersAxios.getUsers(currentPage, pages).then((data) => {
       dispatch(setUsers(data.items));
-      dispatch(setTotalUsersCount(50));
+      dispatch(setTotalUsersCount(100));
       dispatch(toggleIsLoading(false));
     });
   };

@@ -69,6 +69,7 @@
   cursor: pointer;
   transition: all 0.3s;
   text-transform: uppercase;
+  user-select: none;
 }
 
 .submitMessage:hover {

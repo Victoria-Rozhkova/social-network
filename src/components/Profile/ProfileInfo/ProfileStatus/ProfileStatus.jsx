@@ -19,7 +19,7 @@ export const ProfileStatus = (props) => {
   return (
     <div className={module.profileStatus}>
       {!editMode && <div >
-        <span className={module.status} onClick={activateEditMode}>{props.status || <span className={module.status}>...no status...</span>}</span>
+        <span className={module.status} onDoubleClick={activateEditMode}>{props.status || <span className={module.status}>...no status...</span>}</span>
       </div>}
       {editMode && <div>
         <input className={module.statusInput} autoFocus onBlur={deactivateEditMode} onChange={onStatusChange} type="text" value={status} />
