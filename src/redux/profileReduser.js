@@ -4,6 +4,8 @@ import { toggleIsLoading } from "./usersReduser";
 const ADD_POST = "ADD_POST";
 const UPDATE_TEXT_POST = "UPDATE_TEXT_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
+const SET_STATUS = "SET_STATUS";
+const UPDATE_STATUS = "UPDATE_STATUS";
 
 let initialState = {
   posts: [
@@ -20,6 +22,7 @@ let initialState = {
   ],
   newPostText: "",
   profile: null,
+  status: "",
 };
 
 const profileReduser = (state = initialState, action) => {
@@ -46,6 +49,10 @@ const profileReduser = (state = initialState, action) => {
     }
     case SET_USER_PROFILE:
       return { ...state, profile: action.profile };
+    case SET_STATUS:
+      return { ...state, status: action.status };
+    case UPDATE_STATUS:
+      return { ...state, status: action.status };
     default:
       return state;
   }
@@ -60,6 +67,9 @@ export const updateTextPost = (text) => {
 export const setUserProfile = (profile) => {
   return { type: SET_USER_PROFILE, profile };
 };
+export const setStatus = (status) => {
+  return { type: SET_STATUS, status };
+};
 
 export const getProfile = (id) => {
   return (dispatch) => {
@@ -67,6 +77,22 @@ export const getProfile = (id) => {
     ProfileAxios.getProfiles(id).then((data) => {
       dispatch(setUserProfile(data));
       dispatch(toggleIsLoading(false));
+    });
+  };
+};
+export const getStatus = (id) => {
+  return (dispatch) => {
+    ProfileAxios.getStatus(id).then((data) => {
+      dispatch(setStatus(data));
+    });
+  };
+};
+export const updateStatus = (status) => {
+  return (dispatch) => {
+    ProfileAxios.updateStatus(status).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(setStatus(status));
+      }
     });
   };
 };

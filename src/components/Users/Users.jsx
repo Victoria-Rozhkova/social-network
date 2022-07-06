@@ -24,7 +24,7 @@ export const Users = (props) => {
             <div className={module.userLeft}>
               <div className={module.userName}>
                 <NavLink to={`profile/${user.id}`}>{user.name}</NavLink></div>
-              <div className={module.userStatus}>{user.status}</div>
+              <div className={module.userStatus}>{user.status || "no status"}</div>
             </div>
             <div className={module.userRight}>
               <div className={module.userCountry}>{'user.location.country'} </div>

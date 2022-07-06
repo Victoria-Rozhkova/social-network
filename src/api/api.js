@@ -26,4 +26,14 @@ export const ProfileAxios = {
   getProfiles(id) {
     return instanse.get(`profile/${id}`).then((response) => response.data);
   },
+  getStatus(id) {
+    return instanse
+      .get(`profile/status/${id}`)
+      .then((response) => response.data);
+  },
+  updateStatus(status) {
+    return instanse
+      .put(`profile/status`, { status: status })
+      .then((response) => response.data);
+  },
 };

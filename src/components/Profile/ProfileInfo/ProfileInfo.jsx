@@ -20,7 +20,7 @@ export const ProfileInfo = (props) => {
           : props.profile.photos.large} alt="avatar" />
         <div className={module.description}>
           <h2 className={module.heading}>{props.profile.fullName}</h2>
-          <ProfileStatus status={'status from props ProfileStatus'} />
+          <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
           <p className={module.text}>{props.profile.aboutMe}</p></div>
       </div>
     </div>
