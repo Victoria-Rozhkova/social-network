@@ -25,5 +25,5 @@
 .newPost form {
   display: flex;
   gap: 15px;
-  align-items: flex-end;
+  align-items: center;
 }
