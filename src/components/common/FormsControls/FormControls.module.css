@@ -14,3 +14,11 @@
   color: red;
   padding: 10px;
 }
+
+.errorSummary {
+  color: red;
+  text-align: center;
+  font-weight: 500;
+  outline: dotted 1px red;
+  padding: 5px;
+}

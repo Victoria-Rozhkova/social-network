@@ -39,6 +39,10 @@
   user-select: none;
 }
 
+.check label:hover {
+  cursor: pointer;
+}
+
 .btn {
   padding: 20px;
   width: 75%;

@@ -6,6 +6,7 @@ import { login } from "../../redux/authReduser";
 import { email, minLength, required } from "../../utils/validators/validators";
 import { Input } from "../common/FormsControls/FormsControls";
 import module from './Login.module.css';
+import style from '../common/FormsControls/FormControls.module.css';
 
 export const Login = (props) => {
 
@@ -32,6 +33,7 @@ export const LoginForm = (props) => {
       <div className={module.check}>
         <label htmlFor="remember"><Field name="rememberMe" type="checkbox" id="remember" component="input" /> remember me</label>
       </div>
+      {props.error && <div className={style.errorSummary}>{props.error}</div>}
       <button className={module.btn} type="submit">Sign in</button>
     </form>
   );

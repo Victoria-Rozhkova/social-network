@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form";
 import { UsersAxios } from "../api/api";
 import { toggleIsLoading } from "./usersReduser";
 
@@ -45,6 +46,9 @@ export const login = (email, password, rememberMe) => {
     UsersAxios.login(email, password, rememberMe).then((data) => {
       if (data.resultCode === 0) {
         dispatch(getAuthUser());
+      } else {
+        const error = data.messages[0] ?? "Invalid email or password";
+        dispatch(stopSubmit("login", { _error: error }));
       }
     });
   };
