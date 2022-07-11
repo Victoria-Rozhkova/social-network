@@ -16,16 +16,15 @@ const authReduser = (state = initialState, action) => {
     case SET_AUTH_USER:
       return {
         ...state,
-        ...action.data,
-        isAuth: true,
+        ...action.payload,
       };
     default:
       return state;
   }
 };
 
-export const setAuthUser = (userId, login, email) => {
-  return { type: SET_AUTH_USER, data: { userId, login, email } };
+export const setAuthUser = (userId, login, email, isAuth) => {
+  return { type: SET_AUTH_USER, payload: { userId, login, email, isAuth } };
 };
 
 export const getAuthUser = () => {
@@ -34,9 +33,29 @@ export const getAuthUser = () => {
     UsersAxios.getAuthUser().then((data) => {
       const { id, login, email } = data.data;
       if (data.resultCode === 0) {
-        dispatch(setAuthUser(id, login, email));
+        dispatch(setAuthUser(id, login, email, true));
       }
       dispatch(toggleIsLoading(false));
+    });
+  };
+};
+
+export const login = (email, password, rememberMe) => {
+  return (dispatch) => {
+    UsersAxios.login(email, password, rememberMe).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(getAuthUser());
+      }
+    });
+  };
+};
+
+export const logout = () => {
+  return (dispatch) => {
+    UsersAxios.logout().then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(setAuthUser(null, null, null, false));
+      }
     });
   };
 };

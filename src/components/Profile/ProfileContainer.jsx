@@ -20,14 +20,15 @@ const ProfileAPI = (props) => {
       return;
     }
   }, [id]);
-  return <Profile profile={props.profile} status={props.status} updateStatus={props.updateStatus} />;
+  return <Profile profile={props.profile} status={props.status} updateStatus={props.updateStatus} isAuth={props.isAuth} />;
 };
 
 const MapStateToProps = (state) => {
   return {
     profile: state.profilePage.profile,
     userId: state.auth.userId,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    isAuth: state.auth.isAuth
   };
 };
 
