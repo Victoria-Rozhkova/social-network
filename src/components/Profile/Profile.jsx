@@ -6,7 +6,7 @@ import module from './Profile.module.css';
 import { ProfileInfo } from './ProfileInfo/ProfileInfo';
 
 export const Profile = (props) => {
-  if (props.isAuth) {
+ // if (props.isAuth) {
     return (
       <div className={module.content}>
         <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus} />
@@ -14,7 +14,7 @@ export const Profile = (props) => {
       </div>
     );
   }
-  else {
-    <Navigate to="/login" />;
-  }
-};
+ // else {
+//    <Navigate to="/login" />;
+ // }
+//};

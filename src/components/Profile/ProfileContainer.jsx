@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Profile } from "./Profile";
 import { getProfile, getStatus, updateStatus } from "../../redux/profileReduser";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
 
@@ -20,6 +20,7 @@ const ProfileAPI = (props) => {
       return;
     }
   }, [id]);
+
   return <Profile profile={props.profile} status={props.status} updateStatus={props.updateStatus} isAuth={props.isAuth} />;
 };
 

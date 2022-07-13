@@ -47,6 +47,6 @@ const UsersContainer = compose(connect(MapStateToProps, {
   unfollow,
   getUsers,
   getCurrentPage
-}), withAuthRedirect)(UsersAPI);
+}))(UsersAPI);
 
 export default UsersContainer;

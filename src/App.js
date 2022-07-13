@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { HomePage } from "./components/HomePage/HomePage";
@@ -9,8 +9,16 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import { NotFound } from "./components/NotFound/NotFound";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import { LoginContainer } from "./components/Login/Login";
+import { connect } from "react-redux";
+import { initializeApp } from "./redux/appReduser";
+import { Preloader } from "./components/common/Preloader/Preloader";
+import { compose } from "redux";
 
-function App() {
+function App(props) {
+  useEffect(() => props.initializeApp());
+  if (!props.initialization) {
+    return <Preloader />;
+  }
   return (
     <div className="app-wrapper">
       <HeaderContainer />
@@ -32,4 +40,9 @@ function App() {
     </div>
   );
 }
-export default App;
+
+const mapStateToProps = (state) => ({
+  initialization: state.app.initialization,
+});
+
+export default compose(connect(mapStateToProps, { initializeApp }))(App);
