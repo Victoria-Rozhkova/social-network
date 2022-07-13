@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { follow, getCurrentPage, getUsers, unfollow } from '../../redux/usersReduser';
 import { Users } from './Users';
 import { Preloader } from '../common/Preloader/Preloader';
-import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+// import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
+import { currentPageSelector, followingInProgressSelector, isLoadingSelector, pagesSelector, totalPageCountSelector, usersSelector } from '../../redux/selectors/userSelectors';
 
 class UsersAPI extends React.Component {
   componentDidMount() {
@@ -33,12 +34,12 @@ class UsersAPI extends React.Component {
 
 const MapStateToProps = (state) => {
   return {
-    users: state.usersPage.users,
-    pages: state.usersPage.pages,
-    totalPageCount: state.usersPage.totalPageCount,
-    currentPage: state.usersPage.currentPage,
-    isLoading: state.usersPage.isLoading,
-    followingInProgress: state.usersPage.followingInProgress,
+    users: usersSelector(state),
+    pages: pagesSelector(state),
+    totalPageCount: totalPageCountSelector(state),
+    currentPage: currentPageSelector(state),
+    isLoading: isLoadingSelector(state),
+    followingInProgress: followingInProgressSelector(state),
   };
 };
 
