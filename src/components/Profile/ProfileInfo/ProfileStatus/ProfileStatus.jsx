@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import module from './ProfileStatus.module.css';
 
@@ -16,6 +17,11 @@ export const ProfileStatus = (props) => {
   const onStatusChange = (e) => {
     setStatus(e.target.value);
   };
+
+  useEffect(() => {
+    setStatus(props.status);
+  }, [props.status]);
+
   return (
     <div className={module.profileStatus}>
       {!editMode && <div >
