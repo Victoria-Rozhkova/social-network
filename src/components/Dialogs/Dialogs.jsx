@@ -4,11 +4,11 @@ import module from './Dialogs.module.css';
 import NewMessageContainer from './NewMessage/NewMessageContainer';
 import { Messages } from './Messages/Messages';
 
-export const Dialogs = (props) => {
+export const Dialogs = ({ dialogs, messages }) => {
   return (
     <div className={module.dialogs}>
-      <DialogList dialogs={props.dialogs} />
-      <Messages messages={props.messages} />
+      <DialogList dialogs={dialogs} />
+      <Messages messages={messages} />
       <NewMessageContainer />
     </div>
   );

@@ -3,25 +3,25 @@ import { connect } from "react-redux";
 import { Profile } from "./Profile";
 import { getProfile, getStatus, updateStatus } from "../../redux/profileReduser";
 import { useEffect } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
 
-const ProfileAPI = (props) => {
+const ProfileAPI = ({ getProfile, getStatus, userId, profile, status, updateStatus, isAuth }) => {
   const { id } = useParams();
   useEffect(() => {
     if (Number(id)) {
-      props.getProfile(id);
-      props.getStatus(id);
+      getProfile(id);
+      getStatus(id);
     }
     if (id === undefined || id === null) {
-      props.getProfile(props.userId);
-      props.getStatus(props.userId);
+      getProfile(userId);
+      getStatus(userId);
       return;
     }
   }, [id]);
 
-  return <Profile profile={props.profile} status={props.status} updateStatus={props.updateStatus} isAuth={props.isAuth} />;
+  return <Profile profile={profile} status={status} updateStatus={updateStatus} isAuth={isAuth} />;
 };
 
 const MapStateToProps = (state) => {

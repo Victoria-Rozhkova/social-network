@@ -1,9 +1,9 @@
 import React from 'react';
 import module from '../../Dialogs.module.css';
 
-export const Message = (props) => {
+export const Message = ({ img, message }) => {
   return <div className={module.message}>
-    <img src={props.img} alt="img" />
-    <p> {props.message}</p>
+    <img src={img} alt="img" />
+    <p> {message}</p>
   </div>;
 };

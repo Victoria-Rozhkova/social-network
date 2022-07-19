@@ -1,4 +1,5 @@
 import { UsersAxios } from "../api/api";
+import { usersToggleFollow } from "../utils/helpers/usersHelper";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -22,21 +23,15 @@ const usersReduser = (state = initialState, action) => {
     case FOLLOW:
       return {
         ...state,
-        users: state.users.map((user) => {
-          if (user.id === action.userId) {
-            return { ...user, followed: true };
-          }
-          return user;
+        users: usersToggleFollow(state.users, "id", action.userId, {
+          followed: true,
         }),
       };
     case UNFOLLOW:
       return {
         ...state,
-        users: state.users.map((user) => {
-          if (user.id === action.userId) {
-            return { ...user, followed: false };
-          }
-          return user;
+        users: usersToggleFollow(state.users, "id", action.userId, {
+          followed: false,
         }),
       };
     case SET_USERS:
@@ -89,49 +84,37 @@ export const toggleFollowing = (isProgress, userId) => {
   return { type: TOGGLE_FOLLOWING, isProgress, userId };
 };
 
-export const follow = (id) => {
-  return (dispatch) => {
-    dispatch(toggleFollowing(true, id));
-    UsersAxios.followUser(id).then((data) => {
-      if (data.resultCode === 0) {
-        dispatch(followSuccses(id));
-      }
-    });
-    dispatch(toggleFollowing(false, id));
-  };
-};
-export const unfollow = (id) => {
-  return (dispatch) => {
-    dispatch(toggleFollowing(true, id));
-    UsersAxios.unfollowUser(id).then((data) => {
-      if (data.resultCode === 0) {
-        dispatch(unfollowSuccses(id));
-      }
-    });
-    dispatch(toggleFollowing(false, id));
-  };
+const toggleFollowUnfollow = async (dispatch, id, api, action) => {
+  dispatch(toggleFollowing(true, id));
+  const data = await api(id);
+  if (data.resultCode === 0) {
+    dispatch(action(id));
+  }
+  dispatch(toggleFollowing(false, id));
 };
 
-export const getUsers = (currentPage, pages) => {
-  return (dispatch) => {
-    dispatch(toggleIsLoading(true));
-    UsersAxios.getUsers(currentPage, pages).then((data) => {
-      dispatch(setUsers(data.items));
-      dispatch(setTotalUsersCount(100));
-      dispatch(toggleIsLoading(false));
-    });
-  };
+export const follow = (id) => (dispatch) => {
+  toggleFollowUnfollow(dispatch, id, UsersAxios.followUser, followSuccses);
 };
 
-export const getCurrentPage = (page, pages) => {
-  return (dispatch) => {
-    dispatch(setCurrentPage(page));
-    dispatch(toggleIsLoading(true));
-    UsersAxios.getUsers(page, pages).then((data) => {
-      dispatch(setUsers(data.items));
-      dispatch(toggleIsLoading(false));
-    });
-  };
+export const unfollow = (id) => (dispatch) => {
+  toggleFollowUnfollow(dispatch, id, UsersAxios.unfollowUser, unfollowSuccses);
+};
+
+export const getUsers = (currentPage, pages) => async (dispatch) => {
+  dispatch(toggleIsLoading(true));
+  const data = await UsersAxios.getUsers(currentPage, pages);
+  dispatch(setUsers(data.items));
+  dispatch(setTotalUsersCount(100));
+  dispatch(toggleIsLoading(false));
+};
+
+export const getCurrentPage = (page, pages) => async (dispatch) => {
+  dispatch(setCurrentPage(page));
+  dispatch(toggleIsLoading(true));
+  const data = await UsersAxios.getUsers(page, pages);
+  dispatch(setUsers(data.items));
+  dispatch(toggleIsLoading(false));
 };
 
 export default usersReduser;

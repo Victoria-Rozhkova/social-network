@@ -1,9 +1,7 @@
 import { Field, reduxForm } from 'redux-form';
-import { Textarea } from '../../common/FormsControls/FormsControls';
 import module from '../Dialogs.module.css';
 
 export const NewMessage = (props) => {
-
   const sendNewMessage = (formData) => {
     props.sendNewMessage(formData.message);
     formData.message = "";

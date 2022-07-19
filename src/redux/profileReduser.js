@@ -70,30 +70,23 @@ export const deletePost = (postId) => {
   return { type: DELETE_POST, postId };
 };
 
-export const getProfile = (id) => {
-  return (dispatch) => {
-    dispatch(toggleIsLoading(true));
-    ProfileAxios.getProfiles(id).then((data) => {
-      dispatch(setUserProfile(data));
-      dispatch(toggleIsLoading(false));
-    });
-  };
+export const getProfile = (id) => async (dispatch) => {
+  dispatch(toggleIsLoading(true));
+  const data = await ProfileAxios.getProfiles(id);
+  dispatch(setUserProfile(data));
+  dispatch(toggleIsLoading(false));
 };
-export const getStatus = (id) => {
-  return (dispatch) => {
-    ProfileAxios.getStatus(id).then((data) => {
-      dispatch(setStatus(data));
-    });
-  };
+
+export const getStatus = (id) => async (dispatch) => {
+  const data = await ProfileAxios.getStatus(id);
+  dispatch(setStatus(data));
 };
-export const updateStatus = (status) => {
-  return (dispatch) => {
-    ProfileAxios.updateStatus(status).then((data) => {
-      if (data.resultCode === 0) {
-        dispatch(setStatus(status));
-      }
-    });
-  };
+
+export const updateStatus = (status) => async (dispatch) => {
+  const data = await ProfileAxios.updateStatus(status);
+  if (data.resultCode === 0) {
+    dispatch(setStatus(status));
+  }
 };
 
 export default profileReduser;

@@ -2,23 +2,18 @@ import React from 'react';
 import module from './Users.module.css';
 import userPhoto from '../../assets/images/user.png';
 import { NavLink } from 'react-router-dom';
+import { Pagination } from './Pagination/Pagination';
 
-export const Users = (props) => {
-  let pagesCount = Math.ceil(props.totalPageCount / props.pages);
-  let pages = [];
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-  }
-
+export const Users = ({ users, followingInProgress, unfollow, follow, totalPageCount, pages, currentPage, onPageChange }) => {
   return (
     <div>
       <div className={module.users}>
-        {props.users.map(user => <div key={user.id} className={module.user}>
+        {users.map(user => <div key={user.id} className={module.user}>
           <div className={module.userFollow}>
             <NavLink to={`profile/${user.id}`}><img src={user.photos.small != null ? user.photos.small : userPhoto} alt="img" /></NavLink>
             {user.followed === true
-              ? <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => { props.unfollow(user.id); }}>Unfollow</button>
-              : <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => { props.follow(user.id); }}>Follow</button>}
+              ? <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => { unfollow(user.id); }}>Unfollow</button>
+              : <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => { follow(user.id); }}>Follow</button>}
           </div>
           <div className={module.userInfo}>
             <div className={module.userLeft}>
@@ -33,13 +28,7 @@ export const Users = (props) => {
           </div>
         </div>)
         }</div >
-      <div className={module.pagination}>
-        {pages.map((page, index) => {
-          return <button key={index} className={props.currentPage === page
-            ? module.currentPage : module.pageBtn}
-            onClick={() => { props.onPageChange(page); }}>{page}</button>;
-        })}
-      </div>
+      <Pagination totalPageCount={totalPageCount} pages={pages} currentPage={currentPage} onPageChange={onPageChange} />
     </div>
   );
 };
