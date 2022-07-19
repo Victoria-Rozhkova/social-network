@@ -1,6 +1,7 @@
 import {
   applyMiddleware,
   combineReducers,
+  compose,
   legacy_createStore as createStore,
 } from "redux";
 import authReduser from "./authReduser";
@@ -17,9 +18,15 @@ let redusers = combineReducers({
   usersPage: usersReduser,
   auth: authReduser,
   form: formReducer,
-  app:appReduser
+  app: appReduser,
 });
 
-let store = createStore(redusers, applyMiddleware(thunkMiddleware));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  redusers,
+  composeEnhancers(compose(applyMiddleware(thunkMiddleware)))
+);
+
+// let store = createStore(redusers, applyMiddleware(thunkMiddleware));
 
 export default store;
