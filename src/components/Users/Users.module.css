@@ -78,39 +78,6 @@
   min-width: 400px;
 }
 
-.pagination {
-  display: flex;
-  gap: 5px;
-  justify-content: center;
-  margin: 10px 0;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.pageBtn {
-  border-radius: 20px;
-  padding: 6px 11px;
-  cursor: pointer;
-  border: 1px solid rgba(128, 128, 128, 0.493);
-  background: white;
-  color: black;
-}
-
-.currentPage {
-  border: 1px black solid;
-  border-radius: 20px;
-  padding: 6px 11px;
-  cursor: pointer;
-  background: #181A1B;
-  color: white;
-  font-weight: 800;
-}
-
-.pageBtn:hover {
-  background: rgba(128, 128, 128, 0.493);
-  border: 1px solid rgba(128, 128, 128, 0.493);
-}
-
 .loader {
   display: flex;
   justify-content: center;

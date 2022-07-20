@@ -11,11 +11,12 @@ const TOGGLE_FOLLOWING = "TOGGLE_FOLLOWING";
 
 let initialState = {
   users: [],
-  pages: 10,
+  pageSize: 10,
   totalPageCount: 0,
   currentPage: 1,
   isLoading: false,
   followingInProgress: [],
+  portionSize: 10,
 };
 
 const usersReduser = (state = initialState, action) => {
@@ -105,7 +106,7 @@ export const getUsers = (currentPage, pages) => async (dispatch) => {
   dispatch(toggleIsLoading(true));
   const data = await UsersAxios.getUsers(currentPage, pages);
   dispatch(setUsers(data.items));
-  dispatch(setTotalUsersCount(100));
+  dispatch(setTotalUsersCount(data.totalCount));
   dispatch(toggleIsLoading(false));
 };
 

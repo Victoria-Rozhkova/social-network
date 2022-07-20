@@ -2,9 +2,9 @@ import React from 'react';
 import module from './Users.module.css';
 import userPhoto from '../../assets/images/user.png';
 import { NavLink } from 'react-router-dom';
-import { Pagination } from './Pagination/Pagination';
+import { Pagination } from '../common/Pagination/Pagination';
 
-export const Users = ({ users, followingInProgress, unfollow, follow, totalPageCount, pages, currentPage, onPageChange }) => {
+export const Users = ({ users, followingInProgress, unfollow, follow, totalPageCount, pageSize, currentPage, onPageChange, portionSize }) => {
   return (
     <div>
       <div className={module.users}>
@@ -28,7 +28,7 @@ export const Users = ({ users, followingInProgress, unfollow, follow, totalPageC
           </div>
         </div>)
         }</div >
-      <Pagination totalPageCount={totalPageCount} pages={pages} currentPage={currentPage} onPageChange={onPageChange} />
+      <Pagination totalPageCount={totalPageCount} pageSize={pageSize} currentPage={currentPage} onPageChange={onPageChange} portionSize={portionSize} />
     </div>
   );
 };

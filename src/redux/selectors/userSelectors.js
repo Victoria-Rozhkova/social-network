@@ -3,7 +3,7 @@ export const usersSelector = (state) => {
 };
 
 export const pagesSelector = (state) => {
-  return state.usersPage.pages;
+  return state.usersPage.pageSize;
 };
 
 export const totalPageCountSelector = (state) => {
@@ -20,4 +20,8 @@ export const isLoadingSelector = (state) => {
 
 export const followingInProgressSelector = (state) => {
   return state.usersPage.followingInProgress;
+};
+
+export const portionSizeSelector = (state) => {
+  return state.usersPage.portionSize;
 };

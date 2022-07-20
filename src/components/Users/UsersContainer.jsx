@@ -5,7 +5,7 @@ import { Users } from './Users';
 import { Preloader } from '../common/Preloader/Preloader';
 // import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
-import { currentPageSelector, followingInProgressSelector, isLoadingSelector, pagesSelector, totalPageCountSelector, usersSelector } from '../../redux/selectors/userSelectors';
+import { currentPageSelector, followingInProgressSelector, isLoadingSelector, pagesSelector, portionSizeSelector, totalPageCountSelector, usersSelector } from '../../redux/selectors/userSelectors';
 
 class UsersAPI extends React.Component {
   componentDidMount() {
@@ -20,13 +20,14 @@ class UsersAPI extends React.Component {
         ? <Preloader />
         : <Users
           totalPageCount={this.props.totalPageCount}
-          pages={this.props.pages}
+          pageSize={this.props.pageSize}
           users={this.props.users}
           follow={this.props.follow}
           unfollow={this.props.unfollow}
           currentPage={this.props.currentPage}
           onPageChange={this.onPageChange}
           followingInProgress={this.props.followingInProgress}
+          portionSize={this.props.portionSize}
         />}
     </>;
   }
@@ -35,11 +36,12 @@ class UsersAPI extends React.Component {
 const MapStateToProps = (state) => {
   return {
     users: usersSelector(state),
-    pages: pagesSelector(state),
+    pageSize: pagesSelector(state),
     totalPageCount: totalPageCountSelector(state),
     currentPage: currentPageSelector(state),
     isLoading: isLoadingSelector(state),
     followingInProgress: followingInProgressSelector(state),
+    portionSize: portionSizeSelector(state)
   };
 };
 
