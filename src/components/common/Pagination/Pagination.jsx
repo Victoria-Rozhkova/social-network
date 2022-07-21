@@ -18,8 +18,8 @@ export const Pagination = ({ totalPageCount, pageSize, currentPage, onPageChange
   return (
     <div className={module.pagination}>
       {portionNumber > 1 &&
-        <button className={module.arrow} onClick={() => { setPortionNumber(portionNumber - 1); }}>
-          &#129044;</button>}
+        <span className={module.arrow} onClick={() => { setPortionNumber(portionNumber - 1); }}>
+          &#129044;</span>}
       {pages
         .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
         .map((page, index) => {
@@ -28,8 +28,7 @@ export const Pagination = ({ totalPageCount, pageSize, currentPage, onPageChange
             onClick={() => { onPageChange(page); }}>{page}</button>;
         })}
       {portionCount > portionNumber &&
-        <button className={module.arrow} onClick={() => { setPortionNumber(portionNumber + 1); }}>
-
-          &#129046;</button>}
+        <span className={module.arrow} onClick={() => { setPortionNumber(portionNumber + 1); }}>
+          &#129046;</span>}
     </div>);
 };

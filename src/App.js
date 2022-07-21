@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { HomePage } from "./components/HomePage/HomePage";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
@@ -9,10 +9,11 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import { NotFound } from "./components/NotFound/NotFound";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import { LoginContainer } from "./components/Login/Login";
-import { connect } from "react-redux";
+import { connect, Provider } from "react-redux";
 import { initializeApp } from "./redux/appReduser";
 import { Preloader } from "./components/common/Preloader/Preloader";
 import { compose } from "redux";
+import store from "./redux/store-redux";
 
 function App(props) {
   useEffect(() => props.initializeApp());
@@ -45,4 +46,18 @@ const mapStateToProps = (state) => ({
   initialization: state.app.initialization,
 });
 
-export default compose(connect(mapStateToProps, { initializeApp }))(App);
+const AppMain = () => {
+  return (
+    <React.StrictMode>
+      <BrowserRouter>
+        <Provider store={store}>
+          <AppContainer />
+        </Provider>
+      </BrowserRouter>
+    </React.StrictMode>
+  );
+};
+
+const AppContainer = compose(connect(mapStateToProps, { initializeApp }))(App);
+
+export default AppMain;
