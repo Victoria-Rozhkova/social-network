@@ -6,6 +6,7 @@ const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 const UPDATE_STATUS = "UPDATE_STATUS";
 const DELETE_POST = "DELETE_POST";
+const SET_PHOTO = "SET_PHOTO";
 
 let initialState = {
   posts: [
@@ -51,6 +52,11 @@ const profileReduser = (state = initialState, action) => {
         ...state,
         posts: state.posts.filter((p) => p.id !== action.postId),
       };
+    case SET_PHOTO:
+      return {
+        ...state,
+        profile: { ...state.profile, photos: action.photos },
+      };
     default:
       return state;
   }
@@ -70,6 +76,10 @@ export const deletePost = (postId) => {
   return { type: DELETE_POST, postId };
 };
 
+export const setPhoto = (photos) => {
+  return { type: SET_PHOTO, photos };
+};
+
 export const getProfile = (id) => async (dispatch) => {
   dispatch(toggleIsLoading(true));
   const data = await ProfileAxios.getProfiles(id);
@@ -86,6 +96,13 @@ export const updateStatus = (status) => async (dispatch) => {
   const data = await ProfileAxios.updateStatus(status);
   if (data.resultCode === 0) {
     dispatch(setStatus(status));
+  }
+};
+
+export const savePhoto = (file) => async (dispatch) => {
+  const data = await ProfileAxios.savePhoto(file);
+  if (data.resultCode === 0) {
+    dispatch(setPhoto(data.data.photos));
   }
 };
 
