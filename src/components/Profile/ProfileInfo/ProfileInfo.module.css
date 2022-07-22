@@ -31,12 +31,6 @@
   gap: 10px;
 }
 
-.description {
-  display: flex;
-  flex-direction: column;
-  gap: 5px
-}
-
 .heading,
 .text {
   margin: 2px 0;

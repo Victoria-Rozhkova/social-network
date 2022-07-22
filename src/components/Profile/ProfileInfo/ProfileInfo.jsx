@@ -3,13 +3,23 @@ import module from './ProfileInfo.module.css';
 import img from '../img/profileImg.png';
 import userPhoto from '../../../assets/images/user.png';
 import { Preloader } from '../../common/Preloader/Preloader';
-import { ProfileStatus } from './ProfileStatus/ProfileStatus';
 import { UploadFile } from '../../common/UploadFile/UploadFile';
+import { ProfileAbout } from './ProfileAbout/ProfileAbout';
+import { useState } from 'react';
+import { ProfileAboutReduxForm } from './ProfileAboutForm/ProfileAboutForm';
 
 export const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
+  const [editMode, setEditMode] = useState(false);
+
   if (profile === null) {
     return <Preloader />;
   }
+  const onEdit = () => {
+    setEditMode(true);
+  };
+  const onSubmit = (formData) => {
+    setEditMode(false);
+  };
 
   return (
     <div>
@@ -23,10 +33,8 @@ export const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto 
             : profile.photos.large} alt="avatar" /></label>
           {isOwner && <UploadFile savePhoto={savePhoto} />}
         </div>
-        <div className={module.description}>
-          <h2 className={module.heading}>{profile.fullName}</h2>
-          <ProfileStatus status={status} updateStatus={updateStatus} />
-          <p className={module.text}>{profile.aboutMe}</p></div>
+        {editMode && <ProfileAboutReduxForm isOwner={isOwner} onSubmit={onSubmit} />}
+        {!editMode && <ProfileAbout profile={profile} status={status} updateStatus={updateStatus} onEdit={onEdit} />}
       </div>
     </div >
   );

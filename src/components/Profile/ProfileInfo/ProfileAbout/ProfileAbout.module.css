@@ -1,0 +1,24 @@
+.description {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 10px;
+}
+
+.title {
+  margin: 5px;
+  font-size: 19px;
+}
+
+.contacts {
+  margin: 10px;
+  list-style: none;
+}
+
+.noContacts {
+  color: #6a6969;
+}
+
+.heading,
+.text {
+  margin: 2px 0;
+}

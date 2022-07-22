@@ -1,0 +1,17 @@
+.editProfileForm {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 10px;
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  align-self: center;
+}
+
+.formWrapper input {
+  padding: 10px;
+}
