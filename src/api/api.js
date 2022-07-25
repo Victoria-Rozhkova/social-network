@@ -21,9 +21,14 @@ export const UsersAxios = {
   followUser(id) {
     return instanse.post(`follow/${id}`).then((response) => response.data);
   },
-  login(email, password, rememberMe = false) {
+  login(email, password, rememberMe = false, captcha = null) {
     return instanse
-      .post(`auth/login`, { email, password, rememberMe })
+      .post(`auth/login`, {
+        email,
+        password,
+        rememberMe,
+        captcha,
+      })
       .then((response) => response.data);
   },
   logout() {
@@ -57,5 +62,12 @@ export const ProfileAxios = {
   },
   saveProfile(profile) {
     return instanse.put(`profile`, profile).then((response) => response.data);
+  },
+};
+export const SecurityAxios = {
+  getCaptchaUrl() {
+    return instanse
+      .get(`security/get-captcha-url`)
+      .then((response) => response.data);
   },
 };

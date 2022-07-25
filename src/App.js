@@ -9,6 +9,7 @@ import { initializeApp } from "./redux/appReduser";
 import { Preloader } from "./components/common/Preloader/Preloader";
 import { compose } from "redux";
 import store from "./redux/store-redux";
+import { LoginContainer } from "./components/Login/Login";
 
 const DialogsContainer = React.lazy(() =>
   import("./components/Dialogs/DialogsContainer")
@@ -19,7 +20,7 @@ const ProfileContainer = React.lazy(() =>
 const UsersContainer = React.lazy(() =>
   import("./components/Users/UsersContainer")
 );
-const LoginContainer = React.lazy(() => import("./components/Login/Login"));
+// const LoginContainer = lazy(() => import("./components/Login/Login"));
 const NotFound = React.lazy(() => import("./components/NotFound/NotFound"));
 
 function App(props) {

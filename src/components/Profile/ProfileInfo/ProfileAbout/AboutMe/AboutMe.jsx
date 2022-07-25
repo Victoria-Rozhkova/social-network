@@ -8,9 +8,9 @@ export const AboutMe = ({ profile }) => {
       <p className={module.text}><b>Looking for a job: </b>
         {profile.lookingForAJob ? "yes" : 'no'}
       </p>
-      {profile.lookingForAJob && <p className={module.text}><b>Looking for a job description: </b>
+      {profile.lookingForAJob && <p className={module.text}><b>My professional skills: </b>
         {profile.lookingForAJobDescription}
       </p>}
-      <p className={module.text}><b>About me:</b>{profile.aboutMe}</p>
+      <p className={module.text}><b>About me: </b>{profile.aboutMe}</p>
     </div>);
 };

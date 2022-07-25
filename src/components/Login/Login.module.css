@@ -43,6 +43,17 @@
   cursor: pointer;
 }
 
+.captcha {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+.captchaInput {
+  padding: 5px;
+}
+
 .btn {
   padding: 20px;
   width: 75%;

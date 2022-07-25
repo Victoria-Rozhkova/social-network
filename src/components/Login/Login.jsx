@@ -9,10 +9,10 @@ import { createFieldForm } from "../common/FormsControls/FormsControls";
 import module from './Login.module.css';
 import style from '../common/FormsControls/FormControls.module.css';
 
-export const Login = ({ login, isAuth }) => {
+export const Login = ({ login, isAuth, captchaUrl }) => {
 
   const onSubmit = (formData) => {
-    login(formData.email, formData.password, formData.rememberMe);
+    login(formData.email, formData.password, formData.rememberMe, formData.captcha);
   };
 
   if (isAuth) {
@@ -20,12 +20,12 @@ export const Login = ({ login, isAuth }) => {
   } else {
     return <div className={module.loginWrapper}>
       <h2 className={module.heading}>Login</h2>
-      <LoginReduxForm onSubmit={onSubmit} />
+      <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
     </div>;
   }
 };
 
-export const LoginForm = ({ handleSubmit, error }) => {
+export const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
   const minLength5 = minLength(5);
   return (
     <form onSubmit={handleSubmit} className={module.inputBox}>
@@ -34,6 +34,7 @@ export const LoginForm = ({ handleSubmit, error }) => {
       <div className={module.check}>
         <label htmlFor="remember"><Field name="rememberMe" type="checkbox" id="remember" component="input" /> remember me</label>
       </div>
+      {captchaUrl && <div className={module.captcha}> <img src={captchaUrl} alt="captcha" /> {createFieldForm("captcha", module.captchaInput, [required], "text", "Symbols in image", Input)} </div>}
       {error && <div className={style.errorSummary}>{error}</div>}
       <button className={module.btn} type="submit">Sign in</button>
     </form>
@@ -45,7 +46,8 @@ const LoginReduxForm = reduxForm({
 })(LoginForm);
 
 const MapStateToProps = (state) => ({
-  isAuth: state.auth.isAuth
+  isAuth: state.auth.isAuth,
+  captchaUrl: state.auth.captchaUrl,
 });
 
 export const LoginContainer = connect(MapStateToProps, { login })(Login);
