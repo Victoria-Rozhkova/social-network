@@ -4,7 +4,7 @@ import { AboutMe } from './AboutMe/AboutMe';
 import { Contacts } from './Contacts/Contacts';
 import { ProfileStatus } from './ProfileStatus/ProfileStatus';
 
-export const ProfileAbout = ({ profile, status, updateStatus, onEdit }) => {
+export const ProfileAbout = ({ profile, status, updateStatus, goToEditMode }) => {
 
   return <div className={module.description}>
     <div> <h2 className={module.heading}>{profile.fullName}</h2>
@@ -12,6 +12,6 @@ export const ProfileAbout = ({ profile, status, updateStatus, onEdit }) => {
       <AboutMe profile={profile} />
       <Contacts profile={profile} />
     </div>
-    <div><button onClick={onEdit}>Edit</button></div>
+    <div><button className={module.editBtn} onClick={goToEditMode}>Edit profile</button></div>
   </div>;
 };

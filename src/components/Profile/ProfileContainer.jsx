@@ -1,14 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Profile } from "./Profile";
-import { getProfile, getStatus, savePhoto, updateStatus } from "../../redux/profileReduser";
+import { getProfile, getStatus, savePhoto, updateProfile, updateStatus } from "../../redux/profileReduser";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
 import { useState } from "react";
 
-const ProfileAPI = ({ getProfile, getStatus, userId, profile, status, updateStatus, isAuth, savePhoto }) => {
+const ProfileAPI = ({ getProfile, getStatus, userId, profile, status, updateStatus, isAuth, savePhoto, updateProfile }) => {
   const [isOwner, setIsOwner] = useState(false);
   const { id } = useParams();
   useEffect(() => {
@@ -25,7 +25,7 @@ const ProfileAPI = ({ getProfile, getStatus, userId, profile, status, updateStat
     }
   }, [id]);
 
-  return <Profile profile={profile} status={status} updateStatus={updateStatus} isAuth={isAuth} isOwner={isOwner} savePhoto={savePhoto} />;
+  return <Profile profile={profile} status={status} updateStatus={updateStatus} isAuth={isAuth} isOwner={isOwner} savePhoto={savePhoto} updateProfile={updateProfile} />;
 };
 
 const MapStateToProps = (state) => {
@@ -41,7 +41,8 @@ const ProfileContainer = compose(connect(MapStateToProps, {
   getProfile,
   getStatus,
   updateStatus,
-  savePhoto
+  savePhoto,
+  updateProfile,
 }), withAuthRedirect)(ProfileAPI);
 
 export default ProfileContainer;

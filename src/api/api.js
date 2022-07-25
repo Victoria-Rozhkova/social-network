@@ -55,4 +55,7 @@ export const ProfileAxios = {
       })
       .then((response) => response.data);
   },
+  saveProfile(profile) {
+    return instanse.put(`profile`, profile).then((response) => response.data);
+  },
 };

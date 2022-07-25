@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form";
 import { ProfileAxios } from "../api/api";
 import { toggleIsLoading } from "./usersReduser";
 
@@ -103,6 +104,18 @@ export const savePhoto = (file) => async (dispatch) => {
   const data = await ProfileAxios.savePhoto(file);
   if (data.resultCode === 0) {
     dispatch(setPhoto(data.data.photos));
+  }
+};
+
+export const updateProfile = (profile) => async (dispatch, getState) => {
+  const data = await ProfileAxios.saveProfile(profile);
+  const userId = getState().auth.userId;
+  if (data.resultCode === 0) {
+    dispatch(getProfile(userId));
+  } else {
+    const error = data.messages[0] ?? "Error";
+    dispatch(stopSubmit("edit-profile", { _error: error }));
+    return Promise.reject();
   }
 };
 

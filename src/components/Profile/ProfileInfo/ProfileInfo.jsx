@@ -8,17 +8,21 @@ import { ProfileAbout } from './ProfileAbout/ProfileAbout';
 import { useState } from 'react';
 import { ProfileAboutReduxForm } from './ProfileAboutForm/ProfileAboutForm';
 
-export const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
+export const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto, updateProfile }) => {
   const [editMode, setEditMode] = useState(false);
 
   if (profile === null) {
     return <Preloader />;
   }
-  const onEdit = () => {
+  const toEdit = () => {
     setEditMode(true);
   };
   const onSubmit = (formData) => {
-    setEditMode(false);
+    if (formData) {
+      updateProfile(formData).then(() => {
+        setEditMode(false);
+      });
+    }
   };
 
   return (
@@ -31,10 +35,10 @@ export const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto 
           <label for="file"><img src={profile.photos.large == null
             ? userPhoto
             : profile.photos.large} alt="avatar" /></label>
-          {isOwner && <UploadFile savePhoto={savePhoto} />}
+          {isOwner && <UploadFile savePhoto={savePhoto} text="Update photo" />}
         </div>
-        {editMode && <ProfileAboutReduxForm isOwner={isOwner} onSubmit={onSubmit} />}
-        {!editMode && <ProfileAbout profile={profile} status={status} updateStatus={updateStatus} onEdit={onEdit} />}
+        {editMode && <ProfileAboutReduxForm onSubmit={onSubmit} profile={profile} initialValues={profile} />}
+        {!editMode && <ProfileAbout profile={profile} status={status} updateStatus={updateStatus} goToEditMode={toEdit} />}
       </div>
     </div >
   );

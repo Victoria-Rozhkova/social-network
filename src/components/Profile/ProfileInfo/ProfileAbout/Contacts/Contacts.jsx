@@ -8,7 +8,7 @@ export const Contacts = ({ profile }) => {
     <p className={module.title}><b>Contacts: </b> </p>
     <ul className={module.contacts}>
       {Object.keys(profile.contacts).map(key => {
-        return <Contact key={key} value={key} profile={profile} />;
+        return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />;
       }
       )}</ul>
 
