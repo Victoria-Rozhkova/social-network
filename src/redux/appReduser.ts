@@ -2,11 +2,15 @@ import { getAuthUser } from "./authReduser";
 
 const INITIALIZATION = "INITIALIZATION ";
 
-let initialState = {
+export type initialStateType = {
+  initialization: boolean;
+};
+
+let initialState: initialStateType = {
   initialization: false,
 };
 
-const appReduser = (state = initialState, action) => {
+const appReduser = (state = initialState, action: any) => {
   switch (action.type) {
     case INITIALIZATION:
       return {
@@ -23,7 +27,7 @@ export const setInitial = () => {
 };
 
 export const initializeApp = () => {
-  return (dispatch) => {
+  return (dispatch: any) => {
     const promise = dispatch(getAuthUser());
     promise.then(() => {
       dispatch(setInitial());
