@@ -1,7 +1,19 @@
 import img from "../img/img.png";
 const SEND_NEW_MESSAGE = "SEND_NEW_MESSAGE";
 
-let initialState = {
+type DialogType = {
+  id: number;
+  img: typeof img;
+  name: string;
+};
+
+type MessageType = {
+  id: number;
+  img: typeof img;
+  message: string;
+};
+
+const initialState = {
   dialogs: [
     {
       id: 1,
@@ -18,7 +30,7 @@ let initialState = {
       img: img,
       name: "John",
     },
-  ],
+  ] as Array<DialogType>,
   messages: [
     {
       id: 1,
@@ -30,10 +42,15 @@ let initialState = {
       img: img,
       message: "How are you?",
     },
-  ],
+  ] as Array<MessageType>,
 };
 
-const dialogsReduser = (state = initialState, action) => {
+export type InitialStateType = typeof initialState;
+
+const dialogsReduser = (
+  state = initialState,
+  action: any
+): InitialStateType => {
   switch (action.type) {
     case SEND_NEW_MESSAGE: {
       if (action.message) {
@@ -54,7 +71,12 @@ const dialogsReduser = (state = initialState, action) => {
   }
 };
 
-export const sendNewMessage = (message) => {
+type sendNewMessageActionType = {
+  type: typeof SEND_NEW_MESSAGE;
+  message: string;
+};
+
+export const sendNewMessage = (message: string): sendNewMessageActionType => {
   return { type: SEND_NEW_MESSAGE, message };
 };
 

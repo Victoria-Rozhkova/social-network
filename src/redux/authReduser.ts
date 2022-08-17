@@ -1,20 +1,22 @@
 import { stopSubmit } from "redux-form";
 import { SecurityAxios, UsersAxios } from "../api/api";
-import { toggleIsLoading } from "./usersReduser";
+import { toggleIsLoading } from "./usersReduser.ts";
 
 const SET_AUTH_USER = "auth/SET_AUTH_USER";
 const SET_CAPTCHA_URL = "auth/SET_CAPTCHA_URL";
 
-let initialState = {
-  userId: null,
-  login: null,
-  email: null,
+const initialState = {
+  userId: null as number | null,
+  login: null as string | null,
+  email: null as string | null,
   isLoading: false,
   isAuth: false,
-  captchaUrl: null,
+  captchaUrl: null as string | null,
 };
 
-const authReduser = (state = initialState, action) => {
+export type InitialStateType = typeof initialState;
+
+const authReduser = (state = initialState, action: any): InitialStateType => {
   switch (action.type) {
     case SET_AUTH_USER:
       return {
@@ -31,14 +33,36 @@ const authReduser = (state = initialState, action) => {
   }
 };
 
-export const setAuthUser = (userId, login, email, isAuth) => {
+type SetAuthUserActionPayloadType = {
+  userId: number | null;
+  login: string | null;
+  email: string | null;
+  isAuth: boolean;
+};
+type SetAuthUserActionType = {
+  type: typeof SET_AUTH_USER;
+  payload: SetAuthUserActionPayloadType;
+};
+
+export const setAuthUser = (
+  userId: number | null,
+  login: string | null,
+  email: string | null,
+  isAuth: boolean
+): SetAuthUserActionType => {
   return { type: SET_AUTH_USER, payload: { userId, login, email, isAuth } };
 };
-export const setCaptchaUrl = (url) => {
+
+type setCaptchaUrlActionType = {
+  type: typeof SET_CAPTCHA_URL;
+  url: string;
+};
+
+export const setCaptchaUrl = (url: string): setCaptchaUrlActionType => {
   return { type: SET_CAPTCHA_URL, url };
 };
 
-export const getAuthUser = () => async (dispatch) => {
+export const getAuthUser = () => async (dispatch: any) => {
   dispatch(toggleIsLoading(true));
   const data = await UsersAxios.getAuthUser();
   const { id, login, email } = data.data;
@@ -49,7 +73,8 @@ export const getAuthUser = () => async (dispatch) => {
 };
 
 export const login =
-  (email, password, rememberMe, captcha) => async (dispatch) => {
+  (email: string, password: string, rememberMe: boolean, captcha: null) =>
+  async (dispatch: any) => {
     const data = await UsersAxios.login(email, password, rememberMe, captcha);
     if (data.resultCode === 0) {
       dispatch(getAuthUser());
@@ -62,14 +87,14 @@ export const login =
     }
   };
 
-export const logout = () => async (dispatch) => {
+export const logout = () => async (dispatch: any) => {
   const data = await UsersAxios.logout();
   if (data.resultCode === 0) {
     dispatch(setAuthUser(null, null, null, false));
   }
 };
 
-export const getCaptcha = () => async (dispatch) => {
+export const getCaptcha = () => async (dispatch: any) => {
   const data = await SecurityAxios.getCaptchaUrl();
   const url = data.url;
   dispatch(setCaptchaUrl(url));

@@ -5,7 +5,7 @@ import { HomePage } from "./components/HomePage/HomePage";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import { connect, Provider } from "react-redux";
-import { initializeApp } from "./redux/appReduser";
+import { initializeApp } from "./redux/appReduser.ts";
 import { Preloader } from "./components/common/Preloader/Preloader";
 import { compose } from "redux";
 import store from "./redux/store-redux";

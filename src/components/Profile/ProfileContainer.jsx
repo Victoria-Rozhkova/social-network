@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Profile } from "./Profile";
-import { getProfile, getStatus, savePhoto, updateProfile, updateStatus } from "../../redux/profileReduser";
+import { getProfile, getStatus, savePhoto, updateProfile, updateStatus } from "../../redux/profileReduser.ts";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";

@@ -1,3 +1,4 @@
+import { UserType } from './../types/types';
 import { UsersAxios } from "../api/api";
 import { usersToggleFollow } from "../utils/helpers/usersHelper";
 
@@ -9,17 +10,19 @@ const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const TOGGLE_LOADING = "TOGGLE_LOADING";
 const TOGGLE_FOLLOWING = "TOGGLE_FOLLOWING";
 
-let initialState = {
-  users: [],
+const initialState = {
+  users: [] as Array<UserType>,
   pageSize: 10,
   totalPageCount: 0,
   currentPage: 1,
   isLoading: false,
-  followingInProgress: [],
+  followingInProgress: [] as Array<number>,
   portionSize: 10,
 };
 
-const usersReduser = (state = initialState, action) => {
+type InitialStateType = typeof initialState;
+
+const usersReduser = (state = initialState, action: any): InitialStateType => {
   switch (action.type) {
     case FOLLOW:
       return {
@@ -52,9 +55,7 @@ const usersReduser = (state = initialState, action) => {
       } else if (!action.isProgress) {
         return {
           ...state,
-          followingInProgress: [
-            state.followingInProgress.filter((id) => id !== action.userId),
-          ],
+          followingInProgress: state.followingInProgress.filter((id) => id !== action.userId),
         };
       }
       return state;
@@ -63,29 +64,63 @@ const usersReduser = (state = initialState, action) => {
   }
 };
 
-export const followSuccses = (userId) => {
+type FollowSuccsesActionType = {
+  type: typeof FOLLOW;
+  userId:number;
+};
+export const followSuccses = (userId: number): FollowSuccsesActionType => {
   return { type: FOLLOW, userId };
 };
-export const unfollowSuccses = (userId) => {
+type UnfollowSuccsesActionType = {
+  type: typeof UNFOLLOW;
+  userId: number;
+};
+export const unfollowSuccses = (userId: number): UnfollowSuccsesActionType => {
   return { type: UNFOLLOW, userId };
 };
-export const setUsers = (users) => {
+type SetUsersActionType = {
+  type: typeof SET_USERS;
+  users: Array<UserType>;
+};
+export const setUsers = (users: Array<UserType>): SetUsersActionType => {
   return { type: SET_USERS, users };
 };
-export const setTotalUsersCount = (pagesCount) => {
+type SetTotalUsersCountActionType = {
+  type: typeof SET_TOTAL_USERS_PAGE;
+  pagesCount: number;
+};
+export const setTotalUsersCount = (
+  pagesCount: number
+): SetTotalUsersCountActionType => {
   return { type: SET_TOTAL_USERS_PAGE, pagesCount };
 };
-export const setCurrentPage = (currentPage) => {
+type SetCurrentPageActionType = {
+  type: typeof SET_CURRENT_PAGE;
+  currentPage: number;
+};
+export const setCurrentPage = (currentPage: number): SetCurrentPageActionType => {
   return { type: SET_CURRENT_PAGE, currentPage };
 };
-export const toggleIsLoading = (isLoading) => {
+type ToggleIsLoadingActionType = {
+  type: typeof TOGGLE_LOADING;
+  isLoading: boolean;
+};
+export const toggleIsLoading = (isLoading: boolean): ToggleIsLoadingActionType => {
   return { type: TOGGLE_LOADING, isLoading };
 };
-export const toggleFollowing = (isProgress, userId) => {
+type ToggleFollowingActionType = {
+  type: typeof TOGGLE_FOLLOWING;
+  isProgress: boolean;
+  userId: number;
+};
+export const toggleFollowing = (
+  isProgress: boolean,
+  userId: number
+): ToggleFollowingActionType => {
   return { type: TOGGLE_FOLLOWING, isProgress, userId };
 };
 
-const toggleFollowUnfollow = async (dispatch, id, api, action) => {
+const toggleFollowUnfollow = async (dispatch:any, id:number, api:any, action:any) => {
   dispatch(toggleFollowing(true, id));
   const data = await api(id);
   if (data.resultCode === 0) {
@@ -94,15 +129,15 @@ const toggleFollowUnfollow = async (dispatch, id, api, action) => {
   dispatch(toggleFollowing(false, id));
 };
 
-export const follow = (id) => (dispatch) => {
+export const follow = (id:number) => (dispatch:any) => {
   toggleFollowUnfollow(dispatch, id, UsersAxios.followUser, followSuccses);
 };
 
-export const unfollow = (id) => (dispatch) => {
+export const unfollow = (id:number) => (dispatch:any) => {
   toggleFollowUnfollow(dispatch, id, UsersAxios.unfollowUser, unfollowSuccses);
 };
 
-export const getUsers = (currentPage, pages) => async (dispatch) => {
+export const getUsers = (currentPage:number, pages:number) => async (dispatch:any) => {
   dispatch(toggleIsLoading(true));
   const data = await UsersAxios.getUsers(currentPage, pages);
   dispatch(setUsers(data.items));
@@ -110,7 +145,7 @@ export const getUsers = (currentPage, pages) => async (dispatch) => {
   dispatch(toggleIsLoading(false));
 };
 
-export const getCurrentPage = (page, pages) => async (dispatch) => {
+export const getCurrentPage = (page:number, pages:number) => async (dispatch:any) => {
   dispatch(setCurrentPage(page));
   dispatch(toggleIsLoading(true));
   const data = await UsersAxios.getUsers(page, pages);

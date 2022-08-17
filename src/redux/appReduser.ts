@@ -1,16 +1,16 @@
-import { getAuthUser } from "./authReduser";
+import { getAuthUser } from "./authReduser.ts";
 
 const INITIALIZATION = "INITIALIZATION ";
 
-export type initialStateType = {
+export type InitialStateType = {
   initialization: boolean;
 };
 
-let initialState: initialStateType = {
+let initialState: InitialStateType = {
   initialization: false,
 };
 
-const appReduser = (state = initialState, action: any) => {
+const appReduser = (state = initialState, action: any): InitialStateType => {
   switch (action.type) {
     case INITIALIZATION:
       return {
@@ -22,7 +22,11 @@ const appReduser = (state = initialState, action: any) => {
   }
 };
 
-export const setInitial = () => {
+type SetInitialActionType = {
+  type: typeof INITIALIZATION;
+};
+
+export const setInitial = (): SetInitialActionType => {
   return { type: INITIALIZATION };
 };
 

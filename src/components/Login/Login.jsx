@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
-import { login } from "../../redux/authReduser";
+import { login } from "../../redux/authReduser.ts";
 import { email, minLength, required } from "../../utils/validators/validators";
 import { Input } from "../common/FormsControls/FormsControls";
 import { createFieldForm } from "../common/FormsControls/FormsControls";
