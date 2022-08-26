@@ -38,7 +38,7 @@ export const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto,
           {isOwner && <UploadFile savePhoto={savePhoto} text="Update photo" />}
         </div>
         {editMode && <ProfileAboutReduxForm onSubmit={onSubmit} profile={profile} initialValues={profile} />}
-        {!editMode && <ProfileAbout profile={profile} status={status} updateStatus={updateStatus} goToEditMode={toEdit} />}
+        {!editMode && <ProfileAbout profile={profile} isOwner={isOwner} status={status} updateStatus={updateStatus} goToEditMode={toEdit} />}
       </div>
     </div >
   );

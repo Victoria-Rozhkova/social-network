@@ -2,9 +2,9 @@ import React from 'react';
 import module from './ProfileAbout.module.css';
 import { AboutMe } from './AboutMe/AboutMe';
 import { Contacts } from './Contacts/Contacts';
-import { ProfileStatus } from './ProfileStatus/ProfileStatus';
+import { ProfileStatus } from './ProfileStatus/ProfileStatus.tsx';
 
-export const ProfileAbout = ({ profile, status, updateStatus, goToEditMode }) => {
+export const ProfileAbout = ({ profile, status, updateStatus, goToEditMode, isOwner }) => {
 
   return <div className={module.description}>
     <div> <h2 className={module.heading}>{profile.fullName}</h2>
@@ -12,6 +12,6 @@ export const ProfileAbout = ({ profile, status, updateStatus, goToEditMode }) =>
       <AboutMe profile={profile} />
       <Contacts profile={profile} />
     </div>
-    <div><button className={module.editBtn} onClick={goToEditMode}>Edit profile</button></div>
+    {isOwner && <div><button className={module.editBtn} onClick={goToEditMode}>Edit profile</button></div>}
   </div>;
 };

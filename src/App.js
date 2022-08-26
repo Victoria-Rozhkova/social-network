@@ -8,7 +8,7 @@ import { connect, Provider } from "react-redux";
 import { initializeApp } from "./redux/appReduser.ts";
 import { Preloader } from "./components/common/Preloader/Preloader";
 import { compose } from "redux";
-import store from "./redux/store-redux";
+import store from "./redux/store-redux.ts";
 import { LoginContainer } from "./components/Login/Login";
 
 const DialogsContainer = React.lazy(() =>
@@ -18,7 +18,7 @@ const ProfileContainer = React.lazy(() =>
   import("./components/Profile/ProfileContainer")
 );
 const UsersContainer = React.lazy(() =>
-  import("./components/Users/UsersContainer")
+  import("./components/Users/UsersContainer.tsx")
 );
 // const LoginContainer = lazy(() => import("./components/Login/Login"));
 const NotFound = React.lazy(() => import("./components/NotFound/NotFound"));
