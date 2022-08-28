@@ -1,5 +1,7 @@
 import { stopSubmit } from "redux-form";
+import { ThunkAction } from "redux-thunk";
 import { SecurityAxios, UsersAxios } from "../api/api";
+import { AppStateType } from "./store-redux";
 import { toggleIsLoading } from "./usersReduser.ts";
 
 const SET_AUTH_USER = "auth/SET_AUTH_USER";
@@ -15,8 +17,12 @@ const initialState = {
 };
 
 export type InitialStateType = typeof initialState;
+type ActionsTypes = SetAuthUserActionType | setCaptchaUrlActionType;
 
-const authReduser = (state = initialState, action: any): InitialStateType => {
+const authReduser = (
+  state = initialState,
+  action: ActionsTypes
+): InitialStateType => {
   switch (action.type) {
     case SET_AUTH_USER:
       return {
@@ -62,7 +68,14 @@ export const setCaptchaUrl = (url: string): setCaptchaUrlActionType => {
   return { type: SET_CAPTCHA_URL, url };
 };
 
-export const getAuthUser = () => async (dispatch: any) => {
+type ThunkType = ThunkAction<
+  Promise<void>,
+  AppStateType,
+  unknown,
+  ActionsTypes
+>;
+
+export const getAuthUser = (): ThunkType => async (dispatch) => {
   dispatch(toggleIsLoading(true));
   const data = await UsersAxios.getAuthUser();
   const { id, login, email } = data.data;
@@ -73,8 +86,13 @@ export const getAuthUser = () => async (dispatch: any) => {
 };
 
 export const login =
-  (email: string, password: string, rememberMe: boolean, captcha: null) =>
-  async (dispatch: any) => {
+  (
+    email: string,
+    password: string,
+    rememberMe: boolean,
+    captcha: null
+  ): ThunkType =>
+  async (dispatch) => {
     const data = await UsersAxios.login(email, password, rememberMe, captcha);
     if (data.resultCode === 0) {
       dispatch(getAuthUser());
@@ -87,14 +105,14 @@ export const login =
     }
   };
 
-export const logout = () => async (dispatch: any) => {
+export const logout = (): ThunkType => async (dispatch) => {
   const data = await UsersAxios.logout();
   if (data.resultCode === 0) {
     dispatch(setAuthUser(null, null, null, false));
   }
 };
 
-export const getCaptcha = () => async (dispatch: any) => {
+export const getCaptcha = (): ThunkType => async (dispatch) => {
   const data = await SecurityAxios.getCaptchaUrl();
   const url = data.url;
   dispatch(setCaptchaUrl(url));

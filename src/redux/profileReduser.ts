@@ -6,7 +6,6 @@ import { toggleIsLoading } from "./usersReduser.ts";
 const ADD_POST = "ADD_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
-const UPDATE_STATUS = "UPDATE_STATUS";
 const DELETE_POST = "DELETE_POST";
 const SET_PHOTO = "SET_PHOTO";
 
@@ -29,9 +28,16 @@ const initialState = {
 
 type InitialStateType = typeof initialState;
 
+type ActionsTypes =
+  | AddPostActionType
+  | SetUserProfileActionType
+  | SetStatusActionType
+  | DeletePostActionType
+  | SetPhotoActionType;
+
 const profileReduser = (
   state = initialState,
-  action: any
+  action: ActionsTypes
 ): InitialStateType => {
   switch (action.type) {
     case ADD_POST: {
@@ -51,8 +57,6 @@ const profileReduser = (
     case SET_USER_PROFILE:
       return { ...state, profile: action.profile };
     case SET_STATUS:
-      return { ...state, status: action.status };
-    case UPDATE_STATUS:
       return { ...state, status: action.status };
     case DELETE_POST:
       return {

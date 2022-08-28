@@ -1,6 +1,9 @@
-import { UserType } from './../types/types';
+import { AppStateType } from "./store-redux";
+import { UserType } from "./../types/types";
 import { UsersAxios } from "../api/api";
 import { usersToggleFollow } from "../utils/helpers/usersHelper";
+import { ThunkAction } from "redux-thunk";
+import { Dispatch } from "redux";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -22,7 +25,19 @@ const initialState = {
 
 type InitialStateType = typeof initialState;
 
-const usersReduser = (state = initialState, action: any): InitialStateType => {
+type ActionsTypes =
+  | FollowSuccsesActionType
+  | UnfollowSuccsesActionType
+  | SetUsersActionType
+  | SetTotalUsersCountActionType
+  | SetCurrentPageActionType
+  | ToggleIsLoadingActionType
+  | ToggleFollowingActionType;
+
+const usersReduser = (
+  state = initialState,
+  action: ActionsTypes
+): InitialStateType => {
   switch (action.type) {
     case FOLLOW:
       return {
@@ -55,7 +70,9 @@ const usersReduser = (state = initialState, action: any): InitialStateType => {
       } else if (!action.isProgress) {
         return {
           ...state,
-          followingInProgress: state.followingInProgress.filter((id) => id !== action.userId),
+          followingInProgress: state.followingInProgress.filter(
+            (id) => id !== action.userId
+          ),
         };
       }
       return state;
@@ -66,7 +83,7 @@ const usersReduser = (state = initialState, action: any): InitialStateType => {
 
 type FollowSuccsesActionType = {
   type: typeof FOLLOW;
-  userId:number;
+  userId: number;
 };
 export const followSuccses = (userId: number): FollowSuccsesActionType => {
   return { type: FOLLOW, userId };
@@ -98,14 +115,18 @@ type SetCurrentPageActionType = {
   type: typeof SET_CURRENT_PAGE;
   currentPage: number;
 };
-export const setCurrentPage = (currentPage: number): SetCurrentPageActionType => {
+export const setCurrentPage = (
+  currentPage: number
+): SetCurrentPageActionType => {
   return { type: SET_CURRENT_PAGE, currentPage };
 };
 type ToggleIsLoadingActionType = {
   type: typeof TOGGLE_LOADING;
   isLoading: boolean;
 };
-export const toggleIsLoading = (isLoading: boolean): ToggleIsLoadingActionType => {
+export const toggleIsLoading = (
+  isLoading: boolean
+): ToggleIsLoadingActionType => {
   return { type: TOGGLE_LOADING, isLoading };
 };
 type ToggleFollowingActionType = {
@@ -120,7 +141,23 @@ export const toggleFollowing = (
   return { type: TOGGLE_FOLLOWING, isProgress, userId };
 };
 
-const toggleFollowUnfollow = async (dispatch:any, id:number, api:any, action:any) => {
+// type GetStateType = () => AppStateType
+type DispatchType = Dispatch<ActionsTypes>;
+type ThunkType = ThunkAction<
+  Promise<void>,
+  AppStateType,
+  unknown,
+  ActionsTypes
+>;
+
+const _toggleFollowUnfollow = async (
+  dispatch: DispatchType,
+  id: number,
+  api: any,
+  action: (
+    userId: number
+  ) => FollowSuccsesActionType | UnfollowSuccsesActionType
+) => {
   dispatch(toggleFollowing(true, id));
   const data = await api(id);
   if (data.resultCode === 0) {
@@ -129,28 +166,46 @@ const toggleFollowUnfollow = async (dispatch:any, id:number, api:any, action:any
   dispatch(toggleFollowing(false, id));
 };
 
-export const follow = (id:number) => (dispatch:any) => {
-  toggleFollowUnfollow(dispatch, id, UsersAxios.followUser, followSuccses);
-};
+export const follow =
+  (id: number): ThunkType =>
+  (dispatch) => {
+    return _toggleFollowUnfollow(
+      dispatch,
+      id,
+      UsersAxios.followUser,
+      followSuccses
+    );
+  };
 
-export const unfollow = (id:number) => (dispatch:any) => {
-  toggleFollowUnfollow(dispatch, id, UsersAxios.unfollowUser, unfollowSuccses);
-};
+export const unfollow =
+  (id: number): ThunkType =>
+  (dispatch) => {
+    return _toggleFollowUnfollow(
+      dispatch,
+      id,
+      UsersAxios.unfollowUser,
+      unfollowSuccses
+    );
+  };
 
-export const getUsers = (currentPage:number, pages:number) => async (dispatch:any) => {
-  dispatch(toggleIsLoading(true));
-  const data = await UsersAxios.getUsers(currentPage, pages);
-  dispatch(setUsers(data.items));
-  dispatch(setTotalUsersCount(data.totalCount));
-  dispatch(toggleIsLoading(false));
-};
+export const getUsers =
+  (currentPage: number, pages: number): ThunkType =>
+  async (dispatch, getState) => {
+    dispatch(toggleIsLoading(true));
+    const data = await UsersAxios.getUsers(currentPage, pages);
+    dispatch(setUsers(data.items));
+    dispatch(setTotalUsersCount(data.totalCount));
+    dispatch(toggleIsLoading(false));
+  };
 
-export const getCurrentPage = (page:number, pages:number) => async (dispatch:any) => {
-  dispatch(setCurrentPage(page));
-  dispatch(toggleIsLoading(true));
-  const data = await UsersAxios.getUsers(page, pages);
-  dispatch(setUsers(data.items));
-  dispatch(toggleIsLoading(false));
-};
+export const getCurrentPage =
+  (page: number, pages: number): ThunkType =>
+  async (dispatch) => {
+    dispatch(setCurrentPage(page));
+    dispatch(toggleIsLoading(true));
+    const data = await UsersAxios.getUsers(page, pages);
+    dispatch(setUsers(data.items));
+    dispatch(toggleIsLoading(false));
+  };
 
 export default usersReduser;

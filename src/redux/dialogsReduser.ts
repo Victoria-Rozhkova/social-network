@@ -46,10 +46,11 @@ const initialState = {
 };
 
 export type InitialStateType = typeof initialState;
+type ActionsTypes = sendNewMessageActionType;
 
 const dialogsReduser = (
   state = initialState,
-  action: any
+  action: ActionsTypes
 ): InitialStateType => {
   switch (action.type) {
     case SEND_NEW_MESSAGE: {
