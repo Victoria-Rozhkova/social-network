@@ -1,6 +1,6 @@
 import { stopSubmit } from "redux-form";
 import { ThunkAction } from "redux-thunk";
-import { SecurityAxios, UsersAxios } from "../api/api";
+import { SecurityAxios, UsersAxios, ResultCodesEnum } from "../api/api.ts";
 import { AppStateType } from "./store-redux";
 import { toggleIsLoading } from "./usersReduser.ts";
 
@@ -79,7 +79,7 @@ export const getAuthUser = (): ThunkType => async (dispatch) => {
   dispatch(toggleIsLoading(true));
   const data = await UsersAxios.getAuthUser();
   const { id, login, email } = data.data;
-  if (data.resultCode === 0) {
+  if (data.resultCode === ResultCodesEnum.Succses) {
     dispatch(setAuthUser(id, login, email, true));
   }
   dispatch(toggleIsLoading(false));
@@ -94,10 +94,10 @@ export const login =
   ): ThunkType =>
   async (dispatch) => {
     const data = await UsersAxios.login(email, password, rememberMe, captcha);
-    if (data.resultCode === 0) {
+    if (data.resultCode === ResultCodesEnum.Succses) {
       dispatch(getAuthUser());
     } else {
-      if (data.resultCode === 10) {
+      if (data.resultCode === ResultCodesEnum.CaptchaIsRequired) {
         dispatch(getCaptcha());
       }
       const error = data.messages[0] ?? "Invalid email or password";

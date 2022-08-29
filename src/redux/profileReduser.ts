@@ -1,6 +1,6 @@
 import { PostType, ProfileType, PhotosType } from './../types/types';
 import { stopSubmit } from "redux-form";
-import { ProfileAxios } from "../api/api";
+import { ProfileAxios } from "../api/api.ts";
 import { toggleIsLoading } from "./usersReduser.ts";
 
 const ADD_POST = "ADD_POST";

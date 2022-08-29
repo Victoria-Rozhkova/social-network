@@ -9,7 +9,7 @@ import { initializeApp } from "./redux/appReduser.ts";
 import { Preloader } from "./components/common/Preloader/Preloader";
 import { compose } from "redux";
 import store from "./redux/store-redux.ts";
-import { LoginContainer } from "./components/Login/Login";
+import { LoginContainer } from "./components/Login/Login.tsx";
 
 const DialogsContainer = React.lazy(() =>
   import("./components/Dialogs/DialogsContainer")

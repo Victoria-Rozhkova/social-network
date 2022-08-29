@@ -1,3 +1,4 @@
+import { ProfileType } from "./../types/types";
 import axios from "axios";
 
 const instanse = axios.create({
@@ -6,24 +7,48 @@ const instanse = axios.create({
   headers: { "API-KEY": "f4b9c198-7716-4319-b2ac-5f5fc35e722e" },
 });
 
+export enum ResultCodesEnum {
+  Succses = 0,
+  Error = 1,
+  CaptchaIsRequired = 10,
+}
+
+type MeResponseType = {
+  data: { id: number; email: string; login: string };
+  resultCode: ResultCodesEnum;
+  messages: Array<string>;
+};
+type LoginResponseType = {
+  data: { userId: number };
+  resultCode: ResultCodesEnum;
+  messages: Array<string>;
+};
+
 export const UsersAxios = {
-  getUsers(currentPage, pages) {
+  getUsers(currentPage: number, pages: number) {
     return instanse
       .get(`users?page=${currentPage}&count=${pages}`)
       .then((response) => response.data);
   },
   getAuthUser() {
-    return instanse.get(`auth/me`).then((response) => response.data);
+    return instanse
+      .get<MeResponseType>(`auth/me`)
+      .then((response) => response.data);
   },
-  unfollowUser(id) {
+  unfollowUser(id: number) {
     return instanse.delete(`follow/${id}`).then((response) => response.data);
   },
-  followUser(id) {
+  followUser(id: number) {
     return instanse.post(`follow/${id}`).then((response) => response.data);
   },
-  login(email, password, rememberMe = false, captcha = null) {
+  login(
+    email: string,
+    password: string,
+    rememberMe = false,
+    captcha: null | string = null
+  ) {
     return instanse
-      .post(`auth/login`, {
+      .post<LoginResponseType>(`auth/login`, {
         email,
         password,
         rememberMe,
@@ -36,15 +61,15 @@ export const UsersAxios = {
   },
 };
 export const ProfileAxios = {
-  getProfiles(id) {
+  getProfiles(id: number) {
     return instanse.get(`profile/${id}`).then((response) => response.data);
   },
-  getStatus(id) {
+  getStatus(id: number) {
     return instanse
       .get(`profile/status/${id}`)
       .then((response) => response.data);
   },
-  updateStatus(status) {
+  updateStatus(status: string) {
     return instanse
       .put(`profile/status`, { status: status })
       .then((response) => response.data);
@@ -60,7 +85,7 @@ export const ProfileAxios = {
       })
       .then((response) => response.data);
   },
-  saveProfile(profile) {
+  saveProfile(profile: ProfileType) {
     return instanse.put(`profile`, profile).then((response) => response.data);
   },
 };

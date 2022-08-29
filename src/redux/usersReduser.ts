@@ -1,6 +1,6 @@
 import { AppStateType } from "./store-redux";
 import { UserType } from "./../types/types";
-import { UsersAxios } from "../api/api";
+import { UsersAxios } from "../api/api.ts";
 import { usersToggleFollow } from "../utils/helpers/usersHelper";
 import { ThunkAction } from "redux-thunk";
 import { Dispatch } from "redux";
