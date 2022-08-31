@@ -1,7 +1,7 @@
 import { PostType, ProfileType, PhotosType } from './../types/types';
 import { stopSubmit } from "redux-form";
-import { ProfileAxios } from "../api/api.ts";
-import { toggleIsLoading } from "./usersReduser.ts";
+import { ProfileAxios } from "../api/api";
+import { actions } from "./usersReduser";
 
 const ADD_POST = "ADD_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
@@ -110,10 +110,10 @@ export const setPhoto = (photos: PhotosType): SetPhotoActionType => {
 };
 
 export const getProfile = (id: number) => async (dispatch: any) => {
-  dispatch(toggleIsLoading(true));
+  dispatch(actions.toggleIsLoading(true));
   const data = await ProfileAxios.getProfiles(id);
   dispatch(setUserProfile(data));
-  dispatch(toggleIsLoading(false));
+  dispatch(actions.toggleIsLoading(false));
 };
 
 export const getStatus = (id: number) => async (dispatch: any) => {

@@ -1,8 +1,8 @@
 import { stopSubmit } from "redux-form";
 import { ThunkAction } from "redux-thunk";
-import { SecurityAxios, UsersAxios, ResultCodesEnum } from "../api/api.ts";
-import { AppStateType } from "./store-redux";
-import { toggleIsLoading } from "./usersReduser.ts";
+import { SecurityAxios, UsersAxios, ResultCodesEnum } from "../api/api";
+import { AppStateType, InferActionsTypes } from "./store-redux";
+import { actions } from "./usersReduser";
 
 const SET_AUTH_USER = "auth/SET_AUTH_USER";
 const SET_CAPTCHA_URL = "auth/SET_CAPTCHA_URL";
@@ -17,7 +17,7 @@ const initialState = {
 };
 
 export type InitialStateType = typeof initialState;
-type ActionsTypes = SetAuthUserActionType | setCaptchaUrlActionType;
+type ActionsTypes = InferActionsTypes<typeof authActions>;
 
 const authReduser = (
   state = initialState,
@@ -38,34 +38,21 @@ const authReduser = (
       return state;
   }
 };
-
-type SetAuthUserActionPayloadType = {
-  userId: number | null;
-  login: string | null;
-  email: string | null;
-  isAuth: boolean;
-};
-type SetAuthUserActionType = {
-  type: typeof SET_AUTH_USER;
-  payload: SetAuthUserActionPayloadType;
-};
-
-export const setAuthUser = (
-  userId: number | null,
-  login: string | null,
-  email: string | null,
-  isAuth: boolean
-): SetAuthUserActionType => {
-  return { type: SET_AUTH_USER, payload: { userId, login, email, isAuth } };
-};
-
-type setCaptchaUrlActionType = {
-  type: typeof SET_CAPTCHA_URL;
-  url: string;
-};
-
-export const setCaptchaUrl = (url: string): setCaptchaUrlActionType => {
-  return { type: SET_CAPTCHA_URL, url };
+const authActions = {
+  setAuthUser: (
+    userId: number | null,
+    login: string | null,
+    email: string | null,
+    isAuth: boolean
+  ) => {
+    return {
+      type: SET_AUTH_USER,
+      payload: { userId, login, email, isAuth },
+    } as const;
+  },
+  setCaptchaUrl: (url: string) => {
+    return { type: SET_CAPTCHA_URL, url } as const;
+  },
 };
 
 type ThunkType = ThunkAction<
@@ -75,14 +62,14 @@ type ThunkType = ThunkAction<
   ActionsTypes
 >;
 
-export const getAuthUser = (): ThunkType => async (dispatch) => {
-  dispatch(toggleIsLoading(true));
+export const getAuthUser = (): any => async (dispatch:any) => {
+  dispatch(actions.toggleIsLoading(true));
   const data = await UsersAxios.getAuthUser();
   const { id, login, email } = data.data;
   if (data.resultCode === ResultCodesEnum.Succses) {
-    dispatch(setAuthUser(id, login, email, true));
+    dispatch(authActions.setAuthUser(id, login, email, true));
   }
-  dispatch(toggleIsLoading(false));
+  dispatch(actions.toggleIsLoading(false));
 };
 
 export const login =
@@ -92,7 +79,7 @@ export const login =
     rememberMe: boolean,
     captcha: null
   ): ThunkType =>
-  async (dispatch) => {
+  async (dispatch:any) => {
     const data = await UsersAxios.login(email, password, rememberMe, captcha);
     if (data.resultCode === ResultCodesEnum.Succses) {
       dispatch(getAuthUser());
@@ -108,14 +95,14 @@ export const login =
 export const logout = (): ThunkType => async (dispatch) => {
   const data = await UsersAxios.logout();
   if (data.resultCode === 0) {
-    dispatch(setAuthUser(null, null, null, false));
+    dispatch(authActions.setAuthUser(null, null, null, false));
   }
 };
 
 export const getCaptcha = (): ThunkType => async (dispatch) => {
   const data = await SecurityAxios.getCaptchaUrl();
   const url = data.url;
-  dispatch(setCaptchaUrl(url));
+  dispatch(authActions.setCaptchaUrl(url));
 };
 
 export default authReduser;

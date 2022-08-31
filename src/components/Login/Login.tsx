@@ -2,15 +2,15 @@ import React, { FC } from "react";
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { Field, reduxForm, InjectedFormProps } from "redux-form";
-import { login } from "../../redux/authReduser.ts";
-import { email, minLength, required } from "../../utils/validators/validators.ts";
+import { login } from "../../redux/authReduser";
+import { email, minLength, required } from "../../utils/validators/validators";
 import {
   Input,
   createFieldForm,
 } from "../common/FormsControls/FormsControls";
 import module from "./Login.module.css";
 import style from "../common/FormsControls/FormControls.module.css";
-import { AppStateType } from "../../redux/store-redux.ts";
+import { AppStateType } from "../../redux/store-redux";
 
 type PropsTypes = MapStateToPropsType & MapDispatchToPropsType & OwnPropsType;
 type OwnPropsType = {

@@ -1,4 +1,4 @@
-import { getAuthUser } from "./authReduser.ts";
+import { getAuthUser } from "./authReduser";
 
 const INITIALIZATION = "INITIALIZATION ";
 
@@ -41,7 +41,7 @@ export const setInitial = (): SetInitialActionType => {
 //   ActionsTypes
 // >;
 export const initializeApp = () => {
-  return (dispatch) => {
+  return (dispatch:any) => {
     const promise = dispatch(getAuthUser());
     promise.then(() => {
       dispatch(setInitial());

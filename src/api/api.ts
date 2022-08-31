@@ -74,7 +74,7 @@ export const ProfileAxios = {
       .put(`profile/status`, { status: status })
       .then((response) => response.data);
   },
-  savePhoto(file) {
+  savePhoto(file:any) {
     const formData = new FormData();
     formData.append("image", file);
     return instanse

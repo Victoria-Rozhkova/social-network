@@ -5,8 +5,8 @@ import {
   getCurrentPage,
   getUsers,
   unfollow,
-} from "../../redux/usersReduser.ts";
-import { Users } from "./Users.tsx";
+} from "../../redux/usersReduser";
+import { Users } from "./Users";
 import { Preloader } from "../common/Preloader/Preloader";
 // import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from "redux";
@@ -18,7 +18,7 @@ import {
   portionSizeSelector,
   totalPageCountSelector,
   usersSelector,
-} from "../../redux/selectors/userSelectors.ts";
+} from "../../redux/selectors/userSelectors";
 import { UserType } from "../../types/types";
 import { AppStateType } from "../../redux/store-redux";
 
@@ -35,13 +35,13 @@ type MapStateToPropsType = {
   totalPageCount: number;
   currentPage: number;
   isLoading: boolean;
-  followingInProgress: boolean;
+  followingInProgress: Array<number>;
   portionSize: number;
 };
 
 type OwnPropsType = {
   pages: number;
-  onPageChange: () => void;
+  onPageChange: (page:number) => void;
 };
 
 type PropsType = MapDispatchToPropsType & MapStateToPropsType & OwnPropsType;

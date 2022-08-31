@@ -4,16 +4,20 @@ import {
   compose,
   legacy_createStore as createStore,
 } from "redux";
-import authReduser from "./authReduser.ts";
-import dialogsReduser from "./dialogsReduser.ts";
-import profileReduser from "./profileReduser.ts";
-import usersReduser from "./usersReduser.ts";
+import authReduser from "./authReduser";
+import dialogsReduser from "./dialogsReduser";
+import profileReduser from "./profileReduser";
+import usersReduser from "./usersReduser";
 import thunkMiddleware from "redux-thunk";
 import { reducer as formReducer } from "redux-form";
-import appReduser from "./appReduser.ts";
+import appReduser from "./appReduser";
 
 type RootReducerType = typeof rootReducer;
 export type AppStateType = ReturnType<RootReducerType>;
+
+type PropertiesTypes<T> = T extends { [key: string]: infer U } ? U : never;
+export type InferActionsTypes<T extends { [key: string]: (...arg: any[]) => any }> =
+  ReturnType<PropertiesTypes<T>>;
 
 const rootReducer = combineReducers({
   profilePage: profileReduser,

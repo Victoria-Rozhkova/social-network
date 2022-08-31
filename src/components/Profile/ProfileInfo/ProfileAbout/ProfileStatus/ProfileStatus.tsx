@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FC } from "react";
+import React, { useEffect, useState, FC, ChangeEvent } from "react";
 import module from "./ProfileStatus.module.css";
 
 type PropsType = {
@@ -17,7 +17,7 @@ export const ProfileStatus: FC<PropsType> = (props) => {
     setEditMode(false);
     props.updateStatus(status);
   };
-  const onStatusChange = (e: ChangeEvent<HTMLinputElement>) => {
+  const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
     setStatus(e.target.value);
   };
 

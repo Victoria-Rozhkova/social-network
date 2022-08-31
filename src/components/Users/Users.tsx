@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import module from './Users.module.css';
-import { Pagination } from '../common/Pagination/Pagination.tsx';
+import { Pagination } from '../common/Pagination/Pagination';
 import { User } from './User';
 import { UserType } from '../../types/types';
 
 type PropsType = {
   users: Array<UserType>;
-  followingInProgress: boolean;
+  followingInProgress: Array<number>;
   unfollow: (userId: number) => void;
   follow: (userId: number) => void;
   totalPageCount: number;
