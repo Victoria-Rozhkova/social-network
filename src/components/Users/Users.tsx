@@ -12,7 +12,7 @@ type PropsType = {
   totalPageCount: number;
   pageSize: number;
   currentPage: number;
-  onPageChange: () => void;
+  onPageChange: (page:number) => void;
   portionSize: number;
 };
 
