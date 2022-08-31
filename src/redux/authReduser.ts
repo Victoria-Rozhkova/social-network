@@ -1,6 +1,8 @@
 import { stopSubmit } from "redux-form";
 import { ThunkAction } from "redux-thunk";
-import { SecurityAxios, UsersAxios, ResultCodesEnum } from "../api/api";
+import { AuthAPI } from "../api/auth-api";
+import { SecurityAPI } from "../api/security-api";
+import { ResultCodesEnum } from "../api/api";
 import { AppStateType, InferActionsTypes } from "./store-redux";
 import { actions } from "./usersReduser";
 
@@ -64,7 +66,7 @@ type ThunkType = ThunkAction<
 
 export const getAuthUser = (): any => async (dispatch:any) => {
   dispatch(actions.toggleIsLoading(true));
-  const data = await UsersAxios.getAuthUser();
+  const data = await AuthAPI.me();
   const { id, login, email } = data.data;
   if (data.resultCode === ResultCodesEnum.Succses) {
     dispatch(authActions.setAuthUser(id, login, email, true));
@@ -80,7 +82,7 @@ export const login =
     captcha: null
   ): ThunkType =>
   async (dispatch:any) => {
-    const data = await UsersAxios.login(email, password, rememberMe, captcha);
+    const data = await AuthAPI.login(email, password, rememberMe, captcha);
     if (data.resultCode === ResultCodesEnum.Succses) {
       dispatch(getAuthUser());
     } else {
@@ -93,14 +95,14 @@ export const login =
   };
 
 export const logout = (): ThunkType => async (dispatch) => {
-  const data = await UsersAxios.logout();
+  const data = await AuthAPI.logout();
   if (data.resultCode === 0) {
     dispatch(authActions.setAuthUser(null, null, null, false));
   }
 };
 
 export const getCaptcha = (): ThunkType => async (dispatch) => {
-  const data = await SecurityAxios.getCaptchaUrl();
+  const data = await SecurityAPI.getCaptchaUrl();
   const url = data.url;
   dispatch(authActions.setCaptchaUrl(url));
 };

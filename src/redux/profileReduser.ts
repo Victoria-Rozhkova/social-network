@@ -1,6 +1,6 @@
 import { PostType, ProfileType, PhotosType } from './../types/types';
 import { stopSubmit } from "redux-form";
-import { ProfileAxios } from "../api/api";
+import { ProfileAPI } from "../api/profile-api";
 import { actions } from "./usersReduser";
 
 const ADD_POST = "ADD_POST";
@@ -111,25 +111,25 @@ export const setPhoto = (photos: PhotosType): SetPhotoActionType => {
 
 export const getProfile = (id: number) => async (dispatch: any) => {
   dispatch(actions.toggleIsLoading(true));
-  const data = await ProfileAxios.getProfiles(id);
+  const data = await ProfileAPI.getProfiles(id);
   dispatch(setUserProfile(data));
   dispatch(actions.toggleIsLoading(false));
 };
 
 export const getStatus = (id: number) => async (dispatch: any) => {
-  const data = await ProfileAxios.getStatus(id);
+  const data = await ProfileAPI.getStatus(id);
   dispatch(setStatus(data));
 };
 
 export const updateStatus = (status: string) => async (dispatch: any) => {
-  const data = await ProfileAxios.updateStatus(status);
+  const data = await ProfileAPI.updateStatus(status);
   if (data.resultCode === 0) {
     dispatch(setStatus(status));
   }
 };
 
 export const savePhoto = (file: any) => async (dispatch: any) => {
-  const data = await ProfileAxios.savePhoto(file);
+  const data = await ProfileAPI.savePhoto(file);
   if (data.resultCode === 0) {
     dispatch(setPhoto(data.data.photos));
   }
@@ -137,7 +137,7 @@ export const savePhoto = (file: any) => async (dispatch: any) => {
 
 export const updateProfile =
   (profile: ProfileType) => async (dispatch: any, getState: any) => {
-    const data = await ProfileAxios.saveProfile(profile);
+    const data = await ProfileAPI.saveProfile(profile);
     const userId = getState().auth.userId;
     if (data.resultCode === 0) {
       dispatch(getProfile(userId));

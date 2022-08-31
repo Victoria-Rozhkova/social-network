@@ -1,6 +1,6 @@
 import { AppStateType, InferActionsTypes } from "./store-redux";
 import { UserType } from "./../types/types";
-import { UsersAxios } from "../api/api";
+import { UsersAPI } from "../api/users-api";
 import { usersToggleFollow } from "../utils/helpers/usersHelper";
 import { ThunkAction } from "redux-thunk";
 import { Dispatch } from "redux";
@@ -127,7 +127,7 @@ export const follow =
     return _toggleFollowUnfollow(
       dispatch,
       id,
-      UsersAxios.followUser,
+      UsersAPI.followUser,
       actions.followSuccses
     );
   };
@@ -138,7 +138,7 @@ export const unfollow =
     return _toggleFollowUnfollow(
       dispatch,
       id,
-      UsersAxios.unfollowUser,
+      UsersAPI.unfollowUser,
       actions.unfollowSuccses
     );
   };
@@ -147,7 +147,7 @@ export const getUsers =
   (currentPage: number, pages: number): ThunkType =>
   async (dispatch, getState) => {
     dispatch(actions.toggleIsLoading(true));
-    const data = await UsersAxios.getUsers(currentPage, pages);
+    const data = await UsersAPI.getUsers(currentPage, pages);
     dispatch(actions.setUsers(data.items));
     dispatch(actions.setTotalUsersCount(data.totalCount));
     dispatch(actions.toggleIsLoading(false));
@@ -158,7 +158,7 @@ export const getCurrentPage =
   async (dispatch) => {
     dispatch(actions.setCurrentPage(page));
     dispatch(actions.toggleIsLoading(true));
-    const data = await UsersAxios.getUsers(page, pages);
+    const data = await UsersAPI.getUsers(page, pages);
     dispatch(actions.setUsers(data.items));
     dispatch(actions.toggleIsLoading(false));
   };

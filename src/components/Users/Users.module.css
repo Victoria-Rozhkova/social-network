@@ -38,6 +38,26 @@
   transform: translateY(2px)
 }
 
+.userFollow button:disabled {
+  background: linear-gradient(85deg, #d396d2, #e2f598);
+  padding: 7px 15px;
+  border: none;
+  cursor: not-allowed;
+  border-radius: 7px;
+  font-size: 14px;
+  color: white;
+  font-weight: 800;
+  transition: all 0.3s;
+}
+
+.userFollow button:disabled:hover {
+  box-shadow: none;
+}
+
+.userFollow button:disabled:active {
+  box-shadow: none;
+}
+
 .userInfo {
   display: flex;
   border: solid 1px gray;

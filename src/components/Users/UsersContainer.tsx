@@ -37,11 +37,12 @@ type MapStateToPropsType = {
   isLoading: boolean;
   followingInProgress: Array<number>;
   portionSize: number;
+  isAuth: boolean;
 };
 
 type OwnPropsType = {
   pages: number;
-  onPageChange: (page:number) => void;
+  onPageChange: (page: number) => void;
 };
 
 type PropsType = MapDispatchToPropsType & MapStateToPropsType & OwnPropsType;
@@ -69,6 +70,7 @@ class UsersAPI extends React.Component<PropsType> {
             onPageChange={this.onPageChange}
             followingInProgress={this.props.followingInProgress}
             portionSize={this.props.portionSize}
+            isAuth={this.props.isAuth}
           />
         )}
       </>
@@ -85,6 +87,7 @@ const MapStateToProps = (state: AppStateType): MapStateToPropsType => {
     isLoading: isLoadingSelector(state),
     followingInProgress: followingInProgressSelector(state),
     portionSize: portionSizeSelector(state),
+    isAuth: state.auth.isAuth,
   };
 };
 
