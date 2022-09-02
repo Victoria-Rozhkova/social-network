@@ -18,7 +18,7 @@ import {
   portionSizeSelector,
   totalPageCountSelector,
   usersSelector,
-} from "../../redux/selectors/userSelectors";
+} from "../../redux/selectors/usersSelectors";
 import { UserType } from "../../types/types";
 import { AppStateType } from "../../redux/store-redux";
 

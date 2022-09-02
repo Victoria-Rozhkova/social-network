@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
+import { postsSelector } from 'src/redux/selectors/profileSelectors';
 import { actionsProfile } from '../../../redux/profileReduser.ts';
 import { MyPosts } from './MyPosts';
 
 const MapStateToProps = (state) => {
   return {
-    posts: state.profilePage.posts,
-    likesCount: state.profilePage.likesCount,
+    posts: postsSelector(state),
   };
 };
 

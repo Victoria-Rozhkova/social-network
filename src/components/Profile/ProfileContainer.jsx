@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
 import { useState } from "react";
+import { profileSelector, statusSelector } from "src/redux/selectors/profileSelectors";
+import { isAuthSelector, userIdSelector } from "src/redux/selectors/authSelectors";
 
 const ProfileAPI = ({ getProfile, getStatus, userId, profile, status, updateStatus, isAuth, savePhoto, updateProfile }) => {
   const [isOwner, setIsOwner] = useState(false);
@@ -30,10 +32,10 @@ const ProfileAPI = ({ getProfile, getStatus, userId, profile, status, updateStat
 
 const MapStateToProps = (state) => {
   return {
-    profile: state.profilePage.profile,
-    userId: state.auth.userId,
-    status: state.profilePage.status,
-    isAuth: state.auth.isAuth,
+    profile: profileSelector(state),
+    userId: userIdSelector(state),
+    status: statusSelector(state),
+    isAuth: isAuthSelector(state),
   };
 };
 

@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
+import { dialogsSelector } from 'src/redux/selectors/dialogsSelectors';
 import { Navbar } from './Navbar';
 
 const MapStateToProps = (state) => {
   return {
-    friends: state.dialogsPage.dialogs,
+    friends: dialogsSelector(state),
   };
 };
 

@@ -3,9 +3,7 @@ import { actionsDialogs } from '../../../redux/dialogsReduser.ts';
 import { NewMessage } from './NewMessage';
 
 const MapStateToProps = (state) => {
-  return {
-    newMessage: state.dialogsPage.newMessage,
-  };
+  return {};
 };
 
 const NewMessageContainer = connect(MapStateToProps, {
