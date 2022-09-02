@@ -1,4 +1,4 @@
-import profileReduser, { addPost, deletePost } from "../redux/profileReduser";
+import profileReduser, { actionsProfile } from "../redux/profileReduser";
 
 const state = {
   posts: [
@@ -13,10 +13,12 @@ const state = {
       likesCount: 3,
     },
   ],
+  profile: null,
+  status: "",
 };
 
 test("length posts should incremented", () => {
-  const action = addPost("Test post");
+  const action = actionsProfile.addPost("Test post");
 
   const testProfileReduser = profileReduser(state, action);
 
@@ -24,7 +26,7 @@ test("length posts should incremented", () => {
 });
 
 test("message of new post should be correct", () => {
-  const action = addPost("Test post");
+  const action = actionsProfile.addPost("Test post");
 
   const testProfileReduser = profileReduser(state, action);
 
@@ -32,14 +34,14 @@ test("message of new post should be correct", () => {
 });
 
 test("post should be deleted", () => {
-  const action = deletePost(1);
+  const action = actionsProfile.deletePost(1);
 
   const testProfileReduser = profileReduser(state, action);
 
   expect(testProfileReduser.posts.length).toBe(1);
 });
 test("after deleting length should not be decrement if id is incorrect", () => {
-  const action = deletePost(10);
+  const action = actionsProfile.deletePost(10);
 
   const testProfileReduser = profileReduser(state, action);
 

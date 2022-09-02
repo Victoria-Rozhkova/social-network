@@ -1,16 +1,15 @@
-import { getAuthUser } from "./authReduser";
+import { getAuthUser, SetAuthUserType } from "./authReduser";
+import { InferActionsTypes, ThunkType } from "./store-redux";
+import { UsersActionsType } from "./usersReduser";
 
-const INITIALIZATION = "INITIALIZATION ";
+const INITIALIZATION = "app/INITIALIZATION ";
 
-export type InitialStateType = {
-  initialization: boolean;
-};
+export type InitialStateType = typeof initialState;
+type ActionsTypes = InferActionsTypes<typeof appActions>;
 
-let initialState: InitialStateType = {
+const initialState = {
   initialization: false,
 };
-
-type ActionsTypes = SetInitialActionType;
 
 const appReduser = (
   state = initialState,
@@ -27,26 +26,20 @@ const appReduser = (
   }
 };
 
-type SetInitialActionType = {
-  type: typeof INITIALIZATION;
+const appActions = {
+  setInitial: () => ({ type: INITIALIZATION } as const),
 };
 
-export const setInitial = (): SetInitialActionType => {
-  return { type: INITIALIZATION };
-};
-// type ThunkType = ThunkAction<
-//   Promise<void>,
-//   AppStateType,
-//   unknown,
-//   ActionsTypes
-// >;
-export const initializeApp = () => {
-  return (dispatch:any) => {
+export const initializeApp =
+  (): ThunkType<
+    ActionsTypes | UsersActionsType | SetAuthUserType,
+    Promise<ActionsTypes>
+  > =>
+  (dispatch) => {
     const promise = dispatch(getAuthUser());
     promise.then(() => {
-      dispatch(setInitial());
+      dispatch(appActions.setInitial());
     });
   };
-};
 
 export default appReduser;

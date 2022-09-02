@@ -1,5 +1,6 @@
 import img from "../img/img.png";
-const SEND_NEW_MESSAGE = "SEND_NEW_MESSAGE";
+import { InferActionsTypes } from "./store-redux";
+const SEND_NEW_MESSAGE = "DIALOGS/SEND_NEW_MESSAGE";
 
 type DialogType = {
   id: number;
@@ -12,6 +13,9 @@ type MessageType = {
   img: typeof img;
   message: string;
 };
+
+export type InitialStateType = typeof initialState;
+type ActionsTypes = InferActionsTypes<typeof actionsDialogs>;
 
 const initialState = {
   dialogs: [
@@ -45,9 +49,6 @@ const initialState = {
   ] as Array<MessageType>,
 };
 
-export type InitialStateType = typeof initialState;
-type ActionsTypes = sendNewMessageActionType;
-
 const dialogsReduser = (
   state = initialState,
   action: ActionsTypes
@@ -72,13 +73,10 @@ const dialogsReduser = (
   }
 };
 
-type sendNewMessageActionType = {
-  type: typeof SEND_NEW_MESSAGE;
-  message: string;
-};
-
-export const sendNewMessage = (message: string): sendNewMessageActionType => {
-  return { type: SEND_NEW_MESSAGE, message };
+export const actionsDialogs = {
+  sendNewMessage: (message: string) => {
+    return { type: SEND_NEW_MESSAGE, message } as const;
+  },
 };
 
 export default dialogsReduser;
