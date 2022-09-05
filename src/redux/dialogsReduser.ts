@@ -2,13 +2,13 @@ import img from "../img/img.png";
 import { InferActionsTypes } from "./store-redux";
 const SEND_NEW_MESSAGE = "DIALOGS/SEND_NEW_MESSAGE";
 
-type DialogType = {
+export type DialogType = {
   id: number;
   img: typeof img;
   name: string;
 };
 
-type MessageType = {
+export type MessageType = {
   id: number;
   img: typeof img;
   message: string;

@@ -17,7 +17,11 @@ type OwnPropsType = {
   captchaUrl: string;
 };
 
-export const Login: FC<PropsTypes> = ({ login, isAuth, captchaUrl }) => {
+export const Login: FC<PropsTypes> = ({
+  login,
+  isAuth,
+  captchaUrl,
+}) => {
   const onSubmit = (formData: LoginFormValuesType) => {
     login(
       formData.email,
@@ -112,7 +116,7 @@ type LoginFormValuesType = {
   captcha: string | null;
 };
 
-const LoginReduxForm = reduxForm
+const LoginReduxForm:any = reduxForm
 ({
   form: "login",
 })(LoginForm);

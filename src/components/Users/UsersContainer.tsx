@@ -91,7 +91,7 @@ const MapStateToProps = (state: AppStateType): MapStateToPropsType => {
   };
 };
 
-const UsersContainer = compose(
+const UsersContainer = compose<React.ComponentType>(
   connect<
     MapStateToPropsType,
     MapDispatchToPropsType,

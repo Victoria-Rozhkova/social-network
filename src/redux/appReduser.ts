@@ -31,11 +31,8 @@ const appActions = {
 };
 
 export const initializeApp =
-  (): ThunkType<
-    ActionsTypes | UsersActionsType | SetAuthUserType,
-    Promise<ActionsTypes>
-  > =>
-  (dispatch) => {
+  ():any =>
+  (dispatch: any) => {
     const promise = dispatch(getAuthUser());
     promise.then(() => {
       dispatch(appActions.setInitial());
