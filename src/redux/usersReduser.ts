@@ -1,17 +1,18 @@
-import { APIResponseType, ResultCodesEnum } from './../api/api';
+import { APIResponseType, ResultCodesEnum } from "./../api/api";
 import { InferActionsTypes, ThunkType } from "./store-redux";
 import { UserType } from "./../types/types";
 import { UsersAPI } from "../api/users-api";
 import { usersToggleFollow } from "../utils/helpers/usersHelper";
 import { Dispatch } from "redux";
 
-const FOLLOW = "FOLLOW";
-const UNFOLLOW = "UNFOLLOW";
-const SET_USERS = "SET_USERS";
-const SET_TOTAL_USERS_PAGE = "SET_TOTAL_USERS_PAGE";
-const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
-export const TOGGLE_LOADING = "TOGGLE_LOADING";
-const TOGGLE_FOLLOWING = "TOGGLE_FOLLOWING";
+const FOLLOW = "USERS/FOLLOW";
+const UNFOLLOW = "USERS/UNFOLLOW";
+const SET_USERS = "USERS/SET_USERS";
+const SET_TOTAL_USERS_PAGE = "USERS/SET_TOTAL_USERS_PAGE";
+const SET_CURRENT_PAGE = "USERS/SET_CURRENT_PAGE";
+export const TOGGLE_LOADING = "USERS/TOGGLE_LOADING";
+const TOGGLE_FOLLOWING = "USERS/TOGGLE_FOLLOWING";
+const SET_FILTER = "USERS/SET_FILTER";
 
 const initialState = {
   users: [] as Array<UserType>,
@@ -21,9 +22,11 @@ const initialState = {
   isLoading: false,
   followingInProgress: [] as Array<number>,
   portionSize: 10,
+  filter: { term: "", friend: null as null | boolean },
 };
 
 export type InitialStateType = typeof initialState;
+export type FilterType = typeof initialState.filter;
 export type UsersActionsType = {
   type: typeof TOGGLE_LOADING;
   isLoading: boolean;
@@ -71,7 +74,13 @@ const usersReduser = (
           ),
         };
       }
+
       return state;
+    case SET_FILTER:
+      return {
+        ...state,
+        filter: action.payload,
+      };
     default:
       return state;
   }
@@ -99,9 +108,11 @@ export const usersActions = {
   toggleFollowing: (isProgress: boolean, userId: number) => {
     return { type: TOGGLE_FOLLOWING, isProgress, userId } as const;
   },
+  setFilter: (filter: FilterType) => {
+    return { type: SET_FILTER, payload: filter } as const;
+  },
 };
 
-// type GetStateType = () => AppStateType
 type DispatchType = Dispatch<ActionsTypes>;
 
 const _toggleFollowUnfollow = async (
@@ -141,23 +152,24 @@ export const unfollow =
   };
 
 export const getUsers =
-  (currentPage: number, pages: number): ThunkType<ActionsTypes> =>
+  (
+    currentPage: number,
+    pages: number,
+    filter: FilterType
+  ): ThunkType<ActionsTypes> =>
   async (dispatch, getState) => {
-    dispatch(usersActions.toggleIsLoading(true));
-    const data = await UsersAPI.getUsers(currentPage, pages);
+    dispatch(usersActions.toggleIsLoading(true)); // loader on
+    dispatch(usersActions.setFilter(filter));
+    dispatch(usersActions.setCurrentPage(currentPage));
+    const data = await UsersAPI.getUsers(
+      currentPage,
+      pages,
+      filter.term,
+      filter.friend
+    );
     dispatch(usersActions.setUsers(data.items));
     dispatch(usersActions.setTotalUsersCount(data.totalCount));
-    dispatch(usersActions.toggleIsLoading(false));
-  };
-
-export const getCurrentPage =
-  (page: number, pages: number): ThunkType<ActionsTypes> =>
-  async (dispatch) => {
-    dispatch(usersActions.setCurrentPage(page));
-    dispatch(usersActions.toggleIsLoading(true));
-    const data = await UsersAPI.getUsers(page, pages);
-    dispatch(usersActions.setUsers(data.items));
-    dispatch(usersActions.toggleIsLoading(false));
+    dispatch(usersActions.toggleIsLoading(false)); // loader off
   };
 
 export default usersReduser;

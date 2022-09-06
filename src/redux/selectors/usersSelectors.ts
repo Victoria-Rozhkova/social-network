@@ -27,3 +27,7 @@ export const followingInProgressSelector = (state: AppStateType) => {
 export const portionSizeSelector = (state: AppStateType) => {
   return state.usersPage.portionSize;
 };
+
+export const filterSelector = (state: AppStateType) => {
+  return state.usersPage.filter;
+};

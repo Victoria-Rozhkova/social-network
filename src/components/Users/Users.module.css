@@ -10,6 +10,17 @@
   border-radius: 50%;
 }
 
+.form {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.textField {
+  width: 250px;
+}
+
 .userFollow {
   display: flex;
   flex-direction: column;
@@ -74,6 +85,10 @@
 .userName,
 .userStatus {
   min-width: 400px;
+}
+
+.userstatus {
+  word-break: break-word;
 }
 
 .userName a {

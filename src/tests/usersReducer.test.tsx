@@ -43,6 +43,7 @@ beforeEach(() => {
     isLoading: false,
     followingInProgress: [],
     portionSize: 10,
+    filter: { term: "", friend: null },
   };
 });
 

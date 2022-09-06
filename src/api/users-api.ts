@@ -1,9 +1,17 @@
 import { GetItemsType, instanse, APIResponseType } from "./api";
 
 export const UsersAPI = {
-  getUsers(currentPage: number, pages: number) {
+  getUsers(
+    currentPage: number = 1,
+    pages: number = 10,
+    term: string = "",
+    friend: null | boolean = null
+  ) {
     return instanse
-      .get<GetItemsType>(`users?page=${currentPage}&count=${pages}`)
+      .get<GetItemsType>(
+        `users?page=${currentPage}&count=${pages}&term=${term}` +
+          (friend === null ? "" : `&friend=${friend}`)
+      )
       .then((res) => res.data);
   },
   unfollowUser(id: number) {

@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
+  FilterType,
   follow,
-  getCurrentPage,
   getUsers,
   unfollow,
 } from "../../redux/usersReduser";
@@ -12,6 +12,7 @@ import { Preloader } from "../common/Preloader/Preloader";
 import { compose } from "redux";
 import {
   currentPageSelector,
+  filterSelector,
   followingInProgressSelector,
   isLoadingSelector,
   pagesSelector,
@@ -21,10 +22,10 @@ import {
 } from "../../redux/selectors/usersSelectors";
 import { UserType } from "../../types/types";
 import { AppStateType } from "../../redux/store-redux";
+import { isAuthSelector } from "src/redux/selectors/authSelectors";
 
 type MapDispatchToPropsType = {
-  getUsers: (currentPage: number, pages: number) => void;
-  getCurrentPage: (page: number, pages: number) => void;
+  getUsers: (currentPage: number, pages: number, filter: FilterType) => void;
   unfollow: (userId: number) => void;
   follow: (userId: number) => void;
 };
@@ -38,6 +39,7 @@ type MapStateToPropsType = {
   followingInProgress: Array<number>;
   portionSize: number;
   isAuth: boolean;
+  filter: FilterType,
 };
 
 type OwnPropsType = {
@@ -49,10 +51,14 @@ type PropsType = MapDispatchToPropsType & MapStateToPropsType & OwnPropsType;
 
 class UsersAPI extends React.Component<PropsType> {
   componentDidMount() {
-    this.props.getUsers(this.props.currentPage, this.props.pages);
+    this.props.getUsers(this.props.currentPage, this.props.pages, this.props.filter);
   }
   onPageChange = (page: number) => {
-    this.props.getCurrentPage(page, this.props.pages);
+    this.props.getUsers(page, this.props.pages, this.props.filter);
+  };
+  onFilterChanged = (filter: FilterType) => {
+    const { pages } = this.props;
+    this.props.getUsers(1, pages, filter);
   };
   render() {
     return (
@@ -71,6 +77,8 @@ class UsersAPI extends React.Component<PropsType> {
             followingInProgress={this.props.followingInProgress}
             portionSize={this.props.portionSize}
             isAuth={this.props.isAuth}
+            onFilterChanged={this.onFilterChanged}
+            filter={this.props.filter}
           />
         )}
       </>
@@ -87,7 +95,8 @@ const MapStateToProps = (state: AppStateType): MapStateToPropsType => {
     isLoading: isLoadingSelector(state),
     followingInProgress: followingInProgressSelector(state),
     portionSize: portionSizeSelector(state),
-    isAuth: state.auth.isAuth,
+    isAuth: isAuthSelector(state),
+    filter: filterSelector(state),
   };
 };
 
@@ -101,7 +110,6 @@ const UsersContainer = compose<React.ComponentType>(
     follow,
     unfollow,
     getUsers,
-    getCurrentPage,
   })
 )(UsersAPI);
 
