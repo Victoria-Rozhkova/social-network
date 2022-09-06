@@ -1,3 +1,4 @@
+import { APIResponseType, ResultCodesEnum } from './../api/api';
 import { InferActionsTypes, ThunkType } from "./store-redux";
 import { UserType } from "./../types/types";
 import { UsersAPI } from "../api/users-api";
@@ -22,7 +23,7 @@ const initialState = {
   portionSize: 10,
 };
 
-type InitialStateType = typeof initialState;
+export type InitialStateType = typeof initialState;
 export type UsersActionsType = {
   type: typeof TOGGLE_LOADING;
   isLoading: boolean;
@@ -106,12 +107,12 @@ type DispatchType = Dispatch<ActionsTypes>;
 const _toggleFollowUnfollow = async (
   dispatch: DispatchType,
   id: number,
-  api: any,
+  api: (userId: number) => Promise<APIResponseType>,
   action: (userId: number) => ActionsTypes
 ) => {
   dispatch(usersActions.toggleFollowing(true, id));
   const data = await api(id);
-  if (data.resultCode === 0) {
+  if (data.resultCode === ResultCodesEnum.Succses) {
     dispatch(action(id));
   }
   dispatch(usersActions.toggleFollowing(false, id));
