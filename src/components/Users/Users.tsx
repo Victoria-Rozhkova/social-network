@@ -7,14 +7,14 @@ import { UserType } from "../../types/types";
 type PropsType = {
   users: Array<UserType>;
   followingInProgress: Array<number>;
-  unfollow: (userId: number) => void;
-  follow: (userId: number) => void;
+  portionSize: number;
+  isAuth: boolean;
   totalPageCount: number;
   pageSize: number;
   currentPage: number;
+  unfollow: (userId: number) => void;
+  follow: (userId: number) => void;
   onPageChange: (page: number) => void;
-  portionSize: number;
-  isAuth: boolean;
 };
 
 export const Users: FC<PropsType> = ({

@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import module from '../Navbar.module.css';
 
-export const Navigate = (props) => {
+export const Navigate = () => {
   return (
     <nav>
       <div className={module.navbar}>

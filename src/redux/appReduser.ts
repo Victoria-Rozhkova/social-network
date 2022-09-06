@@ -1,6 +1,5 @@
-import { getAuthUser, SetAuthUserType } from "./authReduser";
-import { InferActionsTypes, ThunkType } from "./store-redux";
-import { UsersActionsType } from "./usersReduser";
+import { getAuthUser } from "./authReduser";
+import { InferActionsTypes } from "./store-redux";
 
 const INITIALIZATION = "app/INITIALIZATION ";
 
@@ -30,13 +29,11 @@ const appActions = {
   setInitial: () => ({ type: INITIALIZATION } as const),
 };
 
-export const initializeApp =
-  ():any =>
-  (dispatch: any) => {
-    const promise = dispatch(getAuthUser());
-    promise.then(() => {
-      dispatch(appActions.setInitial());
-    });
-  };
+export const initializeApp = (): any => (dispatch: any) => {
+  const promise = dispatch(getAuthUser());
+  promise.then(() => {
+    dispatch(appActions.setInitial());
+  });
+};
 
 export default appReduser;

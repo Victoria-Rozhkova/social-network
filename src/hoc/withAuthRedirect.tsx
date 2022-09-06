@@ -16,11 +16,16 @@ const MapStateToPropsForRedirect = (state: AppStateType) => {
 
 export const withAuthRedirect = <WCP,>(Component: React.ComponentType<WCP>) => {
   const RedirectComponent = (props: MapStateToPropsType) => {
-    const {isAuth, ...restProps} = props;
+    const { isAuth, ...restProps } = props;
     if (isAuth === false) return <Navigate to="/login" />;
-    return <Component {...restProps as WCP} />;
+    return <Component {...(restProps as WCP)} />;
   };
-  const ConnectedAuthRedirectComponent = connect<MapStateToPropsType,{}, WCP, AppStateType>(
+  const ConnectedAuthRedirectComponent = connect<
+    MapStateToPropsType,
+    {},
+    WCP,
+    AppStateType
+  >(
     MapStateToPropsForRedirect,
     {}
   )(RedirectComponent);

@@ -36,14 +36,26 @@ export const Pagination: React.FC<PropsType> = ({
   return (
     <div className={module.pagination}>
       {portionNumber > 1 && (
-        <span
-          className={module.arrow}
-          onClick={() => {
-            setPortionNumber(portionNumber - 1);
-          }}
-        >
-          &#129044;
-        </span>
+        <>
+          <button
+            className={
+              currentPage === pages[0] ? module.currentPage : module.pageBtn
+            }
+            onClick={() => {
+              onPageChange(pages[0]);
+            }}
+          >
+            {pages[0]}
+          </button>
+          <span
+            className={module.arrow}
+            onClick={() => {
+              setPortionNumber(portionNumber - 1);
+            }}
+          >
+            &#129044;
+          </span>
+        </>
       )}
       {pages
         .filter(
@@ -65,14 +77,26 @@ export const Pagination: React.FC<PropsType> = ({
           );
         })}
       {portionCount > portionNumber && (
-        <span
-          className={module.arrow}
-          onClick={() => {
-            setPortionNumber(portionNumber + 1);
-          }}
-        >
-          &#129046;
-        </span>
+        <>
+          <span
+            className={module.arrow}
+            onClick={() => {
+              setPortionNumber(portionNumber + 1);
+            }}
+          >
+            &#129046;
+          </span>
+          <button
+            className={
+              currentPage === pages.length ? module.currentPage : module.pageBtn
+            }
+            onClick={() => {
+              onPageChange(pages.length);
+            }}
+          >
+            {pages.length}
+          </button>
+        </>
       )}
     </div>
   );

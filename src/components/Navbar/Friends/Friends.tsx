@@ -1,9 +1,14 @@
-import React from 'react';
-import module from '../Navbar.module.css';
+import React, { FC } from "react";
+import { DialogType } from "src/redux/dialogsReduser";
+import module from "../Navbar.module.css";
 
-export const Friends = ({ friends }) => {
+type PropsTypes = {
+  friends: Array<DialogType>;
+};
+
+export const Friends: FC<PropsTypes> = ({ friends }) => {
   return (
-    <nav >
+    <nav>
       <div className={module.friendsBlock}>
         <h2>Friends</h2>
         <div className={module.friends}>
@@ -12,7 +17,8 @@ export const Friends = ({ friends }) => {
               <div key={el.id} className={module.friend}>
                 <img src={el.img} alt="img" />
                 {el.name}
-              </div>);
+              </div>
+            );
           })}
         </div>
       </div>

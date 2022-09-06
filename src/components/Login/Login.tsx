@@ -4,10 +4,7 @@ import { Navigate } from "react-router-dom";
 import { Field, reduxForm, InjectedFormProps } from "redux-form";
 import { login } from "../../redux/authReduser";
 import { email, minLength, required } from "../../utils/validators/validators";
-import {
-  Input,
-  createFieldForm,
-} from "../common/FormsControls/FormsControls";
+import { Input, createFieldForm } from "../common/FormsControls/FormsControls";
 import module from "./Login.module.css";
 import style from "../common/FormsControls/FormControls.module.css";
 import { AppStateType } from "../../redux/store-redux";
@@ -17,11 +14,7 @@ type OwnPropsType = {
   captchaUrl: string;
 };
 
-export const Login: FC<PropsTypes> = ({
-  login,
-  isAuth,
-  captchaUrl,
-}) => {
+export const Login: FC<PropsTypes> = ({ login, isAuth, captchaUrl }) => {
   const onSubmit = (formData: LoginFormValuesType) => {
     login(
       formData.email,
@@ -116,8 +109,7 @@ type LoginFormValuesType = {
   captcha: string | null;
 };
 
-const LoginReduxForm:any = reduxForm
-({
+const LoginReduxForm: any = reduxForm({
   form: "login",
 })(LoginForm);
 

@@ -19,7 +19,7 @@ export const NewMessage: FC<PropsType> = (props) => {
   );
 };
 
-const NewMessageForm : any= (props:any) => {
+const NewMessageForm: any = (props: any) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <Field
@@ -36,6 +36,6 @@ const NewMessageForm : any= (props:any) => {
   );
 };
 
-const NewMessageReduxForm :any = reduxForm({
+const NewMessageReduxForm: any = reduxForm({
   form: "dialogAddNewMessageForm",
 })(NewMessageForm);
