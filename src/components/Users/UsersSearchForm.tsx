@@ -8,10 +8,15 @@ type PropsTypes = {
   onFilterChanged: (filter: FilterType) => void;
 };
 
+type FormType = {
+  term: string;
+  friend: string;
+};
+
 export const UsersSearchForm: FC<PropsTypes> = React.memo(
   ({ onFilterChanged, filter }) => {
     const submit = (
-      values: any,
+      values: FormType,
       { setSubmitting }: { setSubmitting: (isSubmit: boolean) => void }
     ) => {
       setSubmitting(false);
@@ -30,7 +35,11 @@ export const UsersSearchForm: FC<PropsTypes> = React.memo(
     return (
       <div className={style.usersSearch}>
         <Formik
-          initialValues={{ term: filter.term, friend: filter.friend }}
+          enableReinitialize
+          initialValues={{
+            term: filter.term,
+            friend: String(filter.friend),
+          }}
           validate={(values) => {
             const errors = {};
             return errors;

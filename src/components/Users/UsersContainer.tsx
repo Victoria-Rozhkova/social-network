@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import {
   FilterType,
@@ -23,6 +23,7 @@ import {
 import { UserType } from "../../types/types";
 import { AppStateType } from "../../redux/store-redux";
 import { isAuthSelector } from "src/redux/selectors/authSelectors";
+import { useSearchParams } from "react-router-dom";
 
 type MapDispatchToPropsType = {
   getUsers: (currentPage: number, pages: number, filter: FilterType) => void;
@@ -39,7 +40,7 @@ type MapStateToPropsType = {
   followingInProgress: Array<number>;
   portionSize: number;
   isAuth: boolean;
-  filter: FilterType,
+  filter: FilterType;
 };
 
 type OwnPropsType = {
@@ -48,43 +49,73 @@ type OwnPropsType = {
 };
 
 type PropsType = MapDispatchToPropsType & MapStateToPropsType & OwnPropsType;
+type UrlParamsType = { term?: string; friend?: string; page?: string };
 
-class UsersAPI extends React.Component<PropsType> {
-  componentDidMount() {
-    this.props.getUsers(this.props.currentPage, this.props.pages, this.props.filter);
-  }
-  onPageChange = (page: number) => {
-    this.props.getUsers(page, this.props.pages, this.props.filter);
+const UsersAPI: React.FC<PropsType> = (props) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    const urlParams: UrlParamsType = Object.fromEntries([...searchParams]);
+
+    let actualPage = props.currentPage;
+    let actualFilter = props.filter;
+
+    if (urlParams.page) {
+      actualPage = Number(urlParams.page);
+    }
+    if (urlParams.term) {
+      actualFilter = { ...actualFilter, term: urlParams.term };
+    }
+    // преобразовываем свойство friend из строки в нужное значение
+    switch (urlParams.friend) {
+      case "null":
+        actualFilter = { ...actualFilter, friend: null };
+        break;
+      case "true":
+        actualFilter = { ...actualFilter, friend: true };
+        break;
+      case "false":
+        actualFilter = { ...actualFilter, friend: false };
+        break;
+    }
+    props.getUsers(actualPage, props.pages, actualFilter);
+  }, []);
+
+  useEffect(() => {
+    const query = `?term=${props.filter.term}&friend=${props.filter.friend}&page=${props.currentPage}`;
+    setSearchParams(query);
+  }, [props.filter, props.currentPage]);
+
+  const onPageChange = (page: number) => {
+    props.getUsers(page, props.pages, props.filter);
   };
-  onFilterChanged = (filter: FilterType) => {
-    const { pages } = this.props;
-    this.props.getUsers(1, pages, filter);
+  const onFilterChanged = (filter: FilterType) => {
+    const { pages } = props;
+    props.getUsers(1, pages, filter);
   };
-  render() {
-    return (
-      <>
-        {this.props.isLoading ? (
-          <Preloader />
-        ) : (
-          <Users
-            totalPageCount={this.props.totalPageCount}
-            pageSize={this.props.pageSize}
-            users={this.props.users}
-            follow={this.props.follow}
-            unfollow={this.props.unfollow}
-            currentPage={this.props.currentPage}
-            onPageChange={this.onPageChange}
-            followingInProgress={this.props.followingInProgress}
-            portionSize={this.props.portionSize}
-            isAuth={this.props.isAuth}
-            onFilterChanged={this.onFilterChanged}
-            filter={this.props.filter}
-          />
-        )}
-      </>
-    );
-  }
-}
+  return (
+    <>
+      {props.isLoading ? (
+        <Preloader />
+      ) : (
+        <Users
+          totalPageCount={props.totalPageCount}
+          pageSize={props.pageSize}
+          users={props.users}
+          follow={props.follow}
+          unfollow={props.unfollow}
+          currentPage={props.currentPage}
+          onPageChange={onPageChange}
+          followingInProgress={props.followingInProgress}
+          portionSize={props.portionSize}
+          isAuth={props.isAuth}
+          onFilterChanged={onFilterChanged}
+          filter={props.filter}
+        />
+      )}
+    </>
+  );
+};
 
 const MapStateToProps = (state: AppStateType): MapStateToPropsType => {
   return {

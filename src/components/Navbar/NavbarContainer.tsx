@@ -1,13 +1,11 @@
-import { connect } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { dialogsSelector } from "src/redux/selectors/dialogsSelectors";
 import { AppStateType } from "src/redux/store-redux";
 import { Navbar } from "./Navbar";
 
-const MapStateToProps = (state: AppStateType) => {
-  return {
-    friends: dialogsSelector(state),
-  };
+const NavbarContainer = () => {
+  const friends = useSelector((state: AppStateType) => dialogsSelector(state));
+  return <Navbar friends={friends} />;
 };
-
-const NavbarContainer = connect(MapStateToProps, {})(Navbar);
 export default NavbarContainer;
