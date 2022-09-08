@@ -82,8 +82,21 @@ const UsersAPI: React.FC<PropsType> = (props) => {
   }, []);
 
   useEffect(() => {
+    const params: UrlParamsType = {};
+    if (props.filter.term !== "") params.term = props.filter.term;
+    if (props.filter.friend !== null) {
+      params.friend = props.filter.friend.toString();
+    }
+    if (props.currentPage !== 1) params.page = props.currentPage.toString();
+    // в url будут отображаться только те параметры, которые не по умолчанию
+    const queryString =
+      "?" +
+      Object.keys(params)
+        .map((key) => key + "=" + params[key as keyof UrlParamsType])
+        .join("&");
+    // в url будут отображаться все параметры поиска
     const query = `?term=${props.filter.term}&friend=${props.filter.friend}&page=${props.currentPage}`;
-    setSearchParams(query);
+    setSearchParams(queryString);
   }, [props.filter, props.currentPage]);
 
   const onPageChange = (page: number) => {
