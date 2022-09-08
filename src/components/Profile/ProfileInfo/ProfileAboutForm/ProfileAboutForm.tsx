@@ -4,7 +4,7 @@ import { createFieldForm, Input, TextArea } from '../../../common/FormsControls/
 import module from './ProfileAboutForm.module.css';
 import style from '../../../common/FormsControls/FormControls.module.css';
 
-const ProfileAboutForm = ({ handleSubmit, error, initialValues, profile }) => {
+const ProfileAboutForm :any = ({ handleSubmit, error, initialValues, profile }:any) => {
 
   return (
     <form className={module.editProfileForm} onSubmit={handleSubmit}>
@@ -26,7 +26,7 @@ const ProfileAboutForm = ({ handleSubmit, error, initialValues, profile }) => {
   );
 };
 
-export const ProfileAboutReduxForm = reduxForm({
+export const ProfileAboutReduxForm : any= reduxForm({
   form: 'edit-profile',
   enableReinitialize: true,
   destroyOnUnmount: false

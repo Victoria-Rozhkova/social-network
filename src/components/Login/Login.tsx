@@ -111,11 +111,11 @@ type LoginFormValuesType = {
 
 const LoginReduxForm: any = reduxForm({
   form: "login",
-})(LoginForm);
+})(LoginForm as any) ;
 
 const MapStateToProps = (state: AppStateType): MapStateToPropsType => ({
   isAuth: state.auth.isAuth,
   captchaUrl: state.auth.captchaUrl,
 });
 
-export const LoginContainer = connect(MapStateToProps, { login })(Login);
+export const LoginContainer = connect(MapStateToProps, { login })(Login as any);

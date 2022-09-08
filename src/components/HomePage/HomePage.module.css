@@ -4,6 +4,7 @@
   background-clip: text;
   color: transparent;
   background-image: linear-gradient(90deg, rgb(102 33 101) 0%, rgb(64 58 185) 19%, rgb(189 38 188) 52%, #dd59db 100%);
+  font-size: 35px;
 }
 
 .homePage {
@@ -13,6 +14,10 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
+}
+
+.homePage img{
+  max-width: 100%;
 }
 
 .text {

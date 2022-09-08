@@ -1,37 +1,9 @@
-.header {
-  grid-area: header;
-  background-color: #181A1B;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-}
-
-.header a {
-  color: #1890FF;
-  font-size: 20px;
-  font-weight: 900;
-}
-
-.header a:hover {
-  color: white;
-}
-
-.header p {
-  color: #1890FF;
-  font-size: 20px;
-  font-weight: 900;
-  margin: 1px;
-}
-
-.logo {
-  padding: 5px;
-}
-
 .logout {
   display: flex;
   gap: 10px;
   align-items: center;
+  justify-content: flex-end;
+    margin-right: 20px;
 }
 
 .logout button {
@@ -42,6 +14,12 @@
   font-weight: 800;
   border: none;
   border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+  max-height: 40px;
+  justify-content: center;
+
 }
 
 .logout button:hover {
@@ -51,4 +29,21 @@
 .logout button:active {
   box-shadow: 0 3px rgb(63 56 205);
   transform: translateY(2px);
+}
+
+.logout a {
+  color: #1890FF;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.logout a:hover {
+  color: white;
+}
+
+.login {
+  color: #1890FF;
+  font-size: 20px;
+  font-weight: 900;
+  margin: 1px;
 }

@@ -37,6 +37,6 @@ const MyPostsForm = (props: any) => {
     </form>
   );
 };
-const MyPostsReduxForm = reduxForm({
+const MyPostsReduxForm : any= reduxForm({
   form: "profileAddNewPostForm",
 })(MyPostsForm);

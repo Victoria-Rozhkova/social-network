@@ -1,6 +1,6 @@
 .profileImage {
   background-image: url(../img/profileBackground.jpg);
-  background-size: contain;
+  background-size: cover;
   min-height: 207px;
   background-repeat: no-repeat;
   display: flex;
@@ -8,6 +8,10 @@
   justify-content: center;
   margin-bottom: 10px;
   background-position: center;
+}
+
+.profileImage img {
+  max-width: 100%;
 }
 
 .profileInfo {
