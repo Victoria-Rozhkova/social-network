@@ -1,27 +1,37 @@
 import {
-  DesktopOutlined,
   FileOutlined,
-  PieChartOutlined,
   TeamOutlined,
   UserOutlined,
+  MessageOutlined,
 } from "@ant-design/icons";
-import type { MenuProps } from "antd";
-import { Layout, Menu } from "antd";
-import { Col, Row } from "antd";
+import type { MenuTheme } from "antd";
+import { Layout, Menu, Switch } from "antd";
+import { Row } from "antd";
 import React, { Suspense, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import { Preloader } from "../common/Preloader/Preloader";
-import DialogsContainer from "../Dialogs/DialogsContainer";
+//import DialogsContainer from "../Dialogs/DialogsContainer";
 import { HomePage } from "../HomePage/HomePage";
 import { LoginContainer } from "../Login/Login";
 import { Logo } from "../Logo/Logo";
-import NotFound from "../NotFound/NotFound";
-import ProfileContainer from "../Profile/ProfileContainer";
+// import NotFound from "../NotFound/NotFound";
+//import ProfileContainer from "../Profile/ProfileContainer";
 import { SignUp } from "../SignUp/SignUp";
-import UsersContainer from "../Users/UsersContainer";
+// import UsersContainer from "../Users/UsersContainer";
+import style from "./Layout.module.css";
 
 const { Header, Content, Footer, Sider } = Layout;
+
+const DialogsContainer = React.lazy(
+  () => import("../Dialogs/DialogsContainer")
+);
+const ProfileContainer = React.lazy(
+  () => import("../Profile/ProfileContainer")
+);
+const UsersContainer = React.lazy(() => import("../Users/UsersContainer"));
+// const LoginContainer = lazy(() => import("./components/Login/Login"));
+const NotFound = React.lazy(() => import("../NotFound/NotFound"));
 
 type MenuItem = Required<any>["items"][number];
 
@@ -40,48 +50,49 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  // getItem("Option 1", "1", <PieChartOutlined />),
-  // getItem(<NavLink to="/">Home</NavLink>, "2", <DesktopOutlined />),
-  getItem("My profile", "sub1", <UserOutlined />, [
-    getItem(<NavLink to="/profile">Profile</NavLink>, "3"),
-    getItem(<NavLink to="/dialogs">Messages</NavLink>, "4"),
-    // getItem("Alex", "5"),
-  ]),
-  getItem("Users", "sub2", <TeamOutlined />, [
-    getItem(<NavLink to="/users">Users</NavLink>, "6"),
-    // getItem("Team 2", "8"),
-  ]),
-  // getItem("Files", "9", <FileOutlined />),
+  getItem(<NavLink to="/profile">Profile</NavLink>, "1", <UserOutlined />),
+  getItem(<NavLink to="/users">Users</NavLink>, "2", <TeamOutlined />),
+  getItem(<NavLink to="/dialogs">Messages</NavLink>, "3", <MessageOutlined />),
+  getItem("Settings", "sub2", <FileOutlined />, [getItem("Team 2", "8")]),
 ];
 
 export const LayoutApp: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
-
+  const [theme, setTheme] = useState<MenuTheme>("dark");
+  const changeTheme = (value: boolean) => {
+    setTheme(value ? "dark" : "light");
+  };
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider
+        theme={theme}
         collapsible
         collapsed={collapsed}
-        onCollapse={(value:any) => setCollapsed(value)}
+        onCollapse={(value: any) => setCollapsed(value)}
       >
-        <div className="logo" />
-        <Menu
-          theme="dark"
-          defaultSelectedKeys={["3"]}
-          mode="inline"
-          items={items}
-        />
+        <div className="logo">
+          <Logo />
+        </div>
+
+        <Menu theme={theme} mode="inline" items={items} />
       </Sider>
+
       <Layout className="site-layout">
         <Header className="site-layout-background" style={{ padding: 0 }}>
-          <Row>
-            <Col span={8}>
-              <Logo />
-            </Col>
-            <Col span={8} offset={8}>
+            <Row
+              className={style.wrapper}
+              justify="space-between"
+              align="middle"
+            >
+              <Switch
+                className={style.switch}
+                checked={theme === "dark"}
+                onChange={changeTheme}
+                checkedChildren="Dark"
+                unCheckedChildren="Light"
+              />
               <SignUp />
-            </Col>
-          </Row>
+            </Row>
         </Header>
         <Content style={{ margin: "0 16px" }}>
           <Suspense fallback={<Preloader />}>

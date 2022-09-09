@@ -7,9 +7,8 @@ body {
 }
 
 .app-wrapper {
-  width: 1200px;
+  max-width: 1200px;
   margin: 0 auto;
-  display: grid;
 
   grid-template-areas: "header header"
     "nav content";
