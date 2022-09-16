@@ -1,0 +1,46 @@
+.chat {
+  height: 80vh;
+  overflow-y: auto;
+}
+
+.message {
+  border: solid 1px #bdb9b9ad;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 20px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 65px;
+  border-radius: 30px;
+}
+
+.userName {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.userMessage {
+  font-size: 20px;
+  padding-left: 75px;
+}
+
+.chatForm {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: flex-start;
+}
+
+.chatForm textarea {
+  min-height: 75px;
+  width: 75%;
+  margin-left: 20px;
+  border-radius: 8px;
+}

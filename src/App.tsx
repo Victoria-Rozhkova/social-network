@@ -30,13 +30,13 @@ const mapStateToProps = (state: AppStateType) => ({
 
 const AppMain = () => {
   return (
-    <React.StrictMode>
+  //  <React.StrictMode>
       <BrowserRouter>
         <Provider store={store}>
           <AppContainer />
         </Provider>
       </BrowserRouter>
-    </React.StrictMode>
+    // </React.StrictMode>
   );
 };
 

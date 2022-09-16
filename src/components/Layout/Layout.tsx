@@ -10,6 +10,7 @@ import { Row } from "antd";
 import React, { Suspense, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
+//import { Chat } from "../Chat/Chat";
 import { Preloader } from "../common/Preloader/Preloader";
 //import DialogsContainer from "../Dialogs/DialogsContainer";
 import { HomePage } from "../HomePage/HomePage";
@@ -30,6 +31,9 @@ const ProfileContainer = React.lazy(
   () => import("../Profile/ProfileContainer")
 );
 const UsersContainer = React.lazy(() => import("../Users/UsersContainer"));
+const Chat = React.lazy(() =>
+  import("../Chat/Chat").then(({ Chat }) => ({ default: Chat }))
+);
 // const LoginContainer = lazy(() => import("./components/Login/Login"));
 const NotFound = React.lazy(() => import("../NotFound/NotFound"));
 
@@ -53,6 +57,7 @@ const items: MenuItem[] = [
   getItem(<NavLink to="/profile">Profile</NavLink>, "1", <UserOutlined />),
   getItem(<NavLink to="/users">Users</NavLink>, "2", <TeamOutlined />),
   getItem(<NavLink to="/dialogs">Messages</NavLink>, "3", <MessageOutlined />),
+  getItem(<NavLink to="/chat">Chat</NavLink>, "4", <MessageOutlined />),
   getItem("Settings", "sub2", <FileOutlined />, [getItem("Team 2", "8")]),
 ];
 
@@ -79,20 +84,16 @@ export const LayoutApp: React.FC = () => {
 
       <Layout className="site-layout">
         <Header className="site-layout-background" style={{ padding: 0 }}>
-            <Row
-              className={style.wrapper}
-              justify="space-between"
-              align="middle"
-            >
-              <Switch
-                className={style.switch}
-                checked={theme === "dark"}
-                onChange={changeTheme}
-                checkedChildren="Dark"
-                unCheckedChildren="Light"
-              />
-              <SignUp />
-            </Row>
+          <Row className={style.wrapper} justify="space-between" align="middle">
+            <Switch
+              className={style.switch}
+              checked={theme === "dark"}
+              onChange={changeTheme}
+              checkedChildren="Dark"
+              unCheckedChildren="Light"
+            />
+            <SignUp />
+          </Row>
         </Header>
         <Content style={{ margin: "0 16px" }}>
           <Suspense fallback={<Preloader />}>
@@ -102,11 +103,12 @@ export const LayoutApp: React.FC = () => {
               <Route path="/users/profile/:id" element={<ProfileContainer />} />
               <Route path="/dialogs/" element={<DialogsContainer />} />
               <Route path="/users" element={<UsersContainer />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="/chat" element={<Chat />} />
               <Route path="/login" element={<LoginContainer />} />
               {/* <Route path="/news" element={<News />} />
             <Route path="/music" element={<Music />} />
             <Route path="/settings" element={<Settings />} /> */}
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
         </Content>
