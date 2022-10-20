@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import module from "./Chat.module.css";
 
-type PropsType = {};
+type PropsType = { ws: WebSocket | null };
 type ChatMessageType = {
   message: string;
   photo: string;
@@ -9,20 +9,19 @@ type ChatMessageType = {
   userName: string;
 };
 
-const ws = new WebSocket(
-  "wss://social-network.samuraijs.com/handlers/ChatHandler.ashx"
-);
-
-export const ChatMessages: FC<PropsType> = () => {
+export const ChatMessages: FC<PropsType> = ({ ws }) => {
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
 
   useEffect(() => {
-    ws.onmessage = (e: MessageEvent) => {
+    const messageHandler = (e: MessageEvent) => {
       const newMessages: ChatMessageType[] = JSON.parse(e.data);
       setMessages((prev) => [...prev, ...newMessages]);
     };
-    return () => ws.close();
-  }, []);
+    ws?.addEventListener("message", messageHandler);
+    return () => {
+      ws?.removeEventListener("message", messageHandler);
+    };
+  }, [ws]);
   return (
     <div className={module.chatMessages}>
       {messages.map((m, i) => {
@@ -36,23 +35,43 @@ export const ChatMessages: FC<PropsType> = () => {
           </div>
         );
       })}
-      <ChatAddMessageForm />
+      <ChatAddMessageForm ws={ws} />
     </div>
   );
 };
 
-export const ChatAddMessageForm: FC<PropsType> = () => {
+export const ChatAddMessageForm: FC<PropsType> = ({ ws }) => {
   const [value, setValue] = useState("");
+  const [readyStatus, setReadyStatus] = useState<"pending" | "ready">(
+    "pending"
+  );
+
+  useEffect(() => {
+    const openHandler = () => {
+      setReadyStatus("ready");
+    };
+    ws?.addEventListener("open", openHandler);
+    return () => {
+      ws?.removeEventListener("open", openHandler);
+    };
+  }, [ws]);
 
   const sendMessage = () => {
-    ws.send(value);
-    setValue("");
+    if (value !== "") {
+      ws?.send(value);
+      setValue("");
+    }
   };
 
   return (
     <div className={module.chatForm}>
       <textarea value={value} onChange={(e) => setValue(e.target.value)} />
-      <button onClick={sendMessage}>Send</button>
+      <button
+        disabled={ws == null || readyStatus !== "ready"}
+        onClick={sendMessage}
+      >
+        Send
+      </button>
     </div>
   );
 };
