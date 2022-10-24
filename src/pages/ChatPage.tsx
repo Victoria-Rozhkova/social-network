@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { Chat } from "src/components/Chat/Chat";
 
-export const ChatPage: FC<PropsType> = () => {
+const ChatPage: FC<PropsType> = () => {
   return <Chat />;
 };
-
+export default ChatPage;
 type PropsType = {};

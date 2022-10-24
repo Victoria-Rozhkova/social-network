@@ -12,6 +12,7 @@ import usersReduser from "./usersReduser";
 import thunkMiddleware, { ThunkAction } from "redux-thunk";
 import { reducer as formReducer } from "redux-form";
 import appReduser from "./appReduser";
+import chatReducer from "./chatReducer";
 
 type RootReducerType = typeof rootReducer;
 export type AppStateType = ReturnType<RootReducerType>;
@@ -36,6 +37,7 @@ const rootReducer = combineReducers({
   auth: authReduser,
   form: formReducer,
   app: appReduser,
+  chat: chatReducer,
 });
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

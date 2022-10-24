@@ -10,7 +10,6 @@ import { Row } from "antd";
 import React, { Suspense, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
-//import { Chat } from "../Chat/Chat";
 import { Preloader } from "../common/Preloader/Preloader";
 //import DialogsContainer from "../Dialogs/DialogsContainer";
 import { HomePage } from "../HomePage/HomePage";
@@ -31,9 +30,7 @@ const ProfileContainer = React.lazy(
   () => import("../Profile/ProfileContainer")
 );
 const UsersContainer = React.lazy(() => import("../Users/UsersContainer"));
-const Chat = React.lazy(() =>
-  import("../Chat/Chat").then(({ Chat }) => ({ default: Chat }))
-);
+const ChatPage = React.lazy(() => import("src/pages/ChatPage"));
 // const LoginContainer = lazy(() => import("./components/Login/Login"));
 const NotFound = React.lazy(() => import("../NotFound/NotFound"));
 
@@ -103,7 +100,7 @@ export const LayoutApp: React.FC = () => {
               <Route path="/users/profile/:id" element={<ProfileContainer />} />
               <Route path="/dialogs/" element={<DialogsContainer />} />
               <Route path="/users" element={<UsersContainer />} />
-              <Route path="/chat" element={<Chat />} />
+              <Route path="/chat" element={<ChatPage />} />
               <Route path="/login" element={<LoginContainer />} />
               {/* <Route path="/news" element={<News />} />
             <Route path="/music" element={<Music />} />
