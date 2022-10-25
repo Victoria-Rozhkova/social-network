@@ -12,7 +12,9 @@ export const ChatMessages: FC<PropsType> = React.memo(({ isAutoscroll }) => {
 
   useEffect(() => {
     if (isAutoscroll) {
-      messagesAnchorRef.current?.scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => {
+        messagesAnchorRef.current?.scrollIntoView({ behavior: "smooth" });
+      }, 500);
     }
   }, [messages]);
 

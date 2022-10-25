@@ -6,6 +6,7 @@ import { v1 } from "uuid";
 
 const MESSAGES_RESEIVED = "chat/MESSAGES_RESEIVED";
 const STATUS_CHANGED = "chat/STATUS_CHANGED";
+const MESSAGES_CLEANING = "chat/MESSAGES_CLEANING";
 
 export enum StatusesEnum {
   Pending = "pending",
@@ -36,6 +37,11 @@ const chatReducer = (
         ...state,
         status: action.payload.status,
       };
+    case MESSAGES_CLEANING:
+      return {
+        ...state,
+        messages: [],
+      };
     default:
       return state;
   }
@@ -46,6 +52,7 @@ const chatActions = {
     ({ type: MESSAGES_RESEIVED, payload: { messages } } as const),
   statusChanged: (status: StatusType) =>
     ({ type: STATUS_CHANGED, payload: { status } } as const),
+  messagesCleaning: () => ({ type: MESSAGES_CLEANING } as const),
 };
 
 let _newMessageHandler: ((messages: ChatMessageAPIType[]) => void) | null =
@@ -89,6 +96,7 @@ export const stopMessagesListening =
       "status-changed",
       statusChangedHandlerCreator(dispatch)
     );
+    dispatch(chatActions.messagesCleaning());
   };
 
 export const sendMessage =
