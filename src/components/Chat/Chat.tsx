@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { ChatAddMessageForm } from "./ChatAddMessageForm";
 import { ChatMessages } from "./ChatMessages";
 import module from "./Chat.module.css";
@@ -12,10 +12,25 @@ import { chatStatusSelector } from "src/redux/selectors/chatSelectors";
 
 type PropsType = {};
 
-export const Chat: FC<PropsType> = () => {
+export const Chat: FC<PropsType> = React.memo(() => {
+  const [isAutoscroll, setIsAutoScroll] = useState(true);
+
   const status = useSelector(chatStatusSelector);
 
   const dispatch = useDispatch();
+
+  const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+    const element = e.currentTarget;
+    if (
+      Math.abs(
+        element.scrollHeight - element.scrollTop - element.clientHeight
+      ) < 300
+    ) {
+      !isAutoscroll && setIsAutoScroll(true);
+    } else {
+      setIsAutoScroll(false);
+    }
+  };
 
   useEffect(() => {
     dispatch(startMessagesListening() as any);
@@ -25,11 +40,11 @@ export const Chat: FC<PropsType> = () => {
   }, []);
 
   return (
-    <div className={module.chat}>
-      <ChatMessages />
+    <div className={module.chat} onScroll={scrollHandler}>
+      <ChatMessages isAutoscroll={isAutoscroll} />
       {status === StatusesEnum.Error &&
         "Some error occured. Please refresh page"}
       <ChatAddMessageForm />
     </div>
   );
-};
+});
