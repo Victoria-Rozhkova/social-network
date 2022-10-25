@@ -1,51 +1,93 @@
-let subscribers = [] as SubscriberType[];
+import { StatusesEnum } from "src/redux/chatReducer";
+
+const subscribers = {
+  "messages-reseived": [] as MessagesReseivedSubscriberType[],
+  "status-changed": [] as StatusChangedSubscriberType[],
+};
 
 let ws: WebSocket | null = null;
 
+// Обработчики событий
+const openHandler = () => {
+  notifySubscribersAboutStarus(StatusesEnum.Ready);
+};
+
 const closeHandler = () => {
+  notifySubscribersAboutStarus(StatusesEnum.Pending);
   console.log("close ws");
   setTimeout(createWsChanel, 3000);
 };
+
 const messageHandler = (e: MessageEvent) => {
   const newMessages: ChatMessageType[] = JSON.parse(e.data);
-  subscribers.forEach((s) => s(newMessages));
+  subscribers["messages-reseived"].forEach((s) => s(newMessages));
+};
+
+const errorHandler = () => {
+  notifySubscribersAboutStarus(StatusesEnum.Error);
+  console.error("Some error. Refresh page");
+};
+//
+
+const cleanUp = () => {
+  ws?.removeEventListener("open", openHandler);
+  ws?.removeEventListener("close", closeHandler);
+  ws?.removeEventListener("message", messageHandler);
+  ws?.removeEventListener("error", errorHandler);
+  ws?.close();
+};
+
+const notifySubscribersAboutStarus = (status: StatusType) => {
+  subscribers["status-changed"].forEach((s) => s(status));
 };
 
 function createWsChanel() {
-  if (ws !== null) {
-    ws.removeEventListener("close", closeHandler);
-    ws.close();
-  }
+  cleanUp();
   ws = new WebSocket(
     "wss://social-network.samuraijs.com/handlers/ChatHandler.ashx"
   );
+  notifySubscribersAboutStarus(StatusesEnum.Pending);
+  ws.addEventListener("open", openHandler);
   ws.addEventListener("close", closeHandler);
   ws.addEventListener("message", messageHandler);
+  ws.addEventListener("error", errorHandler);
 }
 
 export const chatAPI = {
   start() {
     createWsChanel();
   },
-  subscribe(callback: SubscriberType) {
-    subscribers.push(callback);
+  subscribe(
+    eventName: EventsNames,
+    callback: MessagesReseivedSubscriberType | StatusChangedSubscriberType
+  ) {
+    //@ts-ignore
+    subscribers[eventName].push(callback);
     // unsubscribe
     return () => {
-      subscribers = subscribers.filter((s) => s !== callback);
+      //@ts-ignore
+      subscribers[eventName] = subscribers[eventName].filter(
+        (s: any) => s !== callback
+      );
     };
   },
   // второй вариант
-  unsubscribe(callback: SubscriberType) {
-    subscribers = subscribers.filter((s) => s !== callback);
+  unsubscribe(
+    eventName: EventsNames,
+    callback: MessagesReseivedSubscriberType | StatusChangedSubscriberType
+  ) {
+    //@ts-ignore
+    subscribers[eventName] = subscribers[eventName].filter(
+      (s: any) => s !== callback
+    );
   },
   send(message: string) {
     ws?.send(message);
   },
   stop() {
-    subscribers = [];
-    ws?.close();
-    ws?.removeEventListener("close", closeHandler);
-    ws?.removeEventListener("message", messageHandler);
+    subscribers["messages-reseived"] = [];
+    subscribers["status-changed"] = [];
+    cleanUp();
   },
 };
 
@@ -56,4 +98,10 @@ export type ChatMessageType = {
   userName: string;
 };
 
-type SubscriberType = (messages: ChatMessageType[]) => void;
+type MessagesReseivedSubscriberType = (messages: ChatMessageType[]) => void;
+type StatusChangedSubscriberType = (status: StatusType) => void;
+type EventsNames = "messages-reseived" | "status-changed";
+export type StatusType =
+  | StatusesEnum.Pending
+  | StatusesEnum.Ready
+  | StatusesEnum.Error;
