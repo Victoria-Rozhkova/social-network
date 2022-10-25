@@ -19,7 +19,7 @@ const closeHandler = () => {
 };
 
 const messageHandler = (e: MessageEvent) => {
-  const newMessages: ChatMessageType[] = JSON.parse(e.data);
+  const newMessages: ChatMessageAPIType[] = JSON.parse(e.data);
   subscribers["messages-reseived"].forEach((s) => s(newMessages));
 };
 
@@ -91,14 +91,14 @@ export const chatAPI = {
   },
 };
 
-export type ChatMessageType = {
+export type ChatMessageAPIType = {
   message: string;
   photo: string;
   userId: number;
   userName: string;
 };
 
-type MessagesReseivedSubscriberType = (messages: ChatMessageType[]) => void;
+type MessagesReseivedSubscriberType = (messages: ChatMessageAPIType[]) => void;
 type StatusChangedSubscriberType = (status: StatusType) => void;
 type EventsNames = "messages-reseived" | "status-changed";
 export type StatusType =

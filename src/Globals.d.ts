@@ -5,3 +5,4 @@ declare module "*.jpg";
 declare module "*.svg";
 declare module "*.gif";
 declare module "*antd";
+declare module "*uuid";
