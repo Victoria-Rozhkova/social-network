@@ -11,3 +11,6 @@ export const isAuthSelector = (state: AppStateType) => {
 export const loginSelector = (state: AppStateType) => {
   return state.auth.login;
 };
+export const errorSelector = (state: AppStateType) => {
+  return state.auth.error;
+};

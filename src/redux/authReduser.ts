@@ -7,6 +7,7 @@ import { usersActions, UsersActionsType } from "./usersReduser";
 
 const SET_AUTH_USER = "auth/SET_AUTH_USER";
 const SET_CAPTCHA_URL = "auth/SET_CAPTCHA_URL";
+const SET_ERROR = "auth/SET_ERROR";
 
 export type InitialStateType = typeof initialState;
 type ActionsTypes = InferActionsTypes<typeof authActions>;
@@ -18,6 +19,7 @@ const initialState = {
   isLoading: false,
   isAuth: false,
   captchaUrl: null as string | null,
+  error: "",
 };
 
 const authReduser = (
@@ -34,6 +36,11 @@ const authReduser = (
       return {
         ...state,
         captchaUrl: action.url,
+      };
+    case SET_ERROR:
+      return {
+        ...state,
+        error: action.error,
       };
     default:
       return state;
@@ -60,6 +67,7 @@ const authActions = {
       payload: { userId, login, email, isAuth },
     } as const),
   setCaptchaUrl: (url: string) => ({ type: SET_CAPTCHA_URL, url } as const),
+  setError: (error: string) => ({ type: SET_ERROR, error } as const),
 };
 
 export const getAuthUser =
@@ -84,12 +92,14 @@ export const login =
     const data = await AuthAPI.login(email, password, rememberMe, captcha);
     if (data.resultCode === ResultCodesEnum.Succses) {
       dispatch(getAuthUser());
+      dispatch(authActions.setError(""));
     } else {
       if (data.resultCode === ResultCodesEnum.CaptchaIsRequired) {
         dispatch(getCaptcha());
       }
       const error = data.messages[0] ?? "Invalid email or password";
-      dispatch(stopSubmit("login", { _error: error }));
+      dispatch(authActions.setError(error));
+      // dispatch(stopSubmit("login", { _error: error }));
     }
   };
 
