@@ -1,36 +1,38 @@
 import React, { useEffect, useState, FC, ChangeEvent } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateStatus } from "src/redux/profileReduser";
+import { statusSelector } from "src/redux/selectors/profileSelectors";
 import module from "./ProfileStatus.module.css";
 
-type PropsType = {
-  status: string;
-  updateStatus: (newStatus: string) => void;
-};
+export const ProfileStatus: FC = () => {
+  const statusFromStore = useSelector(statusSelector);
 
-export const ProfileStatus: FC<PropsType> = (props) => {
   const [editMode, setEditMode] = useState(false);
-  const [status, setStatus] = useState(props.status || "...");
+  const [status, setStatus] = useState(statusFromStore || "...");
+
+  const dispatch = useDispatch();
 
   const activateEditMode = () => {
     setEditMode(true);
   };
   const deactivateEditMode = () => {
     setEditMode(false);
-    props.updateStatus(status);
+    dispatch(updateStatus(status) as any);
   };
   const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
     setStatus(e.target.value);
   };
 
   useEffect(() => {
-    setStatus(props.status);
-  }, [props.status]);
+    setStatus(statusFromStore);
+  }, [statusFromStore]);
 
   return (
     <div className={module.profileStatus}>
       {!editMode && (
         <div>
           <span className={module.status} onDoubleClick={activateEditMode}>
-            {props.status || (
+            {statusFromStore || (
               <span className={module.status}>...no status...</span>
             )}
           </span>

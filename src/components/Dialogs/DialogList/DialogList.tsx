@@ -1,13 +1,13 @@
 import React, { FC } from "react";
+import { useSelector } from "react-redux";
+
 import { Dialog } from "./Dialog/Dialog";
 import module from "../Dialogs.module.css";
-import { DialogType } from "src/redux/dialogsReduser";
+import { dialogsSelector } from "src/redux/selectors/dialogsSelectors";
 
-type PropsTypes = {
-  dialogs: Array<DialogType>;
-};
+export const DialogList: FC = () => {
+  const dialogs = useSelector(dialogsSelector);
 
-export const DialogList: FC<PropsTypes> = ({ dialogs }) => {
   const dialogElements = dialogs.map((dialog) => {
     return (
       <li key={dialog.id} className={module.dialogsList}>

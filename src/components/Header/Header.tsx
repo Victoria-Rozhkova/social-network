@@ -1,28 +1,33 @@
 import React, { FC } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { logout } from "src/redux/authReduser";
+import {
+  isAuthSelector,
+  loginSelector,
+} from "src/redux/selectors/authSelectors";
+import { useAppDispatch } from "src/redux/store-redux";
+import { Logo } from "../Logo/Logo";
 import module from "./Header.module.css";
 
-type PropsTypes = {
-  isAuth: boolean;
-  login: string | null;
-  logout: () => void;
-};
+export const Header: FC = () => {
+  const isAuth = useSelector(isAuthSelector);
+  const login = useSelector(loginSelector);
 
-export const Header: FC<PropsTypes> = ({ isAuth, login, logout }) => {
+  const dispatch = useAppDispatch();
+
+  const onLogout = () => {
+    dispatch(logout() as any);
+  };
+
   return (
     <header className={module.header}>
-      <NavLink to="/">
-        <img
-          className={module.logo}
-          src="https://global-uploads.webflow.com/5e157547d6f791d34ea4e2bf/6087f2b060c7a92408bac811_logo.svg"
-          alt="logo"
-        />
-      </NavLink>
+      <Logo/>
       {isAuth === undefined || isAuth === null || isAuth === false ? (
         <NavLink to="/login">Login</NavLink>
       ) : (
         <div className={module.logout}>
-          <p>{login}</p> <button onClick={logout}>Sign out</button>{" "}
+          <p>{login}</p> <button onClick={onLogout}>Sign out</button>
         </div>
       )}
     </header>

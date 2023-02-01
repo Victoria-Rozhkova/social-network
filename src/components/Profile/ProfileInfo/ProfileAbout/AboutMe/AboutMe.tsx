@@ -1,27 +1,26 @@
 import React, { FC } from "react";
-import { ProfileType } from "src/types/types";
+import { useSelector } from "react-redux";
+import { profileSelector } from "src/redux/selectors/profileSelectors";
 import module from "../ProfileAbout.module.css";
 
-type PropsTypes = {
-  profile: ProfileType;
-};
+export const AboutMe: FC = () => {
+  const profile = useSelector(profileSelector);
 
-export const AboutMe: FC<PropsTypes> = ({ profile }) => {
   return (
     <div className={module.aboutMe}>
       <p className={module.text}>
         <b>Looking for a job: </b>
-        {profile.lookingForAJob ? "yes" : "no"}
+        {profile?.lookingForAJob ? "yes" : "no"}
       </p>
-      {profile.lookingForAJob && (
+      {profile?.lookingForAJob && (
         <p className={module.text}>
           <b>My professional skills: </b>
-          {profile.lookingForAJobDescription}
+          {profile?.lookingForAJobDescription}
         </p>
       )}
       <p className={module.text}>
         <b>About me: </b>
-        {profile.aboutMe}
+        {profile?.aboutMe}
       </p>
     </div>
   );

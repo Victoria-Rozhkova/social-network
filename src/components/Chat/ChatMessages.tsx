@@ -16,7 +16,7 @@ export const ChatMessages: FC<PropsType> = React.memo(({ isAutoscroll }) => {
         messagesAnchorRef.current?.scrollIntoView({ behavior: "smooth" });
       }, 500);
     }
-  }, [messages]);
+  }, [messages, isAutoscroll]);
 
   return (
     <div className={module.chatMessages}>

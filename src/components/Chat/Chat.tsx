@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { ChatAddMessageForm } from "./ChatAddMessageForm";
 import { ChatMessages } from "./ChatMessages";
 import module from "./Chat.module.css";
-import { useDispatch, useSelector } from "react-redux";
 import {
   startMessagesListening,
   StatusesEnum,
@@ -37,7 +38,7 @@ export const Chat: FC<PropsType> = React.memo(() => {
     return () => {
       dispatch(stopMessagesListening() as any);
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={module.chat} onScroll={scrollHandler}>

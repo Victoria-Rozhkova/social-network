@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FC } from "react";
+import { useDispatch } from "react-redux";
 import module from "./UploadFile.module.css";
 
 type PropsTypes = {
@@ -7,9 +8,11 @@ type PropsTypes = {
 };
 
 export const UploadFile: FC<PropsTypes> = ({ callback, text }) => {
+  const dispatch = useDispatch();
+
   const onSavePhoto = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
-      callback(e.target.files[0]);
+      dispatch(callback(e.target.files[0]) as any);
     }
   };
 

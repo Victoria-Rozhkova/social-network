@@ -1,14 +1,15 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import { Field, reduxForm } from "redux-form";
+
+import { actionsDialogs } from "src/redux/dialogsReduser";
 import module from "../Dialogs.module.css";
 
-type PropsType = {
-  sendNewMessage: (msg: string) => void;
-};
+export const NewMessage: FC = () => {
+  const dispatch = useDispatch();
 
-export const NewMessage: FC<PropsType> = (props) => {
   const onSubmit = (formData: { message: string }) => {
-    props.sendNewMessage(formData.message);
+    dispatch(actionsDialogs.sendNewMessage(formData.message));
     formData.message = "";
   };
 
@@ -27,7 +28,7 @@ const NewMessageForm: any = (props: any) => {
         name="message"
         component="textarea"
         autoFocus
-        cols="30"
+        cols="50"
         rows="4"
         className={module.messageTextarea}
       />

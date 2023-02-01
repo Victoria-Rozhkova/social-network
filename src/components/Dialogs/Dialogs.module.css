@@ -40,6 +40,10 @@
   margin: 0;
 }
 
+.messages {
+  margin-bottom: 15px;
+}
+
 .message {
   gap: 10px;
   display: flex;

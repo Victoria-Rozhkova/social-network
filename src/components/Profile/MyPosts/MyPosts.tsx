@@ -1,20 +1,21 @@
 import React, { FC } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Field, reduxForm } from "redux-form";
-import { PostType } from "src/types/types";
+import { actionsProfile } from "src/redux/profileReduser";
+import { postsSelector } from "src/redux/selectors/profileSelectors";
 import module from "./MyPosts.module.css";
 import { Post } from "./Post/Post";
 
-type PropsType = {
-  posts: Array<PostType>;
-  addPost: (post: string) => void;
-};
+export const MyPosts: FC = () => {
+const posts = useSelector(postsSelector)
 
-export const MyPosts: FC<PropsType> = (props) => {
-  const postElements = props.posts.map((post) => {
+  const dispatch = useDispatch();
+
+  const postElements = posts.map((post) => {
     return <Post key={post.id} likesCount={post.likesCount} post={post.post} />;
   });
   const addPost = (formData: { post: string }) => {
-    props.addPost(formData.post);
+    dispatch(actionsProfile.addPost(formData.post));
     formData.post = "";
   };
 
@@ -37,6 +38,6 @@ const MyPostsForm = (props: any) => {
     </form>
   );
 };
-const MyPostsReduxForm : any= reduxForm({
+const MyPostsReduxForm: any = reduxForm({
   form: "profileAddNewPostForm",
 })(MyPostsForm);

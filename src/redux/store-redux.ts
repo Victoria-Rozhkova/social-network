@@ -13,6 +13,7 @@ import thunkMiddleware, { ThunkAction } from "redux-thunk";
 import { reducer as formReducer } from "redux-form";
 import appReduser from "./appReduser";
 import chatReducer from "./chatReducer";
+import { useDispatch } from "react-redux";
 
 type RootReducerType = typeof rootReducer;
 export type AppStateType = ReturnType<RootReducerType>;
@@ -47,6 +48,9 @@ const store = createStore(
 );
 
 // let store = createStore(rootReduser, applyMiddleware(thunkMiddleware));
+
+export type AppDispatch = typeof store.dispatch; 
+export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 // @ts-ignore
 window.__store__ = store;

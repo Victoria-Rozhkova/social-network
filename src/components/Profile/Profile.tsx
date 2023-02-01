@@ -1,43 +1,41 @@
-import React, { FC } from "react";
-import { ProfileType } from "src/types/types";
-import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import React, { FC, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
+import { withAuthRedirect } from "src/hoc/withAuthRedirect";
+import { getProfile, getStatus } from "src/redux/profileReduser";
+import { userIdSelector } from "src/redux/selectors/authSelectors";
+import { MyPosts } from "./MyPosts/MyPosts";
 import module from "./Profile.module.css";
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 
-type PropsType = {
-  profile: ProfileType | null;
-  status: string;
-  isOwner: boolean;
-  isAuth: boolean;
-  updateStatus: (status: string) => void;
-  savePhoto: (file: File) => void;
-  updateProfile: (profile: ProfileType) => Promise<any>;
-};
+const Profile: FC = () => {
+  const [isOwner, setIsOwner] = useState(false);
 
-export const Profile: FC<PropsType> = ({
-  profile,
-  status,
-  updateStatus,
-  isOwner,
-  savePhoto,
-  updateProfile,
-}) => {
-  // if (props.isAuth) {
+  const userId = useSelector(userIdSelector);
+
+  const dispatch = useDispatch();
+
+  const { id } = useParams();
+  useEffect(() => {
+    if (Number(id)) {
+      dispatch(getProfile(id as unknown as number) as any);
+      dispatch(getStatus(id as unknown as number) as any);
+      setIsOwner(false);
+    }
+    if (id === undefined || id === null) {
+      dispatch(getProfile(userId as number) as any);
+      dispatch(getStatus(userId as number) as any);
+      setIsOwner(true);
+      return;
+    }
+  }, [id, userId, dispatch]);
+
   return (
     <div className={module.content}>
-      <ProfileInfo
-        profile={profile}
-        status={status}
-        updateStatus={updateStatus}
-        isOwner={isOwner}
-        savePhoto={savePhoto}
-        updateProfile={updateProfile}
-      />
-      <MyPostsContainer />
+      <ProfileInfo isOwner={isOwner} />
+      <MyPosts />
     </div>
   );
 };
-// else {
-//    <Navigate to="/login" />;
-// }
-//};
+
+export default withAuthRedirect(Profile);

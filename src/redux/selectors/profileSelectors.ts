@@ -7,6 +7,7 @@ export const profileSelector = (state: AppStateType) => {
 export const statusSelector = (state: AppStateType) => {
   return state.profilePage.status;
 };
+
 export const postsSelector = (state: AppStateType) => {
   return state.profilePage.posts;
 };

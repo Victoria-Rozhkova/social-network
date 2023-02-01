@@ -1,13 +1,12 @@
 import React, { FC } from "react";
-import { MessageType } from "src/redux/dialogsReduser";
+import { useSelector } from "react-redux";
+import { messagesSelector } from "src/redux/selectors/dialogsSelectors";
+
 import module from "../Dialogs.module.css";
 import { Message } from "./Message/Message";
 
-type PropsType = {
-  messages: Array<MessageType>;
-};
-
-export const Messages: FC<PropsType> = ({ messages }) => {
+export const Messages: FC = () => {
+  const messages = useSelector(messagesSelector);
   const messageElements = messages.map((message) => {
     return (
       <Message key={message.id} img={message.img} message={message.message} />

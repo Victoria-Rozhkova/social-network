@@ -6,12 +6,11 @@ import {
   isAuthSelector,
   loginSelector,
 } from "src/redux/selectors/authSelectors";
-import { AppStateType } from "src/redux/store-redux";
 import module from "./SignUp.module.css";
 
 export const SignUp: FC = () => {
-  const isAuth = useSelector((state: AppStateType) => isAuthSelector(state));
-  const login = useSelector((state: AppStateType) => loginSelector(state));
+  const isAuth = useSelector(isAuthSelector);
+  const login = useSelector(loginSelector);
   const dispatch = useDispatch();
   const onLogout = () => {
     dispatch(logout() as any);
@@ -24,7 +23,7 @@ export const SignUp: FC = () => {
         </div>
       ) : (
         <div className={module.logout}>
-          <p className={module.login}>{login}</p>{" "}
+          <p className={module.login}>{login}</p>
           <button onClick={onLogout}>Sign out</button>
         </div>
       )}

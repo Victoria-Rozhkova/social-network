@@ -1,12 +1,12 @@
 import React, { FC } from "react";
-import { DialogType } from "src/redux/dialogsReduser";
+import { useSelector } from "react-redux";
+
+import { dialogsSelector } from "src/redux/selectors/dialogsSelectors";
 import module from "../Navbar.module.css";
 
-type PropsTypes = {
-  friends: Array<DialogType>;
-};
+export const Friends: FC = () => {
+  const friends = useSelector(dialogsSelector);
 
-export const Friends: FC<PropsTypes> = ({ friends }) => {
   return (
     <nav>
       <div className={module.friendsBlock}>

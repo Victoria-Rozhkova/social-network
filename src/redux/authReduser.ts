@@ -2,7 +2,7 @@ import { FormAction, stopSubmit } from "redux-form";
 import { AuthAPI } from "../api/auth-api";
 import { SecurityAPI } from "../api/security-api";
 import { ResultCodesEnum } from "../api/api";
-import { InferActionsTypes, ThunkType } from "./store-redux";
+import { AppDispatch, InferActionsTypes, ThunkType } from "./store-redux";
 import { usersActions, UsersActionsType } from "./usersReduser";
 
 const SET_AUTH_USER = "auth/SET_AUTH_USER";
@@ -103,12 +103,13 @@ export const login =
     }
   };
 
-export const logout = (): ThunkType<ActionsTypes> => async (dispatch) => {
-  const data = await AuthAPI.logout();
-  if (data.resultCode === ResultCodesEnum.Succses) {
-    dispatch(authActions.setAuthUser(null, null, null, false));
-  }
-};
+export const logout =
+  (): ThunkType<ActionsTypes> => async (dispatch) => {
+    const data = await AuthAPI.logout();
+    if (data.resultCode === ResultCodesEnum.Succses) {
+      dispatch(authActions.setAuthUser(null, null, null, false));
+    }
+  };
 
 export const getCaptcha = (): ThunkType<ActionsTypes> => async (dispatch) => {
   const data = await SecurityAPI.getCaptchaUrl();

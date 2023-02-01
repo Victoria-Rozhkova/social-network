@@ -11,24 +11,17 @@ import React, { Suspense, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import { Preloader } from "../common/Preloader/Preloader";
-//import DialogsContainer from "../Dialogs/DialogsContainer";
 import { HomePage } from "../HomePage/HomePage";
-import { LoginContainer } from "../Login/Login";
+import Login from "../Login/login";
+
 import { Logo } from "../Logo/Logo";
-// import NotFound from "../NotFound/NotFound";
-//import ProfileContainer from "../Profile/ProfileContainer";
 import { SignUp } from "../SignUp/SignUp";
-// import UsersContainer from "../Users/UsersContainer";
 import style from "./Layout.module.css";
 
 const { Header, Content, Footer, Sider } = Layout;
 
-const DialogsContainer = React.lazy(
-  () => import("../Dialogs/DialogsContainer")
-);
-const ProfileContainer = React.lazy(
-  () => import("../Profile/ProfileContainer")
-);
+const Dialogs = React.lazy(() => import("../Dialogs/Dialogs"));
+const Profile = React.lazy(() => import("../Profile/Profile"));
 const UsersContainer = React.lazy(() => import("../Users/UsersContainer"));
 const ChatPage = React.lazy(() => import("src/pages/ChatPage"));
 // const LoginContainer = lazy(() => import("./components/Login/Login"));
@@ -96,12 +89,12 @@ export const LayoutApp: React.FC = () => {
           <Suspense fallback={<Preloader />}>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/profile" element={<ProfileContainer />} />
-              <Route path="/users/profile/:id" element={<ProfileContainer />} />
-              <Route path="/dialogs/" element={<DialogsContainer />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/users/profile/:id" element={<Profile />} />
+              <Route path="/dialogs/" element={<Dialogs />} />
               <Route path="/users" element={<UsersContainer />} />
               <Route path="/chat" element={<ChatPage />} />
-              <Route path="/login" element={<LoginContainer />} />
+              <Route path="/login" element={<Login />} />
               {/* <Route path="/news" element={<News />} />
             <Route path="/music" element={<Music />} />
             <Route path="/settings" element={<Settings />} /> */}
@@ -109,9 +102,7 @@ export const LayoutApp: React.FC = () => {
             </Routes>
           </Suspense>
         </Content>
-        <Footer style={{ textAlign: "center" }}>
-          Ant Design ©2018 Created by Ant UED
-        </Footer>
+        <Footer style={{ textAlign: "center" }}>©2023</Footer>
       </Layout>
     </Layout>
   );

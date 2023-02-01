@@ -14,3 +14,6 @@ export const loginSelector = (state: AppStateType) => {
 export const errorSelector = (state: AppStateType) => {
   return state.auth.error;
 };
+export const captchaSelector = (state: AppStateType) => {
+  return state.auth.captchaUrl;
+};
