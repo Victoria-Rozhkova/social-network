@@ -1,6 +1,7 @@
 import React from "react";
-import module from "./HomePage.module.css";
-import img from "./img/img.png";
+
+import img from "@/assets/images/img.png";
+import module from "@/components/HomePage/HomePage.module.css";
 
 export const HomePage = () => {
   return (

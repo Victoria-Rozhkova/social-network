@@ -1,7 +1,8 @@
 import React, { FC } from "react";
-import module from "./Post.module.css";
-import img from "./post.png";
-import like from "../../../../img/like.png";
+
+import img from "@/assets/images/post.png";
+import like from "@/assets/images/like.png";
+import module from "@/components/Profile/MyPosts/Post/Post.module.css";
 
 type PropsType = {
   post: string;

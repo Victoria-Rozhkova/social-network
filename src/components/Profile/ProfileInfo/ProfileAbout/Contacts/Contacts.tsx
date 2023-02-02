@@ -1,9 +1,10 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
-import { profileSelector } from "src/redux/selectors/profileSelectors";
-import { ConstactsType } from "src/types/types";
-import module from "../ProfileAbout.module.css";
-import { Contact } from "./Contact";
+
+import { profileSelector } from "@/redux/selectors/profileSelectors";
+import { ConstactsType } from "@/types/types";
+import { Contact } from "@/components/Profile/ProfileInfo/ProfileAbout/Contacts/Contact";
+import module from "@/components/Profile/ProfileInfo/ProfileAbout/ProfileAbout.module.css";
 
 export const Contacts: FC = () => {
   const profile = useSelector(profileSelector);

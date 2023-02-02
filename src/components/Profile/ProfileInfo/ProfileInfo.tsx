@@ -1,22 +1,22 @@
-import React, { FC } from "react";
-import module from "./ProfileInfo.module.css";
-import img from "../img/profileImg.png";
-import userPhoto from "../../../assets/images/user.png";
-import { Preloader } from "../../common/Preloader/Preloader";
-import { UploadFile } from "../../common/UploadFile/UploadFile";
-import { ProfileAbout } from "./ProfileAbout/ProfileAbout";
-import { useState } from "react";
-import { ProfileAboutReduxForm } from "./ProfileAboutForm/ProfileAboutForm";
-import { ProfileType } from "src/types/types";
+import React, { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { profileSelector } from "src/redux/selectors/profileSelectors";
-import { savePhoto, updateProfile } from "src/redux/profileReduser";
+
+import img from "@/assets/images/profileImg.png";
+import userPhoto from "@/assets/images/user.png";
+import { Preloader } from "@/components/common/Preloader/Preloader";
+import { UploadFile } from "@/components/common/UploadFile/UploadFile";
+import { ProfileAbout } from "@/components/Profile/ProfileInfo/ProfileAbout/ProfileAbout";
+import { ProfileAboutReduxForm } from "@/components/Profile/ProfileInfo/ProfileAboutForm/ProfileAboutForm";
+import { ProfileType } from "@/types/types";
+import { profileSelector } from "@/redux/selectors/profileSelectors";
+import { savePhoto, updateProfile } from "@/redux/profileReduser";
+import module from "@/components/Profile/ProfileInfo/ProfileInfo.module.css";
 
 type PropsTypes = {
   isOwner: boolean;
 };
 
-export const ProfileInfo: FC<PropsTypes> = ({ isOwner}) => {
+export const ProfileInfo: FC<PropsTypes> = ({ isOwner }) => {
   const [editMode, setEditMode] = useState(false);
 
   const profile = useSelector(profileSelector);
@@ -57,12 +57,7 @@ export const ProfileInfo: FC<PropsTypes> = ({ isOwner}) => {
         {editMode && (
           <ProfileAboutReduxForm onSubmit={onSubmit} initialValues={profile} />
         )}
-        {!editMode && (
-          <ProfileAbout
-            isOwner={isOwner}
-            goToEditMode={toEdit}
-          />
-        )}
+        {!editMode && <ProfileAbout isOwner={isOwner} goToEditMode={toEdit} />}
       </div>
     </div>
   );

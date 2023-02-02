@@ -1,8 +1,9 @@
 import React, { useEffect, useState, FC, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateStatus } from "src/redux/profileReduser";
-import { statusSelector } from "src/redux/selectors/profileSelectors";
-import module from "./ProfileStatus.module.css";
+
+import { updateStatus } from "@/redux/profileReduser";
+import { statusSelector } from "@/redux/selectors/profileSelectors";
+import module from "@/components/Profile/ProfileInfo/ProfileAbout/ProfileStatus/ProfileStatus.module.css";
 
 export const ProfileStatus: FC = () => {
   const statusFromStore = useSelector(statusSelector);

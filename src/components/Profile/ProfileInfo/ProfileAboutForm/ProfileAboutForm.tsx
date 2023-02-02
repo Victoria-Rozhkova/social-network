@@ -1,14 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Field, reduxForm } from "redux-form";
+
+import { profileSelector } from "@/redux/selectors/profileSelectors";
 import {
   createFieldForm,
   Input,
   TextArea,
-} from "../../../common/FormsControls/FormsControls";
-import module from "./ProfileAboutForm.module.css";
-import style from "../../../common/FormsControls/FormControls.module.css";
-import { useSelector } from "react-redux";
-import { profileSelector } from "src/redux/selectors/profileSelectors";
+} from "@/components/common/FormsControls/FormsControls";
+import module from "@/components/Profile/ProfileInfo/ProfileAboutForm/ProfileAboutForm.module.css";
+import style from "@/components/common/FormsControls/FormControls.module.css";
 
 const ProfileAboutForm: any = ({ handleSubmit, error, initialValues }: any) => {
   const profile = useSelector(profileSelector);

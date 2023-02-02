@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
-import "./App.css";
-import "antd/dist/antd.css";
 import { BrowserRouter } from "react-router-dom";
 import { connect, Provider } from "react-redux";
-import { initializeApp } from "./redux/appReduser";
-import { Preloader } from "./components/common/Preloader/Preloader";
 import { compose } from "redux";
-import store, { AppStateType } from "./redux/store-redux";
-import { LayoutApp } from "./components/Layout/Layout";
+
+import { initializeApp } from "@/redux/appReduser";
+import { Preloader } from "@/components/common/Preloader/Preloader";
+import store, { AppStateType } from "@/redux/store-redux";
+import { LayoutApp } from "@/components/Layout/Layout";
+import "antd/dist/antd.css";
+import "./App.css";
 
 type MapStatePropsTypes = ReturnType<typeof mapStateToProps>;
 type MapDispatchPropsTypes = { initializeApp: () => void };
@@ -30,12 +31,12 @@ const mapStateToProps = (state: AppStateType) => ({
 
 const AppMain = () => {
   return (
-  //  <React.StrictMode>
-      <BrowserRouter>
-        <Provider store={store}>
-          <AppContainer />
-        </Provider>
-      </BrowserRouter>
+    //  <React.StrictMode>
+    <BrowserRouter>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    </BrowserRouter>
     // </React.StrictMode>
   );
 };

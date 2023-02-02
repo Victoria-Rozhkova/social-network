@@ -1,13 +1,11 @@
 import React, { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { sendMessage, StatusesEnum } from "src/redux/chatReducer";
-import { chatStatusSelector } from "src/redux/selectors/chatSelectors";
-import module from "./Chat.module.css";
+import { sendMessage, StatusesEnum } from "@/redux/chatReducer";
+import { chatStatusSelector } from "@/redux/selectors/chatSelectors";
+import module from "@/components/Chat/Chat.module.css";
 
-type PropsType = {};
-
-export const ChatAddMessageForm: FC<PropsType> = () => {
+export const ChatAddMessageForm: FC = () => {
   const [value, setValue] = useState("");
 
   const dispatch = useDispatch();

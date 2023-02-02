@@ -1,6 +1,7 @@
 import React from "react";
-import error from "../../assets/images/404.png";
-import module from "./NotFound.module.css";
+
+import error from "@/assets/images/404.png";
+import module from "@/components/NotFound/NotFound.module.css";
 
 const NotFound = () => {
   return (

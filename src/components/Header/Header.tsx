@@ -1,14 +1,12 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { logout } from "src/redux/authReduser";
-import {
-  isAuthSelector,
-  loginSelector,
-} from "src/redux/selectors/authSelectors";
-import { useAppDispatch } from "src/redux/store-redux";
-import { Logo } from "../Logo/Logo";
-import module from "./Header.module.css";
+
+import { logout } from "@/redux/authReduser";
+import { isAuthSelector, loginSelector } from "@/redux/selectors/authSelectors";
+import { useAppDispatch } from "@/redux/store-redux";
+import { Logo } from "@/components/Logo/logo";
+import module from "@/components/Header/Header.module.css";
 
 export const Header: FC = () => {
   const isAuth = useSelector(isAuthSelector);
@@ -22,7 +20,7 @@ export const Header: FC = () => {
 
   return (
     <header className={module.header}>
-      <Logo/>
+      <Logo />
       {isAuth === undefined || isAuth === null || isAuth === false ? (
         <NavLink to="/login">Login</NavLink>
       ) : (

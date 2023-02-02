@@ -1,8 +1,9 @@
 import React, { FC } from "react";
-import module from "./Users.module.css";
-import userPhoto from "../../assets/images/user.png";
 import { NavLink } from "react-router-dom";
-import { UserType } from "src/types/types";
+
+import { UserType } from "@/types/types";
+import userPhoto from "@/assets/images/user.png";
+import module from "@/components/Users/Users.module.css";
 
 type PropsType = {
   user: UserType;

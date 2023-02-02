@@ -2,8 +2,8 @@ import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 
-import { actionsDialogs } from "src/redux/dialogsReduser";
-import module from "../Dialogs.module.css";
+import { actionsDialogs } from "@/redux/dialogsReduser";
+import module from "@/components/Dialogs/Dialogs.module.css";
 
 export const NewMessage: FC = () => {
   const dispatch = useDispatch();

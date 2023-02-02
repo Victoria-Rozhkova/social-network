@@ -1,19 +1,17 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { ChatAddMessageForm } from "./ChatAddMessageForm";
-import { ChatMessages } from "./ChatMessages";
-import module from "./Chat.module.css";
+import { ChatMessages } from "@/components/Chat/ChatMessages";
+import { ChatAddMessageForm } from "@/components/Chat/ChatAddMessageForm";
+import { chatStatusSelector } from "@/redux/selectors/chatSelectors";
 import {
   startMessagesListening,
   StatusesEnum,
   stopMessagesListening,
-} from "src/redux/chatReducer";
-import { chatStatusSelector } from "src/redux/selectors/chatSelectors";
+} from "@/redux/chatReducer";
+import module from "@/components/Chat/Chat.module.css";
 
-type PropsType = {};
-
-export const Chat: FC<PropsType> = React.memo(() => {
+export const Chat: FC = React.memo(() => {
   const [isAutoscroll, setIsAutoScroll] = useState(true);
 
   const status = useSelector(chatStatusSelector);

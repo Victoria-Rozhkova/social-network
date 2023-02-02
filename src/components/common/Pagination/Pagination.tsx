@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import module from "./Pagination.module.css";
+
+import module from "@/components/common/Pagination/Pagination.module.css";
 
 type PropsType = {
   totalPageCount: number;
   pageSize: number;
   currentPage: number;
-  onPageChange: (arg0: number) => void;
+  onPageChange: (pageNumber: number) => void;
   portionSize?: number;
 };
 
@@ -16,21 +17,21 @@ export const Pagination: React.FC<PropsType> = ({
   onPageChange,
   portionSize = 10,
 }) => {
-  let pagesCount = Math.ceil(totalPageCount / pageSize);
-  let pages: Array<number> = [];
+  const pagesCount = Math.ceil(totalPageCount / pageSize);
+  const pages: Array<number> = [];
 
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
 
-  let portionCount = Math.ceil(pagesCount / portionSize);
-  let [portionNumber, setPortionNumber] = useState<number>(1);
-  let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
-  let rightPortionPageNumber = portionNumber * portionSize;
+  const portionCount = Math.ceil(pagesCount / portionSize);
+  const [portionNumber, setPortionNumber] = useState<number>(1);
+  const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
+  const rightPortionPageNumber = portionNumber * portionSize;
 
   useEffect(
     () => setPortionNumber(Math.ceil(currentPage / portionSize)),
-    [currentPage]
+    [currentPage, portionSize]
   );
 
   return (

@@ -1,9 +1,10 @@
 import React, { FC } from "react";
-import { withAuthRedirect } from "src/hoc/withAuthRedirect";
-import { DialogList } from "./DialogList/DialogList";
-import module from "./Dialogs.module.css";
-import { Messages } from "./Messages/Messages";
-import { NewMessage } from "./NewMessage/NewMessage";
+
+import { Messages } from "@/components/Dialogs/Messages/Messages";
+import { NewMessage } from "@/components/Dialogs/NewMessage/NewMessage";
+import { DialogList } from "@/components/Dialogs/DialogList/DialogList";
+import { withAuthRedirect } from "@/hoc/withAuthRedirect";
+import module from "@/components/Dialogs/Dialogs.module.css";
 
 const Dialogs: FC = () => {
   return (

@@ -1,5 +1,6 @@
 import React, { FC } from "react";
-import module from "../ProfileAbout.module.css";
+
+import module from "@/components/Profile/ProfileInfo/ProfileAbout/ProfileAbout.module.css";
 
 type PropsTypes = {
   contactTitle: string;

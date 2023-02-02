@@ -1,20 +1,18 @@
 import React, { FC } from "react";
-import module from "./ProfileAbout.module.css";
-import { AboutMe } from "./AboutMe/AboutMe";
-import { Contacts } from "./Contacts/Contacts";
-import { ProfileStatus } from "./ProfileStatus/ProfileStatus";
 import { useSelector } from "react-redux";
-import { profileSelector } from "src/redux/selectors/profileSelectors";
+
+import { profileSelector } from "@/redux/selectors/profileSelectors";
+import { AboutMe } from "@/components/Profile/ProfileInfo/ProfileAbout/AboutMe/AboutMe";
+import { Contacts } from "@/components/Profile/ProfileInfo/ProfileAbout/Contacts/Contacts";
+import { ProfileStatus } from "@/components/Profile/ProfileInfo/ProfileAbout/ProfileStatus/ProfileStatus";
+import module from "@/components/Profile/ProfileInfo/ProfileAbout/ProfileAbout.module.css";
 
 type PropsTypes = {
-    isOwner: boolean;
+  isOwner: boolean;
   goToEditMode: () => void;
 };
 
-export const ProfileAbout: FC<PropsTypes> = ({
-  goToEditMode,
-  isOwner,
-}) => {
+export const ProfileAbout: FC<PropsTypes> = ({ goToEditMode, isOwner }) => {
   const profile = useSelector(profileSelector);
 
   return (
@@ -23,7 +21,7 @@ export const ProfileAbout: FC<PropsTypes> = ({
         <h2 className={module.heading}>{profile?.fullName}</h2>
         <ProfileStatus />
         <AboutMe />
-        <Contacts  />
+        <Contacts />
       </div>
       {isOwner && (
         <div>

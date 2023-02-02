@@ -1,3 +1,6 @@
+import React, { Suspense, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import {
   FileOutlined,
   TeamOutlined,
@@ -7,24 +10,20 @@ import {
 import type { MenuTheme } from "antd";
 import { Layout, Menu, Switch } from "antd";
 import { Row } from "antd";
-import React, { Suspense, useState } from "react";
-import { NavLink } from "react-router-dom";
-import { Route, Routes } from "react-router-dom";
-import { Preloader } from "../common/Preloader/Preloader";
-import { HomePage } from "../HomePage/HomePage";
-import Login from "../Login/login";
 
-import { Logo } from "../Logo/Logo";
-import { SignUp } from "../SignUp/SignUp";
-import style from "./Layout.module.css";
+import { Preloader } from "@/components/common/Preloader/Preloader";
+import { HomePage } from "@/components/HomePage/HomePage";
+import { Logo } from "@/components/Logo/logo";
+import { SignUp } from "@/components/SignUp/SignUp";
+import style from "@/components/Layout/Layout.module.css";
 
 const { Header, Content, Footer, Sider } = Layout;
 
 const Dialogs = React.lazy(() => import("../Dialogs/Dialogs"));
 const Profile = React.lazy(() => import("../Profile/Profile"));
 const UsersContainer = React.lazy(() => import("../Users/UsersContainer"));
-const ChatPage = React.lazy(() => import("src/pages/ChatPage"));
-// const LoginContainer = lazy(() => import("./components/Login/Login"));
+const ChatPage = React.lazy(() => import("@/pages/ChatPage"));
+const Login = React.lazy(() => import("@/components/Login/login"));
 const NotFound = React.lazy(() => import("../NotFound/NotFound"));
 
 type MenuItem = Required<any>["items"][number];
@@ -95,9 +94,6 @@ export const LayoutApp: React.FC = () => {
               <Route path="/users" element={<UsersContainer />} />
               <Route path="/chat" element={<ChatPage />} />
               <Route path="/login" element={<Login />} />
-              {/* <Route path="/news" element={<News />} />
-            <Route path="/music" element={<Music />} />
-            <Route path="/settings" element={<Settings />} /> */}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
 
-import { dialogsSelector } from "src/redux/selectors/dialogsSelectors";
-import module from "../Navbar.module.css";
+import { dialogsSelector } from "@/redux/selectors/dialogsSelectors";
+import module from "@/components/Navbar/Navbar.module.css";
 
 export const Friends: FC = () => {
   const friends = useSelector(dialogsSelector);

@@ -1,10 +1,11 @@
 import React, { FC } from "react";
-import module from "./Users.module.css";
-import { Pagination } from "../common/Pagination/Pagination";
-import { User } from "./User";
-import { UserType } from "../../types/types";
-import { UsersSearchForm } from "./UsersSearchForm";
-import { FilterType } from "src/redux/usersReduser";
+
+import { UserType } from "@/types/types";
+import { Pagination } from "@/components/common/Pagination/Pagination";
+import { User } from "@/components/Users/User";
+import { UsersSearchForm } from "@/components/Users/UsersSearchForm";
+import { FilterType } from "@/redux/usersReduser";
+import module from "@/components/Users/Users.module.css";
 
 type PropsType = {
   users: Array<UserType>;

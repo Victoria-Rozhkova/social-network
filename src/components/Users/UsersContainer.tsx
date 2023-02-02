@@ -1,15 +1,13 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import {
-  FilterType,
-  follow,
-  getUsers,
-  unfollow,
-} from "../../redux/usersReduser";
-import { Users } from "./Users";
-import { Preloader } from "../common/Preloader/Preloader";
-// import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from "redux";
+import { connect } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+
+import { FilterType, follow, getUsers, unfollow } from "@/redux/usersReduser";
+import { Users } from "@/components/Users/Users";
+import { Preloader } from "@/components/common/Preloader/Preloader";
+// import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+
 import {
   currentPageSelector,
   filterSelector,
@@ -19,11 +17,10 @@ import {
   portionSizeSelector,
   totalPageCountSelector,
   usersSelector,
-} from "../../redux/selectors/usersSelectors";
-import { UserType } from "../../types/types";
-import { AppStateType } from "../../redux/store-redux";
-import { isAuthSelector } from "src/redux/selectors/authSelectors";
-import { useSearchParams } from "react-router-dom";
+} from "@/redux/selectors/usersSelectors";
+import { UserType } from "@/types/types";
+import { AppStateType } from "@/redux/store-redux";
+import { isAuthSelector } from "@/redux/selectors/authSelectors";
 
 type MapDispatchToPropsType = {
   getUsers: (currentPage: number, pages: number, filter: FilterType) => void;
@@ -79,7 +76,7 @@ const UsersAPI: React.FC<PropsType> = (props) => {
         break;
     }
     props.getUsers(actualPage, props.pages, actualFilter);
-  }, []);
+  }, [searchParams, props]);
 
   useEffect(() => {
     const params: UrlParamsType = {};
@@ -95,9 +92,9 @@ const UsersAPI: React.FC<PropsType> = (props) => {
         .map((key) => key + "=" + params[key as keyof UrlParamsType])
         .join("&");
     // в url будут отображаться все параметры поиска
-    const query = `?term=${props.filter.term}&friend=${props.filter.friend}&page=${props.currentPage}`;
+    // const query = `?term=${props.filter.term}&friend=${props.filter.friend}&page=${props.currentPage}`;
     setSearchParams(queryString);
-  }, [props.filter, props.currentPage]);
+  }, [props.filter, props.currentPage, setSearchParams]);
 
   const onPageChange = (page: number) => {
     props.getUsers(page, props.pages, props.filter);

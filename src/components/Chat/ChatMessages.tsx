@@ -1,7 +1,8 @@
 import React, { FC, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { chatMessagesSelector } from "src/redux/selectors/chatSelectors";
-import module from "./Chat.module.css";
+
+import { chatMessagesSelector } from "@/redux/selectors/chatSelectors";
+import module from "@/components/Chat/Chat.module.css";
 
 type PropsType = { isAutoscroll: boolean };
 
@@ -20,7 +21,7 @@ export const ChatMessages: FC<PropsType> = React.memo(({ isAutoscroll }) => {
 
   return (
     <div className={module.chatMessages}>
-      {messages.map((m, i) => {
+      {messages.map((m) => {
         return (
           <div className={module.message} key={m.id}>
             <div className={module.userInfo}>

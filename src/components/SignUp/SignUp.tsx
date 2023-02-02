@@ -1,12 +1,10 @@
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { logout } from "src/redux/authReduser";
-import {
-  isAuthSelector,
-  loginSelector,
-} from "src/redux/selectors/authSelectors";
-import module from "./SignUp.module.css";
+
+import { logout } from "@/redux/authReduser";
+import { isAuthSelector, loginSelector } from "@/redux/selectors/authSelectors";
+import module from "@/components/SignUp/SignUp.module.css";
 
 export const SignUp: FC = () => {
   const isAuth = useSelector(isAuthSelector);

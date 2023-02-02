@@ -1,12 +1,13 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { withAuthRedirect } from "src/hoc/withAuthRedirect";
-import { getProfile, getStatus } from "src/redux/profileReduser";
-import { userIdSelector } from "src/redux/selectors/authSelectors";
-import { MyPosts } from "./MyPosts/MyPosts";
-import module from "./Profile.module.css";
-import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
+
+import { withAuthRedirect } from "@/hoc/withAuthRedirect";
+import { getProfile, getStatus } from "@/redux/profileReduser";
+import { userIdSelector } from "@/redux/selectors/authSelectors";
+import { MyPosts } from "@/components/Profile/MyPosts/MyPosts";
+import module from "@/components/Profile/Profile.module.css";
+import { ProfileInfo } from "@/components/Profile/ProfileInfo/ProfileInfo";
 
 const Profile: FC = () => {
   const [isOwner, setIsOwner] = useState(false);

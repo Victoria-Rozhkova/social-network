@@ -1,13 +1,14 @@
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Field, reduxForm } from "redux-form";
-import { actionsProfile } from "src/redux/profileReduser";
-import { postsSelector } from "src/redux/selectors/profileSelectors";
-import module from "./MyPosts.module.css";
-import { Post } from "./Post/Post";
+
+import { Post } from "@/components/Profile/MyPosts/Post/Post";
+import { actionsProfile } from "@/redux/profileReduser";
+import { postsSelector } from "@/redux/selectors/profileSelectors";
+import module from "@/components/Profile/MyPosts/MyPosts.module.css";
 
 export const MyPosts: FC = () => {
-const posts = useSelector(postsSelector)
+  const posts = useSelector(postsSelector);
 
   const dispatch = useDispatch();
 
