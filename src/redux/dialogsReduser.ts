@@ -1,5 +1,8 @@
-import img from "../img/img.png";
-import { InferActionsTypes } from "./store-redux";
+import { v1 } from "uuid";
+
+import { InferActionsTypes } from "@/redux/store-redux";
+import img from "@/assets/images/default-img.png";
+
 const SEND_NEW_MESSAGE = "DIALOGS/SEND_NEW_MESSAGE";
 
 export type DialogType = {
@@ -57,11 +60,11 @@ const dialogsReduser = (
     case SEND_NEW_MESSAGE: {
       if (action.message) {
         const newMessage = {
-          id: 6,
+          id: v1(),
           img: state.dialogs[0].img,
           message: action.message,
         };
-        let stateCopy = { ...state };
+        const stateCopy = { ...state };
         stateCopy.messages = [...state.messages];
         stateCopy.messages.push(newMessage);
         return stateCopy;

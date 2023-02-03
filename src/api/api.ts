@@ -1,5 +1,6 @@
 import axios from "axios";
-import { UserType } from "../types/types";
+
+import { UserType } from "@/types/types";
 
 export const instanse = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0/",

@@ -1,42 +1,44 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
-import { Field, reduxForm } from "redux-form";
+import { Field, Form, Formik } from "formik";
 
 import { actionsDialogs } from "@/redux/dialogsReduser";
 import module from "@/components/Dialogs/dialogs.module.css";
 
-export const NewMessage: FC = () => {
+export const NewMessageForm: FC = () => {
   const dispatch = useDispatch();
 
-  const onSubmit = (formData: { message: string }) => {
-    dispatch(actionsDialogs.sendNewMessage(formData.message));
-    formData.message = "";
+  const submit = (values: any) => {
+    dispatch(actionsDialogs.sendNewMessage(values.message));
+    values.message = "";
   };
 
   return (
     <div className={module.newMessage}>
-      <NewMessageReduxForm onSubmit={onSubmit} />
+      <Formik
+        enableReinitialize
+        initialValues={{
+          message: "",
+        }}
+        onSubmit={submit}
+      >
+        {() => (
+          <Form>
+            <Field
+              as="textarea"
+              placeholder="Enter your message"
+              name="message"
+              autoFocus
+              cols="50"
+              rows="4"
+              className={module.messageTextarea}
+            />
+            <button type="submit" className={module.submitMessage}>
+              Send
+            </button>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };
-
-const NewMessageForm: any = (props: any) => {
-  return (
-    <form onSubmit={props.handleSubmit}>
-      <Field
-        placeholder="Enter your message"
-        name="message"
-        component="textarea"
-        autoFocus
-        cols="50"
-        rows="4"
-        className={module.messageTextarea}
-      />
-      <button className={module.submitMessage}>Send</button>
-    </form>
-  );
-};
-
-const NewMessageReduxForm: any = reduxForm({
-  form: "dialogAddNewMessageForm",
-})(NewMessageForm);
