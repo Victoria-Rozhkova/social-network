@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { useSelector } from "react-redux";
 
 import { messagesSelector } from "@/redux/selectors/dialogsSelectors";
-import { Message } from "@/components/Dialogs/Messages/Message/Message";
+import { Message } from "@/components/Dialogs/message";
 import module from "@/components/Dialogs/Dialogs.module.css";
 
 export const Messages: FC = () => {

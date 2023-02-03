@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
 import { Pagination } from "@/components/common/Pagination/Pagination";
-import { User } from "@/components/Users/user";
+import { User } from "@/components/Users/user-";
 import { UsersSearchForm } from "@/components/Users/users-search-form";
 import { FilterType, getUsers } from "@/redux/usersReduser";
 import {
@@ -15,7 +15,7 @@ import {
   totalPageCountSelector,
   usersSelector,
 } from "@/redux/selectors/usersSelectors";
-import { Preloader } from "@/components/common/Preloader/Preloader";
+import { Preloader } from "@/components/common/Preloader/preloader-";
 import module from "@/components/Users/users.module.css";
 
 type UrlParamsType = { term?: string; friend?: string; page?: string };

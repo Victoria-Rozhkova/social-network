@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
 
-import { Dialog } from "@/components/Dialogs/DialogList/Dialog/Dialog";
+import { Dialog } from "@/components/Dialogs/dialog";
 import { dialogsSelector } from "@/redux/selectors/dialogsSelectors";
 import module from "@/components/Dialogs/Dialogs.module.css";
 

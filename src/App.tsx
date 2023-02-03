@@ -4,7 +4,7 @@ import { connect, Provider } from "react-redux";
 import { compose } from "redux";
 
 import { initializeApp } from "@/redux/appReduser";
-import { Preloader } from "@/components/common/Preloader/Preloader";
+import { Preloader } from "@/components/common/Preloader/preloader-";
 import store, { AppStateType } from "@/redux/store-redux";
 import { LayoutApp } from "@/components/Layout/Layout";
 import "antd/dist/antd.css";

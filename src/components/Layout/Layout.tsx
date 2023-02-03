@@ -11,7 +11,7 @@ import type { MenuTheme } from "antd";
 import { Layout, Menu, Switch } from "antd";
 import { Row } from "antd";
 
-import { Preloader } from "@/components/common/Preloader/Preloader";
+import { Preloader } from "@/components/common/Preloader/preloader-";
 import { HomePage } from "@/components/HomePage/HomePage";
 import { Logo } from "@/components/Logo/logo";
 import { SignUp } from "@/components/SignUp/SignUp";
@@ -19,7 +19,7 @@ import style from "@/components/Layout/Layout.module.css";
 
 const { Header, Content, Footer, Sider } = Layout;
 
-const Dialogs = React.lazy(() => import("../Dialogs/Dialogs"));
+const Dialogs = React.lazy(() => import("../Dialogs/dialogs-"));
 const Profile = React.lazy(() => import("../Profile/Profile"));
 const Users = React.lazy(() => import("@/pages/users.page"));
 const ChatPage = React.lazy(() => import("@/pages/ChatPage"));

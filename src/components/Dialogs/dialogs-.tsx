@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 
-import { Messages } from "@/components/Dialogs/Messages/Messages";
-import { NewMessage } from "@/components/Dialogs/NewMessage/NewMessage";
-import { DialogList } from "@/components/Dialogs/DialogList/DialogList";
+import { Messages } from "@/components/Dialogs/messages";
+import { NewMessage } from "@/components/Dialogs/new-message-form";
+import { DialogList } from "@/components/Dialogs/dialog-list";
 import { withAuthRedirect } from "@/hoc/withAuthRedirect";
 import module from "@/components/Dialogs/Dialogs.module.css";
 
