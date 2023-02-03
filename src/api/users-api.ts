@@ -2,9 +2,9 @@ import { GetItemsType, instanse, APIResponseType } from "./api";
 
 export const UsersAPI = {
   getUsers(
-    currentPage: number = 1,
-    pages: number = 10,
-    term: string = "",
+    currentPage = 1,
+    pages = 10,
+    term = "",
     friend: null | boolean = null
   ) {
     return instanse

@@ -21,7 +21,7 @@ const { Header, Content, Footer, Sider } = Layout;
 
 const Dialogs = React.lazy(() => import("../Dialogs/Dialogs"));
 const Profile = React.lazy(() => import("../Profile/Profile"));
-const UsersContainer = React.lazy(() => import("../Users/UsersContainer"));
+const Users = React.lazy(() => import("@/pages/users.page"));
 const ChatPage = React.lazy(() => import("@/pages/ChatPage"));
 const Login = React.lazy(() => import("@/components/Login/login"));
 const NotFound = React.lazy(() => import("../NotFound/NotFound"));
@@ -91,7 +91,7 @@ export const LayoutApp: React.FC = () => {
               <Route path="/profile" element={<Profile />} />
               <Route path="/users/profile/:id" element={<Profile />} />
               <Route path="/dialogs/" element={<Dialogs />} />
-              <Route path="/users" element={<UsersContainer />} />
+              <Route path="/users" element={<Users />} />
               <Route path="/chat" element={<ChatPage />} />
               <Route path="/login" element={<Login />} />
               <Route path="*" element={<NotFound />} />

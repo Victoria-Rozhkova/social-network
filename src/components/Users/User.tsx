@@ -1,25 +1,24 @@
 import React, { FC } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import { UserType } from "@/types/types";
 import userPhoto from "@/assets/images/user.png";
-import module from "@/components/Users/Users.module.css";
+import module from "@/components/Users/users.module.css";
+import { isAuthSelector } from "@/redux/selectors/authSelectors";
+import { followingInProgressSelector } from "@/redux/selectors/usersSelectors";
+import { follow, unfollow } from "@/redux/usersReduser";
 
 type PropsType = {
   user: UserType;
-  followingInProgress: Array<number>;
-  isAuth: boolean;
-  unfollow: (id: number) => void;
-  follow: (id: number) => void;
 };
 
-export const User: FC<PropsType> = ({
-  user,
-  followingInProgress,
-  unfollow,
-  follow,
-  isAuth,
-}) => {
+export const User: FC<PropsType> = ({ user }) => {
+  const isAuth = useSelector(isAuthSelector);
+  const followingInProgress = useSelector(followingInProgressSelector);
+
+  const dispatch = useDispatch();
+
   return (
     <div className={module.user}>
       <div className={module.userFollow}>
@@ -35,7 +34,7 @@ export const User: FC<PropsType> = ({
               !isAuth || followingInProgress.some((id) => id === user.id)
             }
             onClick={() => {
-              unfollow(user.id);
+              dispatch(unfollow(user.id) as any);
             }}
           >
             Unfollow
@@ -46,7 +45,7 @@ export const User: FC<PropsType> = ({
               !isAuth || followingInProgress.some((id) => id === user.id)
             }
             onClick={() => {
-              follow(user.id);
+              dispatch(follow(user.id) as any);
             }}
           >
             Follow

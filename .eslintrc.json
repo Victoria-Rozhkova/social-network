@@ -31,7 +31,7 @@
     "react"
   ],
   "rules": {
-    "@typescript-eslint/no-unused-vars": ["error"],
+    "@typescript-eslint/no-unused-vars": ["warn"],
     "react/prop-types": "off",
     "react/display-name": "off",
     "react/jsx-uses-react": "error",
@@ -51,11 +51,11 @@
     ],
     "react/no-unescaped-entities": 0,
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "no-console": "error",
     "no-alert": "error",
     "no-unused-vars": [
-      "error",
+      "warn",
       {
         "vars": "all",
         "args": "after-used",

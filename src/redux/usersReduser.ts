@@ -1,9 +1,10 @@
-import { APIResponseType, ResultCodesEnum } from "./../api/api";
-import { InferActionsTypes, ThunkType } from "./store-redux";
-import { UserType } from "./../types/types";
-import { UsersAPI } from "../api/users-api";
-import { usersToggleFollow } from "../utils/helpers/usersHelper";
 import { Dispatch } from "redux";
+
+import { APIResponseType, ResultCodesEnum } from "@/api/api";
+import { InferActionsTypes, ThunkType } from "@/redux/store-redux";
+import { UserType } from "@/types/types";
+import { UsersAPI } from "@/api/users-api";
+import { usersToggleFollow } from "@/utils/helpers/usersHelper";
 
 const FOLLOW = "USERS/FOLLOW";
 const UNFOLLOW = "USERS/UNFOLLOW";
@@ -157,10 +158,11 @@ export const getUsers =
     pages: number,
     filter: FilterType
   ): ThunkType<ActionsTypes> =>
-  async (dispatch, getState) => {
+  async (dispatch) => {
     dispatch(usersActions.toggleIsLoading(true)); // loader on
     dispatch(usersActions.setFilter(filter));
     dispatch(usersActions.setCurrentPage(currentPage));
+
     const data = await UsersAPI.getUsers(
       currentPage,
       pages,

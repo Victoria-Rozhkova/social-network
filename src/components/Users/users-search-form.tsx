@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { Formik, Form, Field } from "formik";
 
 import { FilterType } from "@/redux/usersReduser";
-import style from "@/components/Users/Users.module.css";
+import style from "@/components/Users/users.module.css";
 
 type PropsTypes = {
   filter: FilterType;

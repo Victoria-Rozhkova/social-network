@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 import loader from "@/assets/images/loader.gif";
-import module from "@/components/Users/Users.module.css";
+import module from "@/components/Users/users.module.css";
 
 export const Preloader: FC = () => {
   return (
