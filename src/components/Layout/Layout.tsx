@@ -11,7 +11,7 @@ import type { MenuTheme } from "antd";
 import { Layout, Menu, Switch } from "antd";
 import { Row } from "antd";
 
-import { Preloader } from "@/components/common/Preloader/preloader-";
+import { Preloader } from "@/components/common/Preloader/preloader";
 import { HomePage } from "@/components/HomePage/HomePage";
 import { Logo } from "@/components/Logo/logo";
 import { SignUp } from "@/components/SignUp/SignUp";
@@ -19,10 +19,10 @@ import style from "@/components/Layout/Layout.module.css";
 
 const { Header, Content, Footer, Sider } = Layout;
 
-const Dialogs = React.lazy(() => import("../Dialogs/dialogs-"));
+const DialogsPage = React.lazy(() => import("@/pages/dialogs.page"));
 const Profile = React.lazy(() => import("../Profile/Profile"));
-const Users = React.lazy(() => import("@/pages/users.page"));
-const ChatPage = React.lazy(() => import("@/pages/ChatPage"));
+const UsersPage = React.lazy(() => import("@/pages/users.page"));
+const ChatPage = React.lazy(() => import("@/pages/chat.page"));
 const Login = React.lazy(() => import("@/components/Login/login"));
 const NotFound = React.lazy(() => import("../NotFound/NotFound"));
 
@@ -90,8 +90,8 @@ export const LayoutApp: React.FC = () => {
               <Route path="/" element={<HomePage />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/users/profile/:id" element={<Profile />} />
-              <Route path="/dialogs/" element={<Dialogs />} />
-              <Route path="/users" element={<Users />} />
+              <Route path="/dialogs/" element={<DialogsPage />} />
+              <Route path="/users" element={<UsersPage />} />
               <Route path="/chat" element={<ChatPage />} />
               <Route path="/login" element={<Login />} />
               <Route path="*" element={<NotFound />} />

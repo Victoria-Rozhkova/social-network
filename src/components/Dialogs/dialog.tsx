@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { NavLink } from "react-router-dom";
 
-import module from "@/components/Dialogs/Dialogs.module.css";
+import module from "@/components/Dialogs/dialogs.module.css";
 
 type PropsTypes = {
   img: string;

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 
 import { actionsDialogs } from "@/redux/dialogsReduser";
-import module from "@/components/Dialogs/Dialogs.module.css";
+import module from "@/components/Dialogs/dialogs.module.css";
 
 export const NewMessage: FC = () => {
   const dispatch = useDispatch();

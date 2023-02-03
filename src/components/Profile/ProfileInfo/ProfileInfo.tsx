@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import img from "@/assets/images/profileImg.png";
 import userPhoto from "@/assets/images/user.png";
-import { Preloader } from "@/components/common/Preloader/preloader-";
+import { Preloader } from "@/components/common/Preloader/preloader";
 import { UploadFile } from "@/components/common/UploadFile/UploadFile";
 import { ProfileAbout } from "@/components/Profile/ProfileInfo/ProfileAbout/ProfileAbout";
 import { ProfileAboutReduxForm } from "@/components/Profile/ProfileInfo/ProfileAboutForm/ProfileAboutForm";

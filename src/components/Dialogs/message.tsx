@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import module from "@/components/Dialogs/Dialogs.module.css";
+import module from "@/components/Dialogs/dialogs.module.css";
 
 type PropsType = {
   img: string;
