@@ -2,14 +2,14 @@ import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Field, Form, Formik } from "formik";
 
-import { login } from "@/redux/authReduser";
+import { login } from "@/redux/auth.reducer";
 import module from "@/components/Login/login.module.css";
 import style from "@/components/common/FormsControls/FormControls.module.css";
 
 import {
   captchaSelector,
   errorSelector,
-} from "@/redux/selectors/authSelectors";
+} from "@/redux/selectors/auth.selectors";
 
 export const LoginForm: FC = () => {
   const error = useSelector(errorSelector);

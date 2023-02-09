@@ -1,4 +1,4 @@
-import { StatusesEnum } from "src/redux/chatReducer";
+import { StatusesEnum } from "@/redux/chat.reducer";
 
 const subscribers = {
   "messages-reseived": [] as MessagesReseivedSubscriberType[],

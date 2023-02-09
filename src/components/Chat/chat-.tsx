@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { ChatMessages } from "@/components/Chat/chat-messages";
 import { ChatAddMessageForm } from "@/components/Chat/chat-add-message-form";
-import { chatStatusSelector } from "@/redux/selectors/chatSelectors";
+import { chatStatusSelector } from "@/redux/selectors/chat.selectors";
 import {
   startMessagesListening,
   StatusesEnum,
   stopMessagesListening,
-} from "@/redux/chatReducer";
+} from "@/redux/chat.reducer";
 import module from "@/components/Chat/chat.module.css";
-import { withAuthRedirect } from "@/hoc/withAuthRedirect";
+import { withAuthRedirect } from "@/hoc/with-auth-redirect";
 
 const Chat: FC = React.memo(() => {
   const [isAutoscroll, setIsAutoScroll] = useState(true);

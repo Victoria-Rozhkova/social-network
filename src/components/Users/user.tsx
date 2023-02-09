@@ -5,9 +5,9 @@ import { NavLink } from "react-router-dom";
 import { UserType } from "@/types/types";
 import userPhoto from "@/assets/images/user.png";
 import module from "@/components/Users/users.module.css";
-import { isAuthSelector } from "@/redux/selectors/authSelectors";
-import { followingInProgressSelector } from "@/redux/selectors/usersSelectors";
-import { follow, unfollow } from "@/redux/usersReduser";
+import { isAuthSelector } from "@/redux/selectors/auth.selectors";
+import { followingInProgressSelector } from "@/redux/selectors/users.selectors";
+import { follow, unfollow } from "@/redux/users.reducer";
 
 type PropsType = {
   user: UserType;

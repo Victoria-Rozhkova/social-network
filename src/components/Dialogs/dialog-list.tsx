@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { useSelector } from "react-redux";
 
 import { Dialog } from "@/components/Dialogs/dialog";
-import { dialogsSelector } from "@/redux/selectors/dialogsSelectors";
+import { dialogsSelector } from "@/redux/selectors/dialogs.selectors";
 import module from "@/components/Dialogs/dialogs.module.css";
 
 export const DialogList: FC = () => {

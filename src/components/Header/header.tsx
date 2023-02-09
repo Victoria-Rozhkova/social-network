@@ -2,8 +2,11 @@ import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
-import { logout } from "@/redux/authReduser";
-import { isAuthSelector, loginSelector } from "@/redux/selectors/authSelectors";
+import { logout } from "@/redux/auth.reducer";
+import {
+  isAuthSelector,
+  loginSelector,
+} from "@/redux/selectors/auth.selectors";
 import { useAppDispatch } from "@/redux/store-redux";
 import { Logo } from "@/components/Logo/logo";
 import module from "@/components/Header/header.module.css";

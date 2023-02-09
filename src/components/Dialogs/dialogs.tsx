@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { Messages } from "@/components/Dialogs/messages";
 import { NewMessageForm } from "@/components/Dialogs/new-message-form";
 import { DialogList } from "@/components/Dialogs/dialog-list";
-import { withAuthRedirect } from "@/hoc/withAuthRedirect";
+import { withAuthRedirect } from "@/hoc/with-auth-redirect";
 import module from "@/components/Dialogs/dialogs.module.css";
 
 const Dialogs: FC = () => {

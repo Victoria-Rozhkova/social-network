@@ -3,10 +3,10 @@ import { BrowserRouter } from "react-router-dom";
 import { connect, Provider } from "react-redux";
 import { compose } from "redux";
 
-import { initializeApp } from "@/redux/appReduser";
+import { initializeApp } from "@/redux/app.reducer";
 import { Preloader } from "@/components/common/Preloader/preloader";
 import store, { AppStateType } from "@/redux/store-redux";
-import { LayoutApp } from "@/components/Layout/Layout";
+import { LayoutApp } from "@/components/Layout/layout";
 import "antd/dist/antd.css";
 import "./App.css";
 

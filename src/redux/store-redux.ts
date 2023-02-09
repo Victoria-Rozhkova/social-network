@@ -5,15 +5,16 @@ import {
   compose,
   legacy_createStore as createStore,
 } from "redux";
-import authReduser from "./authReduser";
-import dialogsReduser from "./dialogsReduser";
-import profileReduser from "./profileReduser";
-import usersReduser from "./usersReduser";
 import thunkMiddleware, { ThunkAction } from "redux-thunk";
-import { reducer as formReducer } from "redux-form";
-import appReduser from "./appReduser";
-import chatReducer from "./chatReducer";
 import { useDispatch } from "react-redux";
+import { reducer as formReducer } from "redux-form";
+
+import authReducer from "./auth.reducer";
+import dialogsReducer from "./dialogs.reducer";
+import profileReducer from "./profile.reducer";
+import usersReducer from "./users.reducer";
+import appReducer from "./app.reducer";
+import chatReducer from "./chat.reducer";
 
 type RootReducerType = typeof rootReducer;
 export type AppStateType = ReturnType<RootReducerType>;
@@ -32,12 +33,12 @@ export type ThunkType<A extends Action, R = Promise<void>> = ThunkAction<
 >;
 
 const rootReducer = combineReducers({
-  profilePage: profileReduser,
-  dialogsPage: dialogsReduser,
-  usersPage: usersReduser,
-  auth: authReduser,
+  profilePage: profileReducer,
+  dialogsPage: dialogsReducer,
+  usersPage: usersReducer,
+  auth: authReducer,
   form: formReducer,
-  app: appReduser,
+  app: appReducer,
   chat: chatReducer,
 });
 // @ts-ignore
@@ -47,9 +48,9 @@ const store = createStore(
   composeEnhancers(compose(applyMiddleware(thunkMiddleware)))
 );
 
-// let store = createStore(rootReduser, applyMiddleware(thunkMiddleware));
+// let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
-export type AppDispatch = typeof store.dispatch; 
+export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 // @ts-ignore

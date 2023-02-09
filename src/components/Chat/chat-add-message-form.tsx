@@ -1,8 +1,8 @@
 import React, { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { sendMessage, StatusesEnum } from "@/redux/chatReducer";
-import { chatStatusSelector } from "@/redux/selectors/chatSelectors";
+import { sendMessage, StatusesEnum } from "@/redux/chat.reducer";
+import { chatStatusSelector } from "@/redux/selectors/chat.selectors";
 import module from "@/components/Chat/chat.module.css";
 
 export const ChatAddMessageForm: FC = () => {

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
 
-import { messagesSelector } from "@/redux/selectors/dialogsSelectors";
+import { messagesSelector } from "@/redux/selectors/dialogs.selectors";
 import { Message } from "@/components/Dialogs/message";
 import module from "@/components/Dialogs/dialogs.module.css";
 

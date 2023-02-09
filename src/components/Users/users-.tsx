@@ -5,7 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import { Pagination } from "@/components/common/Pagination/pagination";
 import { User } from "@/components/Users/user";
 import { UsersSearchForm } from "@/components/Users/users-search-form";
-import { FilterType, getUsers } from "@/redux/usersReduser";
+import { FilterType, getUsers } from "@/redux/users.reducer";
 import {
   currentPageSelector,
   filterSelector,
@@ -14,7 +14,7 @@ import {
   portionSizeSelector,
   totalPageCountSelector,
   usersSelector,
-} from "@/redux/selectors/usersSelectors";
+} from "@/redux/selectors/users.selectors";
 import { Preloader } from "@/components/common/Preloader/preloader";
 import module from "@/components/Users/users.module.css";
 

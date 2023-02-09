@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { Field, Form, Formik } from "formik";
 
-import { actionsDialogs } from "@/redux/dialogsReduser";
+import { actionsDialogs } from "@/redux/dialogs.reducer";
 import module from "@/components/Dialogs/dialogs.module.css";
 
 export const NewMessageForm: FC = () => {
