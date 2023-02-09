@@ -4,9 +4,9 @@ export type PostType = {
   likesCount: number;
 };
 export type ConstactsType = {
-  facebook: string | null;
+  facebook?: string | null;
   github: string | null;
-  instagram: string | null;
+  instagram?: string | null;
   mainLink: string | null;
   twitter: string | null;
   vk: string | null;

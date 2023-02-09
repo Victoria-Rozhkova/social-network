@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import img from "@/assets/images/profileImg.png";
 import userPhoto from "@/assets/images/user.png";
-import { Preloader } from "@/components/common/Preloader/preloader";
-import { UploadFile } from "@/components/common/UploadFile/upload-file";
+import { Preloader } from "@/components/common/preloader/preloader";
+import { UploadFile } from "@/components/common/uploadFile/upload-file";
 import { ProfileAbout } from "@/components/Profile/profile-about";
 import { ProfileAboutReduxForm } from "@/components/Profile/profile-about-form";
 import { ProfileType } from "@/types/types";
-import { profileSelector } from "@/redux/selectors/profileSelectors";
+import { profileSelector } from "@/redux/selectors/profile.selectors";
 import { savePhoto, updateProfile } from "@/redux/profile.reducer";
 import module from "@/components/Profile/profile-info.module.css";
 

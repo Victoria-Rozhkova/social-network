@@ -13,6 +13,22 @@
 .contacts {
   margin: 10px;
   list-style: none;
+  display: flex;
+  gap: 15px;
+  padding: 0;
+}
+
+.contact {
+  display: flex;
+  gap: 10px;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.icon svg {
+  border-radius: 20%;
 }
 
 .noContacts {

@@ -2,7 +2,7 @@ import React, { useEffect, useState, FC, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { updateStatus } from "@/redux/profile.reducer";
-import { statusSelector } from "@/redux/selectors/profileSelectors";
+import { statusSelector } from "@/redux/selectors/profile.selectors";
 import module from "@/components/Profile/profile-status.module.css";
 
 export const ProfileStatus: FC = () => {

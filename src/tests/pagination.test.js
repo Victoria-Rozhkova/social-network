@@ -1,7 +1,7 @@
 import React from "react";
 import TestRenderer from "react-test-renderer";
 
-import { Pagination } from "../components/common/Pagination/pagination";
+import { Pagination } from "../components/common/pagination/pagination";
 
 describe("Pagination component tests", () => {
   test(`pages count is 15 but should be showed only 10`, () => {

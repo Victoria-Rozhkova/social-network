@@ -5,7 +5,7 @@ import { useParams } from "react-router";
 import { withAuthRedirect } from "@/hoc/with-auth-redirect";
 import { getProfile, getStatus } from "@/redux/profile.reducer";
 import { userIdSelector } from "@/redux/selectors/auth.selectors";
-import { MyPosts } from "@/components/Profile/MyPosts/my-posts";
+import { MyPosts } from "@/components/Profile/posts/my-posts";
 import module from "@/components/Profile/profile.module.css";
 import { ProfileInfo } from "@/components/Profile/profile-info";
 

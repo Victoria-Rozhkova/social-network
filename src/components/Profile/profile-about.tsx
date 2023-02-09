@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
 
-import { profileSelector } from "@/redux/selectors/profileSelectors";
+import { profileSelector } from "@/redux/selectors/profile.selectors";
 import { AboutMe } from "@/components/Profile/about-me";
 import { Contacts } from "@/components/Profile/contacts";
 import { ProfileStatus } from "@/components/Profile/profile-status";

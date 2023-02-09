@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 
-import { profileSelector } from "@/redux/selectors/profileSelectors";
+import { profileSelector } from "@/redux/selectors/profile.selectors";
 import {
   createFieldForm,
   Input,
