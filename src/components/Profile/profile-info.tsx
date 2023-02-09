@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import img from "@/assets/images/profileImg.png";
@@ -9,7 +9,11 @@ import { ProfileAbout } from "@/components/Profile/profile-about";
 import { ProfileAboutReduxForm } from "@/components/Profile/profile-about-form";
 import { ProfileType } from "@/types/types";
 import { profileSelector } from "@/redux/selectors/profile.selectors";
-import { savePhoto, updateProfile } from "@/redux/profile.reducer";
+import {
+  actionsProfile,
+  savePhoto,
+  updateProfile,
+} from "@/redux/profile.reducer";
 import module from "@/components/Profile/profile-info.module.css";
 
 type PropsTypes = {
@@ -23,12 +27,10 @@ export const ProfileInfo: FC<PropsTypes> = ({ isOwner }) => {
 
   const dispatch = useDispatch();
 
-  if (profile === null) {
-    return <Preloader />;
-  }
   const toEdit = () => {
     setEditMode(true);
   };
+
   const onSubmit = (formData: ProfileType) => {
     if (formData) {
       dispatch(updateProfile(formData) as any).then(() => {
@@ -36,6 +38,16 @@ export const ProfileInfo: FC<PropsTypes> = ({ isOwner }) => {
       });
     }
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(actionsProfile.setUserProfile(null));
+    };
+  }, []);
+
+  if (profile === null) {
+    return <Preloader />;
+  }
 
   return (
     <div>

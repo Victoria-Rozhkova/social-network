@@ -75,7 +75,7 @@ export const actionsProfile = {
   addPost: (post: string) => {
     return { type: ADD_POST, post } as const;
   },
-  setUserProfile: (profile: ProfileType) => {
+  setUserProfile: (profile: ProfileType | null) => {
     return { type: SET_USER_PROFILE, profile } as const;
   },
   setStatus: (status: string) => {
