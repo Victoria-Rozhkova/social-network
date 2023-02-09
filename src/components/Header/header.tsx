@@ -6,7 +6,7 @@ import { logout } from "@/redux/authReduser";
 import { isAuthSelector, loginSelector } from "@/redux/selectors/authSelectors";
 import { useAppDispatch } from "@/redux/store-redux";
 import { Logo } from "@/components/Logo/logo";
-import module from "@/components/Header/Header.module.css";
+import module from "@/components/Header/header.module.css";
 
 export const Header: FC = () => {
   const isAuth = useSelector(isAuthSelector);

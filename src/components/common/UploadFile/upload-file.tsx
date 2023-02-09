@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC } from "react";
 import { useDispatch } from "react-redux";
 
-import module from "./UploadFile.module.css";
+import module from "./upload-file.module.css";
 
 type PropsTypes = {
   text: string;

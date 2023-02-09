@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import module from "@/components/common/Pagination/Pagination.module.css";
+import module from "@/components/common/Pagination/pagination.module.css";
 
 type PropsType = {
   totalPageCount: number;

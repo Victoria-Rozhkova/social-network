@@ -2,7 +2,7 @@ import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
-import { Pagination } from "@/components/common/Pagination/Pagination";
+import { Pagination } from "@/components/common/Pagination/pagination";
 import { User } from "@/components/Users/user";
 import { UsersSearchForm } from "@/components/Users/users-search-form";
 import { FilterType, getUsers } from "@/redux/usersReduser";
