@@ -2,7 +2,7 @@ import React, { FC, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 
 import { chatMessagesSelector } from "@/redux/selectors/chatSelectors";
-import module from "@/components/Chat/Chat.module.css";
+import module from "@/components/Chat/chat.module.css";
 
 type PropsType = { isAutoscroll: boolean };
 
