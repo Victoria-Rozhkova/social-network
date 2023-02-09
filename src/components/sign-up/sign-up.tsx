@@ -3,8 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import { logout } from "@/redux/auth.reducer";
-import { isAuthSelector, loginSelector } from "@/redux/selectors/auth.selectors";
-import module from "@/components/SignUp/sign-up.module.css";
+import {
+  isAuthSelector,
+  loginSelector,
+} from "@/redux/selectors/auth.selectors";
+import module from "@/components/sign-up/sign-up.module.css";
 
 export const SignUp: FC = () => {
   const isAuth = useSelector(isAuthSelector);
@@ -21,7 +24,9 @@ export const SignUp: FC = () => {
         </div>
       ) : (
         <div className={module.logout}>
-          <p className={module.login}>{login}</p>
+          <NavLink to={"/profile"} className={module.login}>
+            {login}
+          </NavLink>
           <button onClick={onLogout}>Sign out</button>
         </div>
       )}

@@ -14,7 +14,7 @@ import { Row } from "antd";
 import { Preloader } from "@/components/common/preloader/preloader";
 import { HomePage } from "@/components/home-page/home-page";
 import { Logo } from "@/components/logo/logo";
-import { SignUp } from "@/components/SignUp/sign-up";
+import { SignUp } from "@/components/sign-up/sign-up";
 import style from "@/components/layout/layout.module.css";
 
 const { Header, Content, Footer, Sider } = Layout;

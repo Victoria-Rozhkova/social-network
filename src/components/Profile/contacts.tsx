@@ -8,7 +8,10 @@ import module from "@/components/Profile/profile-about.module.css";
 
 export const Contacts: FC = () => {
   const profile = useSelector(profileSelector);
-  const values = Object.values(profile?.contacts || {}).filter(Boolean);
+
+  delete profile?.contacts.facebook;
+  const profileObject = delete profile?.contacts.instagram;
+  const values = Object.values(profileObject || {}).filter(Boolean);
 
   return (
     <div className={module.contactsWrapper}>
@@ -19,19 +22,17 @@ export const Contacts: FC = () => {
       )}
       <ul className={module.contacts}>
         {profile &&
-          Object.keys(profile.contacts)
-            .filter((el) => el !== "facebook" && el !== "instagram")
-            .map((key) => {
-              return (
-                <Contact
-                  key={key}
-                  contactTitle={key}
-                  contactValue={
-                    profile.contacts[key as keyof ConstactsType] || ""
-                  }
-                />
-              );
-            })}
+          Object.keys(profile.contacts).map((key) => {
+            return (
+              <Contact
+                key={key}
+                contactTitle={key}
+                contactValue={
+                  profile.contacts[key as keyof ConstactsType] || ""
+                }
+              />
+            );
+          })}
       </ul>
     </div>
   );

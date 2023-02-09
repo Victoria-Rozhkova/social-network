@@ -3,8 +3,8 @@
   text-align: center;
   cursor: pointer;
   padding: 10px;
-  border: solid 1px gray;
   border-radius: 20px;
+  box-shadow: 2px 4px 8px 0px rgb(34 60 80 / 20%);
   background: #8f2e8d;
   color: white;
   font-size: 17px;
