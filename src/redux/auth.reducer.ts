@@ -1,9 +1,7 @@
-import { FormAction, stopSubmit } from "redux-form";
-
 import { AuthAPI } from "@/api/auth-api";
 import { SecurityAPI } from "@/api/security-api";
 import { ResultCodesEnum } from "@/api/api";
-import { AppDispatch, InferActionsTypes, ThunkType } from "@/redux/store-redux";
+import { InferActionsTypes, ThunkType } from "@/redux/store-redux";
 import { usersActions, UsersActionsType } from "@/redux/users.reducer";
 
 const SET_AUTH_USER = "auth/SET_AUTH_USER";
@@ -88,7 +86,7 @@ export const login =
     password: string,
     rememberMe: boolean,
     captcha: null
-  ): ThunkType<ActionsTypes | FormAction> =>
+  ): ThunkType<ActionsTypes> =>
   async (dispatch) => {
     const data = await AuthAPI.login(email, password, rememberMe, captcha);
     if (data.resultCode === ResultCodesEnum.Succses) {

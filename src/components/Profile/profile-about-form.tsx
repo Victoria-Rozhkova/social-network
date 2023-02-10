@@ -1,89 +1,128 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Field, reduxForm } from "redux-form";
+import React, { FC } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Field, Form, Formik } from "formik";
 
-import { profileSelector } from "@/redux/selectors/profile.selectors";
 import {
-  createFieldForm,
-  Input,
-  TextArea,
-} from "@/components/common/FormsControls/FormsControls";
+  errorSelector,
+  profileSelector,
+} from "@/redux/selectors/profile.selectors";
+
 import module from "@/components/Profile/profile-about-form.module.css";
 import style from "@/components/common/FormsControls/FormControls.module.css";
+import { updateProfile } from "@/redux/profile.reducer";
 
-const ProfileAboutForm: any = ({ handleSubmit, error, initialValues }: any) => {
+type Propstype = {
+  setEditMode: (n: boolean) => void;
+};
+
+const ProfileAboutForm: FC<Propstype> = ({ setEditMode }) => {
   const profile = useSelector(profileSelector);
+  const error = useSelector(errorSelector);
+  const dispatch = useDispatch();
 
+  const onSubmit = (
+    values: any,
+    { setSubmitting }: { setSubmitting: (b: boolean) => void }
+  ) => {
+    setTimeout(() => {
+      if (values) {
+        dispatch(updateProfile(values) as any).then(() => {
+          setEditMode(false);
+        });
+      }
+      setSubmitting(false);
+    }, 400);
+  };
   return (
-    <form className={module.editProfileForm} onSubmit={handleSubmit}>
-      <div className={module.formWrapper}>
-        {error && <div className={style.errorSummary}>{error}</div>}
-        <b>FullName:</b>
-        {createFieldForm(
-          "fullName",
-          module.fullname,
-          [],
-          "text",
-          "FullName",
-          Input
-        )}
-        <label htmlFor="lookingForAJob">
-          <b>Looking for a job </b>
-          <Field
-            name="lookingForAJob"
-            type="checkbox"
-            id="lookingForAJob"
-            component="input"
-          />{" "}
-        </label>
-        <b>My professional skills:</b>{" "}
-        {createFieldForm(
-          "lookingForAJobDescription",
-          module.fullname,
-          [],
-          "text",
-          "Write your skills...",
-          TextArea
-        )}
-        <b>About me:</b>
-        {createFieldForm(
-          "aboutMe",
-          module.about,
-          [],
-          "text",
-          "About me...",
-          TextArea
-        )}
-        <b>Contacts:</b>
-        <div className={module.contacts}>
-          {profile &&
-            Object.keys(profile.contacts).map((key) => {
-              return (
-                <div key={key}>
-                  {" "}
-                  <b>{key}:</b>{" "}
-                  {createFieldForm(
-                    "contacts." + key,
-                    module.fullname,
-                    [],
-                    "url",
-                    key,
-                    Input
-                  )}{" "}
-                </div>
-              );
-            })}
-        </div>
-      </div>
-      <div>
-        <button className={module.saveBtn}>Save</button>
-      </div>
-    </form>
+    <Formik
+      initialValues={{
+        fullName: profile?.fullName || "",
+        lookingForAJob: profile?.lookingForAJob || false,
+        lookingForAJobDescription: profile?.lookingForAJobDescription || "",
+        aboutMe: profile?.aboutMe || "",
+        contacts: {
+          vk: profile?.contacts.vk || "",
+          twitter: profile?.contacts.twitter || "",
+          website: profile?.contacts.website || "",
+          github: profile?.contacts.github || "",
+          mainLink: profile?.contacts.mainLink || "",
+          youtube: profile?.contacts.youtube || "",
+          facebook: "",
+          instagram: "",
+        },
+      }}
+      enableReinitialize
+      onSubmit={onSubmit}
+    >
+      {({ isSubmitting }) => (
+        <Form className={module.editProfileForm}>
+          <div className={module.formWrapper}>
+            {error && <div className={style.errorSummary}>{error}</div>}
+            <label htmlFor="fullName">
+              <b>FullName:</b>
+            </label>
+            <Field
+              className={module.fullname}
+              id="fullName"
+              name="fullName"
+              placeholder="fullName"
+            />
+            <label htmlFor="lookingForAJob">
+              <b>Looking for a job </b>
+            </label>
+            <Field id="lookingForAJob" name="lookingForAJob" type="checkbox" />
+            <label htmlFor="lookingForAJobDescription">
+              <b>My professional skills:</b>
+            </label>
+            <Field
+              className={module.fullname}
+              id="lookingForAJobDescription"
+              as="textarea"
+              name="lookingForAJobDescription"
+              placeholder="Write your skills..."
+            />
+            <label htmlFor="aboutMe">
+              <b>About me:</b>
+            </label>
+            <Field
+              className={module.fullname}
+              id="aboutMe"
+              as="textarea"
+              name="aboutMe"
+              placeholder="About me..."
+            />
+            <b>Contacts:</b>
+            <div className={module.contacts}>
+              {profile &&
+                Object.keys(profile.contacts).map((key) => {
+                  return (
+                    <div key={key} className={module.contact}>
+                      <b>{key}:</b>
+                      <Field
+                        className={module.fullname}
+                        id="contacts"
+                        type="url"
+                        name={`contacts.${key}`}
+                        placeholder={key}
+                      />
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+          <div>
+            <button
+              className={module.saveBtn}
+              type="submit"
+              disabled={isSubmitting}
+            >
+              Save
+            </button>
+          </div>
+        </Form>
+      )}
+    </Formik>
   );
 };
 
-export const ProfileAboutReduxForm: any = reduxForm({
-  form: "edit-profile",
-  enableReinitialize: true,
-  destroyOnUnmount: false,
-})(ProfileAboutForm);
+export default ProfileAboutForm;

@@ -38,6 +38,11 @@
   gap: 10px;
 }
 
+.contact {
+  display: flex;
+  flex-direction: column;
+}
+
 .saveBtn {
   text-align: center;
   cursor: pointer;

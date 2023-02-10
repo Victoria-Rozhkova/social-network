@@ -11,6 +11,7 @@ import { ProfileInfo } from "@/components/Profile/profile-info";
 
 const Profile: FC = () => {
   const [isOwner, setIsOwner] = useState(false);
+  const [editMode, setEditMode] = useState(false);
 
   const userId = useSelector(userIdSelector);
 
@@ -33,8 +34,12 @@ const Profile: FC = () => {
 
   return (
     <div className={module.content}>
-      <ProfileInfo isOwner={isOwner} />
-      <MyPosts />
+      <ProfileInfo
+        isOwner={isOwner}
+        editMode={editMode}
+        setEditMode={setEditMode}
+      />
+      {!editMode && isOwner && <MyPosts />}
     </div>
   );
 };

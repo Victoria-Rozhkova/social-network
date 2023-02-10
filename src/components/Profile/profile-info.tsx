@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import img from "@/assets/images/profileImg.png";
@@ -6,37 +6,28 @@ import userPhoto from "@/assets/images/user.png";
 import { Preloader } from "@/components/common/preloader/preloader";
 import { UploadFile } from "@/components/common/uploadFile/upload-file";
 import { ProfileAbout } from "@/components/Profile/profile-about";
-import { ProfileAboutReduxForm } from "@/components/Profile/profile-about-form";
-import { ProfileType } from "@/types/types";
+import ProfileAboutForm from "@/components/Profile/profile-about-form";
 import { profileSelector } from "@/redux/selectors/profile.selectors";
-import {
-  actionsProfile,
-  savePhoto,
-  updateProfile,
-} from "@/redux/profile.reducer";
+import { actionsProfile, savePhoto } from "@/redux/profile.reducer";
 import module from "@/components/Profile/profile-info.module.css";
 
 type PropsTypes = {
   isOwner: boolean;
+  editMode: boolean;
+  setEditMode: (b: boolean) => void;
 };
 
-export const ProfileInfo: FC<PropsTypes> = ({ isOwner }) => {
-  const [editMode, setEditMode] = useState(false);
-
+export const ProfileInfo: FC<PropsTypes> = ({
+  isOwner,
+  editMode,
+  setEditMode,
+}) => {
   const profile = useSelector(profileSelector);
 
   const dispatch = useDispatch();
 
   const toEdit = () => {
     setEditMode(true);
-  };
-
-  const onSubmit = (formData: ProfileType) => {
-    if (formData) {
-      dispatch(updateProfile(formData) as any).then(() => {
-        setEditMode(false);
-      });
-    }
   };
 
   useEffect(() => {
@@ -59,16 +50,16 @@ export const ProfileInfo: FC<PropsTypes> = ({ isOwner }) => {
           <label htmlFor="file">
             <img
               src={
-                profile.photos.large == null ? userPhoto : profile.photos.large
+                profile?.photos && profile.photos.large === null
+                  ? userPhoto
+                  : profile?.photos?.large
               }
               alt="avatar"
             />
           </label>
           {isOwner && <UploadFile callback={savePhoto} text="Update photo" />}
         </div>
-        {editMode && (
-          <ProfileAboutReduxForm onSubmit={onSubmit} initialValues={profile} />
-        )}
+        {editMode && <ProfileAboutForm setEditMode={setEditMode} />}
         {!editMode && <ProfileAbout isOwner={isOwner} goToEditMode={toEdit} />}
       </div>
     </div>

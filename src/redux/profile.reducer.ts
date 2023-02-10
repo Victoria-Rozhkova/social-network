@@ -1,5 +1,3 @@
-import { FormAction, stopSubmit } from "redux-form";
-
 import { PostType, ProfileType, PhotosType } from "@/types/types";
 import { ProfileAPI } from "@/api/profile-api";
 import { usersActions, UsersActionsType } from "@/redux/users.reducer";
@@ -11,6 +9,7 @@ const SET_USER_PROFILE = "PROFILE/SET_USER_PROFILE";
 const SET_STATUS = "PROFILE/SET_STATUS";
 const DELETE_POST = "PROFILE/DELETE_POST";
 const SET_PHOTO = "PROFILE/SET_PHOTO";
+const SET_ERROR = "PROFILE/SET_ERROR";
 
 const initialState = {
   posts: [
@@ -27,6 +26,7 @@ const initialState = {
   ] as Array<PostType>,
   profile: null as ProfileType | null,
   status: "",
+  error: "",
 };
 
 type InitialStateType = typeof initialState;
@@ -66,6 +66,11 @@ const profileReducer = (
         ...state,
         profile: { ...state.profile, photos: action.photos } as ProfileType,
       };
+    case SET_ERROR:
+      return {
+        ...state,
+        error: action.error,
+      };
     default:
       return state;
   }
@@ -86,6 +91,9 @@ export const actionsProfile = {
   },
   setPhoto: (photos: PhotosType) => {
     return { type: SET_PHOTO, photos } as const;
+  },
+  setError: (error: string) => {
+    return { type: SET_ERROR, error } as const;
   },
 };
 
@@ -124,17 +132,18 @@ export const savePhoto =
   };
 
 export const updateProfile =
-  (profile: ProfileType): ThunkType<ActionsTypes | FormAction> =>
+  (profile: ProfileType): ThunkType<ActionsTypes> =>
   async (dispatch, getState) => {
     const data = await ProfileAPI.saveProfile(profile);
     const userId = getState().auth.userId;
     if (data.resultCode === ResultCodesEnum.Succses) {
       if (userId !== null) {
         dispatch(getProfile(userId));
+        dispatch(actionsProfile.setError(""));
       }
     } else {
       const error = data.messages[0] ?? "Error";
-      dispatch(stopSubmit("edit-profile", { _error: error }));
+      dispatch(actionsProfile.setError(error));
       return Promise.reject();
     }
   };

@@ -11,3 +11,7 @@ export const statusSelector = (state: AppStateType) => {
 export const postsSelector = (state: AppStateType) => {
   return state.profilePage.posts;
 };
+
+export const errorSelector = (state: AppStateType) => {
+  return state.profilePage.error;
+};
