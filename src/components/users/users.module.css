@@ -32,6 +32,27 @@
 
 .textField {
   width: 250px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #40a9ff;
+  font-weight: 600;
+}
+
+.textField:focus-visible {
+  outline: 1px inset #40a9ff;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.select {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #40a9ff;
+  font-weight: 600;
+}
+
+.select:focus-visible {
+  outline: 1px inset #40a9ff;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
 }
 
 .userFollow {
@@ -125,4 +146,28 @@
 
 .userCity {
   min-width: 400px;
+}
+
+.btn {
+  background-image: linear-gradient(166deg, #f22876 0%, #942dd9 100%);
+  -webkit-box-shadow: 0.872px 9.962px 20px 0px rgb(12 78 165 / 30%);
+  box-shadow: 0.872px 9.962px 20px 0px rgb(12 78 165 / 30%);
+  font-weight: 600;
+  color: #ffffff;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  padding: 16px 45px;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  opacity: 0.855;
+  background-image: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+  transition: all 0.3s;
+}
+
+.btn:active {
+  box-shadow: 0 1px #9d249ffa;
+  transform: translateY(2px);
 }

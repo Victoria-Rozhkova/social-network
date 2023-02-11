@@ -19,10 +19,12 @@ export const AboutMe: FC = () => {
           {profile?.lookingForAJobDescription}
         </p>
       )}
-      <p className={module.text}>
-        <b>About me: </b>
-        {profile?.aboutMe}
-      </p>
+      {profile?.aboutMe && (
+        <p className={module.text}>
+          <b>About me: </b>
+          {profile?.aboutMe}
+        </p>
+      )}
     </div>
   );
 };

@@ -38,10 +38,58 @@
   justify-content: flex-start;
 }
 
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 10px;
+}
+
 .chatForm textarea {
   min-height: 75px;
   width: 75%;
   margin-left: 20px;
   border-radius: 8px;
   border: 1px solid #d8cece;
+}
+
+.chatForm textarea:focus-visible {
+  outline: 2px inset rgb(177 0 231);
+  box-shadow: 4px 4px 8px 0px rgb(34 60 80 / 21%);
+}
+
+.btn {
+  background: url(https://olympus.crumina.net/wp-content/plugins/youzify/includes/public/assets/images/dotted-bg.png),
+    -webkit-linear-gradient(right, #f35c44, #5c42c4);
+  border: none;
+  padding: 10px 25px;
+  color: white;
+  box-shadow: 0.872px 9.962px 20px 0px rgb(12 78 165 / 30%);
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  background: url(https://olympus.crumina.net/wp-content/plugins/youzify/includes/public/assets/images/dotted-bg.png), radial-gradient(circle, rgba(131, 58, 180, 1) 0%, rgba(150, 51, 162, 1) 45%, rgba(222, 121, 101, 1) 100%);
+}
+
+.btn:active {
+  box-shadow: 0 2px #696187fa;
+  transform: translateY(2px);
+}
+
+.btn:disabled {
+  background: url(https://olympus.crumina.net/wp-content/plugins/youzify/includes/public/assets/images/dotted-bg.png), radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+  cursor: not-allowed;
+}
+
+.btn:disabled:active {
+  transform: none;
+  box-shadow: 0 0 10px 0px rgb(97 142 216 / 0%);
 }

@@ -65,7 +65,17 @@
 }
 
 .messageTextarea {
-  outline: none;
+  min-width: 380px;
+  min-height: 80px;
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid #d8cece;
+  font-size: 15px;
+}
+
+.messageTextarea:focus-visible {
+  outline: 2px inset rgb(177 0 231);
+  box-shadow: 4px 4px 8px 0px rgb(34 60 80 / 21%);
 }
 
 .submitMessage {

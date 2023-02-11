@@ -21,10 +21,15 @@ export const ChatAddMessageForm: FC = () => {
 
   return (
     <div className={module.chatForm}>
-      <textarea value={value} onChange={(e) => setValue(e.target.value)} />
+      <textarea
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        autoFocus={status !== StatusesEnum.Ready}
+      />
       <button
         disabled={status !== StatusesEnum.Ready}
         onClick={sendMessageHandler}
+        className={module.btn}
       >
         Send
       </button>

@@ -19,7 +19,7 @@ export const ProfileAbout: FC<PropsTypes> = ({ goToEditMode, isOwner }) => {
     <div className={module.description}>
       <div>
         <h2 className={module.heading}>{profile?.fullName}</h2>
-        <ProfileStatus />
+        <ProfileStatus isOwner={isOwner} />
         <AboutMe />
         <Contacts />
       </div>

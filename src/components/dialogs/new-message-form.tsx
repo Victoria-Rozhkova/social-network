@@ -28,7 +28,6 @@ export const NewMessageForm: FC = () => {
               as="textarea"
               placeholder="Enter your message"
               name="message"
-              autoFocus
               cols="50"
               rows="4"
               className={module.messageTextarea}

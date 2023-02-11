@@ -41,5 +41,4 @@
 .field:focus-visible {
   outline: 2px inset rgb(177 0 231);
   box-shadow: 4px 4px 8px 0px rgb(34 60 80 / 21%);
-
 }

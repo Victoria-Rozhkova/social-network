@@ -5,7 +5,11 @@ import { updateStatus } from "@/redux/profile.reducer";
 import { statusSelector } from "@/redux/selectors/profile.selectors";
 import module from "@/components/Profile/profile-status.module.css";
 
-export const ProfileStatus: FC = () => {
+type PropsTypes = {
+  isOwner: boolean;
+};
+
+export const ProfileStatus: FC<PropsTypes> = ({ isOwner }) => {
   const statusFromStore = useSelector(statusSelector);
 
   const [editMode, setEditMode] = useState(false);
@@ -14,7 +18,10 @@ export const ProfileStatus: FC = () => {
   const dispatch = useDispatch();
 
   const activateEditMode = () => {
-    setEditMode(true);
+    if (isOwner) {
+      setEditMode(true);
+    }
+    return;
   };
   const deactivateEditMode = () => {
     setEditMode(false);
