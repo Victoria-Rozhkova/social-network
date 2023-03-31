@@ -1,13 +1,13 @@
 import React, { FC } from "react";
 import { NavLink } from "react-router-dom";
 
-import logo from "@/assets/images/logo.svg";
+import Icon from "@/components/UI/Icon/icon";
 import module from "@/components/logo/logo.module.css";
 
 export const Logo: FC = () => {
   return (
     <NavLink to="/">
-      <img className={module.logo} src={logo} alt="logo" />
+      <Icon name="Logo" size={40} className={module.logo} />
     </NavLink>
   );
 };

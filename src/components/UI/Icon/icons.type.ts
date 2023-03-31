@@ -4,7 +4,8 @@ export type IconName =
   | "Youtube"
   | "Vk"
   | "Linkedin"
-  | "Website";
+  | "Website"
+  | "Logo";
 
 export type IconProps = {
   size: number;
