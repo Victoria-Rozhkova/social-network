@@ -7,7 +7,7 @@ import {
   profileSelector,
 } from "@/redux/selectors/profile.selectors";
 
-import module from "@/components/Profile/profile-about-form.module.css";
+import module from "@/components/profile/profile-about-form.module.css";
 import style from "@/components/common/FormsControls/FormControls.module.css";
 import { updateProfile } from "@/redux/profile.reducer";
 
@@ -110,7 +110,15 @@ const ProfileAboutForm: FC<Propstype> = ({ setEditMode }) => {
                 })}
             </div>
           </div>
-          <div>
+          <div className={module.btnBlock}>
+            <button
+              className={module.cancelBtn}
+              type="button"
+              onClick={() => setEditMode(false)}
+              disabled={isSubmitting}
+            >
+              Cancel
+            </button>
             <button
               className={module.saveBtn}
               type="submit"

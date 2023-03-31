@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 import img from "@/assets/images/post.png";
 import like from "@/assets/images/like.png";
-import module from "@/components/Profile/posts/post.module.css";
+import module from "@/components/profile/posts/post.module.css";
 
 type PropsType = {
   post: string;

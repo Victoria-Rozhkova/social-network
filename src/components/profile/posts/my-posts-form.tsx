@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Field, Form, Formik } from "formik";
 
 import { actionsProfile } from "@/redux/profile.reducer";
-import module from "@/components/Profile/posts/my-posts-form.module.css";
+import module from "@/components/profile/posts/my-posts-form.module.css";
 
 export const MyPostForm: FC = () => {
   const dispatch = useDispatch();

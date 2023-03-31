@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
 
-import { Post } from "@/components/Profile/posts/post";
+import { Post } from "@/components/profile/posts/post";
 import { postsSelector } from "@/redux/selectors/profile.selectors";
-import { MyPostForm } from "@/components/Profile/posts//my-posts-form";
+import { MyPostForm } from "@/components/profile/posts//my-posts-form";
 
 export const MyPosts: FC = () => {
   const posts = useSelector(postsSelector);

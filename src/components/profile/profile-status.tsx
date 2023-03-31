@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { updateStatus } from "@/redux/profile.reducer";
 import { statusSelector } from "@/redux/selectors/profile.selectors";
-import module from "@/components/Profile/profile-status.module.css";
+import module from "@/components/profile/profile-status.module.css";
 
 type PropsTypes = {
   isOwner: boolean;

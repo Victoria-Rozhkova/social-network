@@ -2,10 +2,10 @@ import React, { FC } from "react";
 import { useSelector } from "react-redux";
 
 import { profileSelector } from "@/redux/selectors/profile.selectors";
-import { AboutMe } from "@/components/Profile/about-me";
-import { Contacts } from "@/components/Profile/contacts";
-import { ProfileStatus } from "@/components/Profile/profile-status";
-import module from "@/components/Profile/profile-about.module.css";
+import { AboutMe } from "@/components/profile/about-me";
+import { Contacts } from "@/components/profile/contacts";
+import { ProfileStatus } from "@/components/profile/profile-status";
+import module from "@/components/profile/profile-about.module.css";
 
 type PropsTypes = {
   isOwner: boolean;

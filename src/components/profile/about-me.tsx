@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { useSelector } from "react-redux";
 
 import { profileSelector } from "@/redux/selectors/profile.selectors";
-import module from "@/components/Profile/profile-about.module.css";
+import module from "@/components/profile/profile-about.module.css";
 
 export const AboutMe: FC = () => {
   const profile = useSelector(profileSelector);

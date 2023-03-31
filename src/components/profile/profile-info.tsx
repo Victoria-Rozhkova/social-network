@@ -5,11 +5,11 @@ import img from "@/assets/images/profileImg.png";
 import userPhoto from "@/assets/images/user.png";
 import { Preloader } from "@/components/common/preloader/preloader";
 import { UploadFile } from "@/components/common/uploadFile/upload-file";
-import { ProfileAbout } from "@/components/Profile/profile-about";
-import ProfileAboutForm from "@/components/Profile/profile-about-form";
+import { ProfileAbout } from "@/components/profile/profile-about";
+import ProfileAboutForm from "@/components/profile/profile-about-form";
 import { profileSelector } from "@/redux/selectors/profile.selectors";
 import { actionsProfile, savePhoto } from "@/redux/profile.reducer";
-import module from "@/components/Profile/profile-info.module.css";
+import module from "@/components/profile/profile-info.module.css";
 
 type PropsTypes = {
   isOwner: boolean;

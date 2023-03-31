@@ -56,6 +56,27 @@
   transition: all .2s;
 }
 
+.cancelBtn {
+  text-align: center;
+  cursor: pointer;
+  padding: 10px 30px;
+  border: solid 1px #8f2e8d;
+  border-radius: 10px;
+  background: white;
+  color: #8f2e8d;
+  font-size: 17px;
+  font-weight: 400;
+  transition: all .2s;
+}
+
+.cancelBtn:hover {
+  box-shadow: 0px 4px 4px -1px #9c27b061;
+}
+
+.cancelBtn:active {
+  transform: translateY(2px);
+}
+
 .saveBtn:hover {
   background: #643a64;
 }
@@ -63,4 +84,10 @@
 .saveBtn:active {
   transform: translateY(2px);
   box-shadow: 0px 7px 4px -1px #942dd994;
+}
+
+.btnBlock {
+  display: flex;
+  align-items: start;
+  gap: 10px;
 }

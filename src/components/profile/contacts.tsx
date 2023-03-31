@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 
 import { profileSelector } from "@/redux/selectors/profile.selectors";
 import { ConstactsType } from "@/types/types";
-import { Contact } from "@/components/Profile/contact";
-import module from "@/components/Profile/profile-about.module.css";
+import { Contact } from "@/components/profile/contact";
+import module from "@/components/profile/profile-about.module.css";
 
 export const Contacts: FC = () => {
   const profile = useSelector(profileSelector);

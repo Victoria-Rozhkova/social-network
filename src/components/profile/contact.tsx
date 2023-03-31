@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 import Icon from "@/components/UI/Icon/icon";
 import { IconName } from "@/components/UI/Icon/icons.type";
-import module from "@/components/Profile/profile-about.module.css";
+import module from "@/components/profile/profile-about.module.css";
 
 type PropsTypes = {
   contactTitle: string;
